@@ -1,0 +1,17 @@
+{
+  "name": "feira-nova",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "generate": "node src/index.js",
+    "check:example": "node scripts/check-example.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
