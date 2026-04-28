@@ -597,6 +597,14 @@ function cloneStyle(style) {
   return JSON.parse(JSON.stringify(style ?? {}));
 }
 
+function applyCenteredAlignment(cell) {
+  cell.alignment = {
+    ...(cell.alignment ?? {}),
+    horizontal: "center",
+    vertical: "middle",
+  };
+}
+
 function findLastConfiguredRow(worksheet, section) {
   for (let rowNumber = worksheet.rowCount; rowNumber >= 9; rowNumber -= 1) {
     const productText = worksheetValueToString(worksheet.getCell(`${section.productColumn}${rowNumber}`).value).trim();
@@ -799,6 +807,7 @@ function createUnknownItemWriter(worksheet, config) {
 
     const quantityCell = worksheet.getCell(`${targetColumn}${rowNumber}`);
     quantityCell.value = quantityForCell(quantity);
+    applyCenteredAlignment(quantityCell);
     applyReviewFill(quantityCell);
   };
 }
@@ -883,6 +892,7 @@ async function generateMap(config, inputs, outputDir, now) {
 
       const cell = worksheet.getCell(`${targetColumn}${row.rowNumber}`);
       cell.value = quantityForCell(item.quantity);
+      applyCenteredAlignment(cell);
     }
   }
 
