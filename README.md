@@ -62,9 +62,10 @@ Fluxo da interface:
 ### Publicar no GitHub Pages
 
 1. Suba o projeto para o GitHub.
-2. Em `Settings > Pages`, configure a publicacao pela branch principal.
-3. Use a raiz do repositorio como origem da pagina.
-4. A interface carregara os templates diretamente da pasta `template/mapa/`.
+2. Em `Settings > Pages`, selecione `GitHub Actions` como source.
+3. A cada push na branch `master`, a workflow `.github/workflows/deploy-pages.yml` roda `npm ci` e `npm run build:web`.
+4. O script `scripts/build-pages.js` gera a pasta `dist/` com a versao publicada do frontend.
+5. O deploy envia apenas `dist/` para o GitHub Pages.
 
 Importante:
 
