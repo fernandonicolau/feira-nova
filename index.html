@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feira Nova | Gerador de Mapas</title>
+    <link rel="stylesheet" href="web/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <p class="eyebrow">Feira Nova</p>
+        <h1>Gerador de mapas no navegador</h1>
+        <p class="hero-copy">
+          Envie planilhas `.xlsx` e `.xlsm` ou um `.zip` com os arquivos das
+          filiais. O processamento acontece no navegador e o resultado sai em um
+          unico download.
+        </p>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Arquivos de entrada</h2>
+            <p>Voce pode misturar upload avulso com arquivos dentro de `.zip`.</p>
+          </div>
+          <span class="pill" id="file-count">0 arquivos</span>
+        </div>
+
+        <label class="dropzone" for="input-files" id="dropzone">
+          <input
+            id="input-files"
+            type="file"
+            accept=".zip,.xlsx,.xlsm"
+            multiple
+          />
+          <strong>Selecionar arquivos</strong>
+          <span>Arraste aqui ou clique para escolher planilhas e zips.</span>
+        </label>
+
+        <ul class="file-list" id="file-list">
+          <li class="empty-state">Nenhum arquivo carregado ainda.</li>
+        </ul>
+
+        <div class="actions">
+          <button id="generate-button" class="button button-primary" type="button">
+            Gerar mapas
+          </button>
+          <button id="download-button" class="button button-secondary" type="button" disabled>
+            Baixar resultado
+          </button>
+          <button id="clear-button" class="button button-ghost" type="button">
+            Limpar
+          </button>
+        </div>
+
+        <div class="status-card" id="status-card" aria-live="polite">
+          Aguardando arquivos para processar.
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <div>
+            <h2>Saida</h2>
+            <p>Os arquivos gerados serao empacotados em um `.zip` para download.</p>
+          </div>
+        </div>
+
+        <ul class="result-list" id="result-list">
+          <li class="empty-state">Nenhum mapa gerado ainda.</li>
+        </ul>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+    <script src="web/app.js"></script>
+  </body>
+</html>

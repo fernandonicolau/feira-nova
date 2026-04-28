@@ -47,6 +47,31 @@ npm run generate
 4. Revise os arquivos `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx`.
 5. Se houver linhas destacadas em amarelo, ajuste manualmente ou atualize as regras de normalizacao no codigo.
 
+## Uso no navegador
+
+O projeto agora tambem tem uma interface web estatica em `index.html`, pensada para GitHub Pages.
+
+Fluxo da interface:
+
+- aceita upload de arquivos `.xlsx` e `.xlsm`
+- aceita upload de `.zip` com varias planilhas dentro
+- gera os mapas diretamente no navegador
+- libera um botao para baixar um `.zip` com `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx`
+- possui um botao `Limpar` para remover os arquivos carregados e resetar a tela
+
+### Publicar no GitHub Pages
+
+1. Suba o projeto para o GitHub.
+2. Em `Settings > Pages`, configure a publicacao pela branch principal.
+3. Use a raiz do repositorio como origem da pagina.
+4. A interface carregara os templates diretamente da pasta `template/mapa/`.
+
+Importante:
+
+- no GitHub Pages nao existe backend, entao o processamento acontece 100% no navegador
+- a interface depende dos arquivos de template versionados no repositorio
+- para abrir localmente com todos os recursos funcionando, prefira servir a pasta com um servidor estatico ou usar o proprio GitHub Pages
+
 ## Validacao com exemplo
 
 O projeto tem um conjunto de exemplo para comparacao.
