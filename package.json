@@ -4,6 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "build:web": "node scripts/build-pages.js",
     "generate": "node src/index.js",
     "check:example": "node scripts/check-example.js"
   },
