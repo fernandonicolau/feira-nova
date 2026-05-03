@@ -113,10 +113,12 @@
     [/ABOBORA SERG\b/g, "ABOBORA SERGIPANA"],
     [/ABOBORA SERGIPANA\b/g, "ABOBORA SERGIPANA"],
     [/ABOBRINHA ITALIANA\b/g, "ABOBRINHA"],
+    [/AMORA(?:\s+BANDEJA)?\s+100G\b/g, "AMORA"],
     [/BANANA D AGUA\b/g, "BANANA DAGUA"],
     [/BANANA DAGUA\b/g, "BANANA DAGUA"],
     [/BATATA BAROA BANDEJA\b/g, "BATATA BAROA"],
     [/BATATA BAROA BANDEJA \d+G\b/g, "BATATA BAROA"],
+    [/BATATA CALABRESA\b/g, "BATATA BOLINHA"],
     [/BATATA BOLINHA PACOTE\b/g, "BATATA BOLINHA"],
     [/BATATA BOLINHA PACOTE \d+KG\b/g, "BATATA BOLINHA"],
     [/BATATA BOLINHA PACOTE \d+G\b/g, "BATATA BOLINHA"],
@@ -129,19 +131,26 @@
     [/CAJU BANDEJA\b/g, "CAJU"],
     [/CAQUI RAMA FORTE BANDEJA\b/g, "CAQUI RAMA FORTE"],
     [/CARAMBOLA BANDEJA\b/g, "CARAMBOLA"],
-    [/COGUMELO PORTOBELLO BANDEJA\b/g, "COGUMELO PORTOBELLO"],
-    [/COGUMELO SHIMEJI BANDEJA\b/g, "COGUMELO SHIMEJI"],
-    [/COGUMELO SHITAKE BANDEJA\b/g, "COGUMELO SHITAKE"],
+    [/CEBOLINHA PIRULITO\b/g, "CEBOLA PIRULITO"],
+    [/COGUMELO PARIS(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
+    [/COGUMELO PORTOBELLO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
+    [/COGUMELO SHIMEJI(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
+    [/COGUMELO SHITAKE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
     [/GOIABA VERMELHA\b/g, "GOIABA"],
     [/GOIABA GRANEL\b/g, "GOIABA"],
     [/COCO SECO\b/g, "COCO SECO"],
     [/COCO VERDE\b/g, "COCO VERDE"],
+    [/LIMAO THAITI\b/g, "LIMAO"],
     [/LIMAO TAHITI\b/g, "LIMAO"],
     [/MACA GALA SUPER K\b/g, "MACA 850G"],
     [/MACA GALA BENASSI\b/g, "MACA 850G"],
+    [/MACA PACOTE\b/g, "MACA 850G"],
     [/MACA PCT\b/g, "MACA 850G"],
+    [/MACA FUG\b/g, "MACA FUJI"],
     [/MACA GALA NACIONAL\b/g, "MACA GALA"],
     [/MACA RED(?: IMPORT)?\b/g, "MACA RED IMPORT"],
+    [/MACA GRASMIT\b/g, "MACA VERDE GRAN"],
+    [/MACA GRANSMHT\b/g, "MACA VERDE GRAN"],
     [/MACA GRANSMITH\b/g, "MACA VERDE GRAN"],
     [/MAMAO PAPAYA\b/g, "MAMAO HAVAI"],
     [/MAMAO FORMOSA\b/g, "MAMAO FORMOSA"],
@@ -158,23 +167,27 @@
     [/MORANGO BJ\b/g, "MORANGO"],
     [/MORANGO BANDEJA\b/g, "MORANGO"],
     [/PITAYA(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PITAYA"],
+    [/OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN\b/g, "OVOS 12"],
+    [/OVO[S]?\s+VERMELH[OA]?\s+GRANDE\s+12\s*UN\b/g, "OVOS VERMELHOS 12"],
     [/OVO[S]?\s+BRANCO.*30\b/g, "OVOS BRANCOS 30"],
     [/OVO[S]?\s+BRANCO.*20\b/g, "OVOS BRANCO 20"],
     [/OVO[S]?.*CODORNA.*30\b/g, "OVOS CODORNA 30"],
     [/CODORNA\b/g, "OVOS CODORNA"],
+    [/OVO[S]?\s+VERM\b.*12\b/g, "OVOS VERMELHOS 12"],
     [/OVO[S]?.*VERMELH.*12\b/g, "OVOS VERMELHOS 12"],
     [/OVO[S]?.*VERMELH.*20\b/g, "OVOS VERMELHOS 20"],
     [/OVO[S]?.*VERMELH.*30\b/g, "OVOS VERMELHOS 30"],
     [/OVO[S]?.*\bC\b.*12\b/g, "OVOS 12"],
-    [/PERA WILLIAM\b/g, "PERA WILLIANS"],
-    [/PERA WILLIANS\b/g, "PERA WILLIANS"],
+    [/PERA WILLIAM[SN]?\b/g, "PÊRA WILLIANS"],
+    [/PERA WILLIANS\b/g, "PÊRA WILLIANS"],
     [/PERA PORTUGUESA\b/g, "PERA PORTUGUESA"],
     [/PIMENTAO AMARELO\b/g, "PIMENTAO AMARELO"],
     [/PIMENTAO VERDE\b/g, "PIMENTAO"],
     [/PIMENTAO VERMEL(?:HO)?\b/g, "PIMENTAO"],
     [/PIMENTAO BRANCO\b/g, "PIMENTAO"],
     [/TANGERINA POKAN\b/g, "TANGERINA PONKAN"],
-    [/TANGERINA IMPORTADA\b/g, "TANGERINA IMP"],
+    [/TANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
+    [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
     [/TOMATE SWEET GRAPE\b/g, "TOMATE SWEET 180"],
     [/TOMATE SWEET\b/g, "TOMATE SWEET 180"],
@@ -184,8 +197,7 @@
     [/UVA REDGLOBE\b/g, "UVA RED GLOB"],
     [/UVA THOMPSON VERDE\b/g, "UVA THOMPSON"],
     [/UVA VITORIA SEM\b/g, "UVA VITORIA"],
-    [/QUIABO BAND\b/g, "QUIABO 300G"],
-    [/QUIABO EMBALADO\b/g, "QUIABO 300G"],
+    [/QUIABO(?:\s+(?:BAND|BANDEJA|EMBALADO))?(?:\s+\d+G)?\b/g, "QUIABO 300G"],
     [/VAGEM MACARRAO\b/g, "VAGEM MANT"],
     [/VAGEM MANTEIGA\b/g, "VAGEM MANT"],
   ];
@@ -222,8 +234,19 @@
   function canonicalizeProductName(rawName) {
     let text = normalizeText(rawName);
 
+    if (/^OVO[S]?\s+RAIAR\s+GRANDE\s+ORGANICO\s+20\s*UN$/.test(text)) {
+      return text;
+    }
+    if (/^OVO[S]?\s+SITIO\s+COCORICO\s+CAIPIRA\s+10\s*UN$/.test(text)) {
+      return text;
+    }
+
     for (const [pattern, replacement] of PHRASE_REPLACEMENTS) {
       text = text.replace(pattern, replacement);
+    }
+
+    if (text.startsWith("TANGERINA IMPORTADA")) {
+      return "TANGERINA IMPORTADA";
     }
 
     text = text.replace(/\s+/g, " ").trim();
@@ -283,6 +306,9 @@
     ) {
       return "MACA 850G";
     }
+    if (canonical === "MACA") {
+      return "MACA GALA";
+    }
 
     if (canonical.includes("UVA")) {
       if (canonical.includes("THOMPSON")) {
@@ -340,8 +366,54 @@
     if (canonical.startsWith("TANGERINA PONKAN")) {
       return "TANGERINA PONKAN";
     }
+    if (canonical.startsWith("TANGERINA IMPORTADA")) {
+      return "TANGERINA IMPORTADA";
+    }
 
     return canonical;
+  }
+
+  function outputProductName(rawName, productKey) {
+    const text = normalizeText(rawName);
+
+    if (/^OVO[S]?\s+RAIAR\s+GRANDE\s+ORGANICO\s+20\s*UN$/.test(text)) {
+      return text;
+    }
+    if (/^OVO[S]?\s+SITIO\s+COCORICO\s+CAIPIRA\s+10\s*UN$/.test(text)) {
+      return text;
+    }
+    if (/^OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN$/.test(text)) {
+      return "OVOS C/12";
+    }
+    if (/^OVO[S]?\s+VERMELH[OA]?\s+GRANDE\s+12\s*UN$/.test(text)) {
+      return "OVOS VERMELHOS C/12";
+    }
+    if (productKey === "TANGERINA IMPORTADA") {
+      return "TANGERINA IMPORTADA";
+    }
+    if (productKey === "COGUMELO PARIS") {
+      return "COGUMELO PARIS BANDEJA 200g";
+    }
+    if (productKey === "COGUMELO PORTOBELLO") {
+      return "COGUMELO PORTOBELLO BANDEJA 200g";
+    }
+    if (productKey === "COGUMELO SHIMEJI") {
+      return "COGUMELO SHIMEJI BANDEJA 200g";
+    }
+    if (productKey === "COGUMELO SHITAKE") {
+      return "COGUMELO SHITAKE BANDEJA 200g";
+    }
+    if (productKey === "OVOS BRANCO 20") {
+      return "OVOS BRANCO C/ 20";
+    }
+    if (productKey === "OVOS BRANCOS 30") {
+      return "OVOS  BRANCOS C/30";
+    }
+    if (productKey === "QUIABO 300G") {
+      return "QUIABO BANDEJA 300G";
+    }
+
+    return productKey || text;
   }
 
   function parseLooseItem(text) {
@@ -351,6 +423,10 @@
     );
 
     if (!match) {
+      return null;
+    }
+
+    if (/C\/\s*$/i.test(match[1])) {
       return null;
     }
 
@@ -525,6 +601,13 @@
       const parsed = parseLooseItem(rawValue);
       if (parsed) {
         items.push(parsed);
+        continue;
+      }
+
+      const productName = worksheetValueToString(rawValue).trim();
+      const quantity = normalizeQuantity(worksheet.getCell(`B${rowNumber}`).value);
+      if (productName && quantity != null) {
+        items.push({ productName, quantity });
       }
     }
 
@@ -765,7 +848,7 @@
           `${firstSection.productColumn}${prototypeRow}`,
         );
         productCell.style = cloneStyle(prototypeProductCell.style);
-        productCell.value = normalizeText(originalName);
+        productCell.value = outputProductName(originalName, productKey);
         applyReviewFill(productCell);
 
         Object.values(firstSection.storeColumns).forEach((column) => {
@@ -788,6 +871,14 @@
 
   function replaceDateText(existingValue, formattedDate) {
     const currentText = String(existingValue ?? "");
+    const normalizedText = normalizeText(currentText);
+
+    if (normalizedText.startsWith("PEDIDOS CEASA")) {
+      return `PEDIDOS CEASA ${formattedDate}`;
+    }
+    if (normalizedText.startsWith("DATA")) {
+      return `DATA ${formattedDate}`;
+    }
 
     if (!currentText) {
       return `Data ${formattedDate}`;
@@ -798,6 +889,23 @@
     }
 
     return `${currentText} ${formattedDate}`.trim();
+  }
+
+  function updateHeaderDates(worksheet, formattedDate) {
+    for (let rowNumber = 1; rowNumber <= Math.min(worksheet.rowCount, 3); rowNumber += 1) {
+      const row = worksheet.getRow(rowNumber);
+      const maxColumns = Math.max(row.cellCount || 0, 10);
+
+      for (let columnNumber = 1; columnNumber <= maxColumns; columnNumber += 1) {
+        const cell = row.getCell(columnNumber);
+        const text = worksheetValueToString(cell.value);
+        const normalizedText = normalizeText(text);
+
+        if (normalizedText.startsWith("PEDIDOS CEASA") || normalizedText.startsWith("DATA")) {
+          cell.value = replaceDateText(text, formattedDate);
+        }
+      }
+    }
   }
 
   async function readWorkbookFromBuffer(buffer) {
@@ -849,7 +957,7 @@
     const writeUnknownItem = createUnknownItemWriter(worksheet, config);
 
     clearSectionStoreValues(worksheet, config.sections);
-    worksheet.getCell("D2").value = replaceDateText(worksheet.getCell("D2").value, formatDate(now));
+    updateHeaderDates(worksheet, formatDate(now));
 
     for (const input of inputs) {
       const resolvedStore = config.storeAliases[input.storeKey];
@@ -872,6 +980,11 @@
         const targetColumn = config.sections[row.sectionIndex].storeColumns[resolvedStore];
         if (!targetColumn) {
           continue;
+        }
+
+        if (productKey === "TANGERINA IMPORTADA") {
+          worksheet.getCell(`${config.sections[row.sectionIndex].productColumn}${row.rowNumber}`).value =
+            "TANGERINA IMPORTADA";
         }
 
         worksheet.getCell(`${targetColumn}${row.rowNumber}`).value = quantityForCell(item.quantity);
