@@ -13,6 +13,7 @@ O script principal:
 - aplica duas listas compartilhadas de produtos em `data/produtos-legumes.json` e `data/produtos-frutas.json`
 - preenche os templates em `template/mapa`
 - cria uma pasta de saida no formato `output-AAAA-MM-DD-HH-mm`
+- gera os arquivos por fornecedor em `output-AAAA-MM-DD-HH-mm/fornecedores/`
 - destaca em amarelo os produtos que nao encontrou no template para revisao manual
 
 ## Estrutura esperada
@@ -48,8 +49,22 @@ npm run generate
 ```
 
 3. Abra a pasta `output-...` gerada na raiz do projeto.
-4. Revise os arquivos `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx`.
+4. Revise os arquivos `MAPA.xlsx`, `MAPA2.xlsx`, `MAPA3.xlsx` e a pasta `fornecedores/`.
 5. Se houver linhas destacadas em amarelo, ajuste manualmente ou atualize as regras de normalizacao no codigo.
+
+## Gerar arquivos por fornecedor
+
+O comando `npm run generate` ja cria a pasta `fornecedores/` dentro do `output-...` gerado.
+
+Se quiser gerar fornecedores manualmente a partir dos mapas que estiverem na pasta fixa `output/`, rode:
+
+```bash
+npm run fornecedores
+```
+
+O script usa os arquivos em `exemplo/` como modelos de associacao entre fornecedor, produto e loja. Os arquivos finais sao gerados em `output/fornecedores/`.
+
+Quando alguma associacao do modelo nao for encontrada nos mapas, o script tambem gera `associacoes-pendentes.xlsx` na pasta dos fornecedores. Preencha a coluna `Como tratar` para indicar qual nome/regra deve ser usada.
 
 ## Uso no navegador
 

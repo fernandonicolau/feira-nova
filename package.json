@@ -6,6 +6,7 @@
   "scripts": {
     "build:web": "node scripts/build-pages.js",
     "generate": "node src/index.js",
+    "fornecedores": "node scripts/generate-fornecedores.js",
     "check:example": "node scripts/check-example.js"
   },
   "keywords": [],

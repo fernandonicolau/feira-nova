@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const ExcelJS = require("exceljs");
+const { generateSupplierFiles } = require("../scripts/generate-fornecedores");
 const PRODUCT_LISTS = {
   legumes: require("../data/produtos-legumes.json"),
   frutas: require("../data/produtos-frutas.json"),
@@ -1101,6 +1102,15 @@ async function main() {
   console.log(`Arquivos gerados em: ${outputDir}`);
   for (const outputPath of outputs) {
     console.log(`- ${path.basename(outputPath)}`);
+  }
+
+  const supplierOutput = await generateSupplierFiles({ mapDir: outputDir });
+  console.log(`Arquivos de fornecedores gerados em: ${supplierOutput.outputDir}`);
+  for (const fileName of supplierOutput.files) {
+    console.log(`- fornecedores/${fileName}`);
+  }
+  if (supplierOutput.unmatchedFile) {
+    console.log(`Associacoes pendentes: fornecedores/${supplierOutput.unmatchedFile.fileName}`);
   }
 }
 
