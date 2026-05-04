@@ -1,4 +1,10 @@
 (function () {
+  const PRODUCT_LIST_FILES = {
+    legumes: "data/produtos-legumes.json",
+    frutas: "data/produtos-frutas.json",
+  };
+  const PRODUCT_START_ROW = 9;
+  let productListCachePromise = null;
   const MAP_CONFIGS = [
     {
       outputName: "MAPA.xlsx",
@@ -7,10 +13,12 @@
         {
           productColumn: "A",
           storeColumns: { CERAM: "B", COELHO: "C", QUEIM: "D" },
+          productListKey: "legumes",
         },
         {
           productColumn: "E",
           storeColumns: { CERAM: "F", COELHO: "G", QUEIM: "H" },
+          productListKey: "frutas",
         },
       ],
       storeAliases: {
@@ -28,10 +36,12 @@
         {
           productColumn: "A",
           storeColumns: { PIABETA: "B", ANCH: "C", OLINDA: "D", "STA CRUZ": "E" },
+          productListKey: "legumes",
         },
         {
           productColumn: "F",
           storeColumns: { PIABETA: "G", ANCH: "H", OLINDA: "I", "STA CRUZ": "J" },
+          productListKey: "frutas",
         },
       ],
       storeAliases: {
@@ -51,10 +61,12 @@
         {
           productColumn: "A",
           storeColumns: { IRAJA: "B", CACH: "C", SANTOS: "D", FREG: "E" },
+          productListKey: "legumes",
         },
         {
           productColumn: "F",
           storeColumns: { IRAJA: "G", CACH: "H", SANTOS: "I", FREG: "J" },
+          productListKey: "frutas",
         },
       ],
       storeAliases: {
@@ -618,7 +630,7 @@
     const map = new Map();
 
     sections.forEach((section, sectionIndex) => {
-      for (let rowNumber = 9; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+      for (let rowNumber = PRODUCT_START_ROW; rowNumber <= worksheet.rowCount; rowNumber += 1) {
         const label = worksheet.getCell(`${section.productColumn}${rowNumber}`).value;
         if (!label) {
           continue;
@@ -640,7 +652,7 @@
     sections.forEach((section) => {
       const columns = Object.values(section.storeColumns);
       for (const column of columns) {
-        for (let rowNumber = 9; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+        for (let rowNumber = PRODUCT_START_ROW; rowNumber <= worksheet.rowCount; rowNumber += 1) {
           worksheet.getCell(`${column}${rowNumber}`).value = null;
         }
       }
@@ -652,7 +664,7 @@
   }
 
   function findLastConfiguredRow(worksheet, section) {
-    for (let rowNumber = worksheet.rowCount; rowNumber >= 9; rowNumber -= 1) {
+    for (let rowNumber = worksheet.rowCount; rowNumber >= PRODUCT_START_ROW; rowNumber -= 1) {
       const productText = worksheetValueToString(
         worksheet.getCell(`${section.productColumn}${rowNumber}`).value,
       ).trim();
@@ -661,7 +673,7 @@
       }
     }
 
-    return 9;
+    return PRODUCT_START_ROW;
   }
 
   function applyReviewFill(cell) {
@@ -685,7 +697,7 @@
     const categories = [];
     let currentCategory = [];
 
-    for (let rowNumber = 9; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+    for (let rowNumber = PRODUCT_START_ROW; rowNumber <= worksheet.rowCount; rowNumber += 1) {
       const productText = worksheetValueToString(
         worksheet.getCell(`${section.productColumn}${rowNumber}`).value,
       ).trim();
@@ -706,6 +718,71 @@
     }
 
     return categories;
+  }
+
+  async function loadProductLists() {
+    if (!productListCachePromise) {
+      productListCachePromise = Promise.all(
+        Object.entries(PRODUCT_LIST_FILES).map(async ([key, filePath]) => {
+          const response = await fetch(filePath);
+          if (!response.ok) {
+            throw new Error(`Nao foi possivel carregar a lista ${filePath}.`);
+          }
+
+          return [key, await response.json()];
+        }),
+      ).then((entries) => Object.fromEntries(entries));
+    }
+
+    return productListCachePromise;
+  }
+
+  function getConfiguredSectionProducts(config, section, productLists) {
+    const sectionProducts = productLists[section.productListKey];
+    if (!Array.isArray(sectionProducts)) {
+      throw new Error(`Lista de produtos nao configurada: ${section.productListKey}`);
+    }
+    return sectionProducts;
+  }
+
+  function cloneSectionRowLayout(worksheet, section, sourceRowNumber, targetRowNumber) {
+    worksheet.getRow(targetRowNumber).height = worksheet.getRow(sourceRowNumber).height;
+
+    const productCell = worksheet.getCell(`${section.productColumn}${targetRowNumber}`);
+    const prototypeProductCell = worksheet.getCell(`${section.productColumn}${sourceRowNumber}`);
+    productCell.style = cloneStyle(prototypeProductCell.style);
+
+    Object.values(section.storeColumns).forEach((column) => {
+      const cell = worksheet.getCell(`${column}${targetRowNumber}`);
+      const prototypeCell = worksheet.getCell(`${column}${sourceRowNumber}`);
+      cell.style = cloneStyle(prototypeCell.style);
+      cell.value = null;
+    });
+  }
+
+  function applyConfiguredProductLists(worksheet, config, productLists) {
+    config.sections.forEach((section) => {
+      const products = getConfiguredSectionProducts(config, section, productLists);
+      const lastConfiguredRow = Math.max(findLastConfiguredRow(worksheet, section), PRODUCT_START_ROW);
+      const lastRequiredRow = PRODUCT_START_ROW + products.length - 1;
+
+      for (let rowNumber = PRODUCT_START_ROW; rowNumber <= lastRequiredRow; rowNumber += 1) {
+        if (rowNumber > lastConfiguredRow) {
+          cloneSectionRowLayout(worksheet, section, lastConfiguredRow, rowNumber);
+        }
+
+        const label = products[rowNumber - PRODUCT_START_ROW];
+        worksheet.getCell(`${section.productColumn}${rowNumber}`).value = label || null;
+      }
+
+      for (
+        let rowNumber = Math.max(lastRequiredRow + 1, PRODUCT_START_ROW);
+        rowNumber <= lastConfiguredRow;
+        rowNumber += 1
+      ) {
+        worksheet.getCell(`${section.productColumn}${rowNumber}`).value = null;
+      }
+    });
   }
 
   function snapshotSectionRow(worksheet, section, rowNumber) {
@@ -816,7 +893,10 @@
       const reviewRows = getSectionRows(
         worksheet,
         section,
-        Array.from({ length: Math.max(worksheet.rowCount - 8, 0) }, (_, index) => index + 9),
+        Array.from(
+          { length: Math.max(worksheet.rowCount - (PRODUCT_START_ROW - 1), 0) },
+          (_, index) => index + PRODUCT_START_ROW,
+        ),
       ).filter((row) => row.isReview);
 
       if (reviewRows.length) {
@@ -952,6 +1032,8 @@
     const templateBuffer = await fetchTemplateBuffer(config.templateName);
     const workbook = await readWorkbookFromBuffer(templateBuffer);
     const worksheet = workbook.worksheets[0];
+    const productLists = await loadProductLists();
+    applyConfiguredProductLists(worksheet, config, productLists);
     const templateMap = buildTemplateMap(worksheet, config.sections);
     const sectionCategoryMap = config.sections.map((section) => buildSectionCategories(worksheet, section));
     const writeUnknownItem = createUnknownItemWriter(worksheet, config);

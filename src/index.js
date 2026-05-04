@@ -1,10 +1,15 @@
 const fs = require("fs");
 const path = require("path");
 const ExcelJS = require("exceljs");
+const PRODUCT_LISTS = {
+  legumes: require("../data/produtos-legumes.json"),
+  frutas: require("../data/produtos-frutas.json"),
+};
 
 const ROOT_DIR = process.cwd();
 const INPUT_DIR = path.join(ROOT_DIR, "input");
 const TEMPLATE_DIR = path.join(ROOT_DIR, "template", "mapa");
+const PRODUCT_START_ROW = 9;
 
 const MAP_CONFIGS = [
   {
@@ -14,10 +19,12 @@ const MAP_CONFIGS = [
       {
         productColumn: "A",
         storeColumns: { CERAM: "B", COELHO: "C", QUEIM: "D" },
+        productListKey: "legumes",
       },
       {
         productColumn: "E",
         storeColumns: { CERAM: "F", COELHO: "G", QUEIM: "H" },
+        productListKey: "frutas",
       },
     ],
     storeAliases: {
@@ -35,10 +42,12 @@ const MAP_CONFIGS = [
       {
         productColumn: "A",
         storeColumns: { PIABETA: "B", ANCH: "C", OLINDA: "D", "STA CRUZ": "E" },
+        productListKey: "legumes",
       },
       {
         productColumn: "F",
         storeColumns: { PIABETA: "G", ANCH: "H", OLINDA: "I", "STA CRUZ": "J" },
+        productListKey: "frutas",
       },
     ],
     storeAliases: {
@@ -58,10 +67,12 @@ const MAP_CONFIGS = [
       {
         productColumn: "A",
         storeColumns: { IRAJA: "B", CACH: "C", SANTOS: "D", FREG: "E" },
+        productListKey: "legumes",
       },
       {
         productColumn: "F",
         storeColumns: { IRAJA: "G", CACH: "H", SANTOS: "I", FREG: "J" },
+        productListKey: "frutas",
       },
     ],
     storeAliases: {
@@ -641,7 +652,7 @@ function buildTemplateMap(worksheet, sections) {
 
   sections.forEach((section, sectionIndex) => {
     const column = section.productColumn;
-    for (let rowNumber = 9; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+    for (let rowNumber = PRODUCT_START_ROW; rowNumber <= worksheet.rowCount; rowNumber += 1) {
       const label = worksheet.getCell(`${column}${rowNumber}`).value;
       if (!label) {
         continue;
@@ -669,7 +680,7 @@ function clearSectionStoreValues(worksheet, sections) {
   sections.forEach((section) => {
     const columns = Object.values(section.storeColumns);
     for (const column of columns) {
-      for (let rowNumber = 9; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+      for (let rowNumber = PRODUCT_START_ROW; rowNumber <= worksheet.rowCount; rowNumber += 1) {
         worksheet.getCell(`${column}${rowNumber}`).value = null;
       }
     }
@@ -689,14 +700,14 @@ function applyCenteredAlignment(cell) {
 }
 
 function findLastConfiguredRow(worksheet, section) {
-  for (let rowNumber = worksheet.rowCount; rowNumber >= 9; rowNumber -= 1) {
+  for (let rowNumber = worksheet.rowCount; rowNumber >= PRODUCT_START_ROW; rowNumber -= 1) {
     const productText = worksheetValueToString(worksheet.getCell(`${section.productColumn}${rowNumber}`).value).trim();
     if (productText) {
       return rowNumber;
     }
   }
 
-  return 9;
+  return PRODUCT_START_ROW;
 }
 
 function applyReviewFill(cell) {
@@ -720,7 +731,7 @@ function buildSectionCategories(worksheet, section) {
   const categories = [];
   let currentCategory = [];
 
-  for (let rowNumber = 9; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+  for (let rowNumber = PRODUCT_START_ROW; rowNumber <= worksheet.rowCount; rowNumber += 1) {
     const productText = worksheetValueToString(worksheet.getCell(`${section.productColumn}${rowNumber}`).value).trim();
 
     if (!productText) {
@@ -739,6 +750,50 @@ function buildSectionCategories(worksheet, section) {
   }
 
   return categories;
+}
+
+function getConfiguredSectionProducts(config, section) {
+  const sectionProducts = PRODUCT_LISTS[section.productListKey];
+  if (!Array.isArray(sectionProducts)) {
+    throw new Error(`Lista de produtos nao configurada: ${section.productListKey}`);
+  }
+  return sectionProducts;
+}
+
+function cloneSectionRowLayout(worksheet, section, sourceRowNumber, targetRowNumber) {
+  worksheet.getRow(targetRowNumber).height = worksheet.getRow(sourceRowNumber).height;
+
+  const productCell = worksheet.getCell(`${section.productColumn}${targetRowNumber}`);
+  const prototypeProductCell = worksheet.getCell(`${section.productColumn}${sourceRowNumber}`);
+  productCell.style = cloneStyle(prototypeProductCell.style);
+
+  Object.values(section.storeColumns).forEach((column) => {
+    const cell = worksheet.getCell(`${column}${targetRowNumber}`);
+    const prototypeCell = worksheet.getCell(`${column}${sourceRowNumber}`);
+    cell.style = cloneStyle(prototypeCell.style);
+    cell.value = null;
+  });
+}
+
+function applyConfiguredProductLists(worksheet, config) {
+  config.sections.forEach((section) => {
+    const products = getConfiguredSectionProducts(config, section);
+    const lastConfiguredRow = Math.max(findLastConfiguredRow(worksheet, section), PRODUCT_START_ROW);
+    const lastRequiredRow = PRODUCT_START_ROW + products.length - 1;
+
+    for (let rowNumber = PRODUCT_START_ROW; rowNumber <= lastRequiredRow; rowNumber += 1) {
+      if (rowNumber > lastConfiguredRow) {
+        cloneSectionRowLayout(worksheet, section, lastConfiguredRow, rowNumber);
+      }
+
+      const label = products[rowNumber - PRODUCT_START_ROW];
+      worksheet.getCell(`${section.productColumn}${rowNumber}`).value = label || null;
+    }
+
+    for (let rowNumber = Math.max(lastRequiredRow + 1, PRODUCT_START_ROW); rowNumber <= lastConfiguredRow; rowNumber += 1) {
+      worksheet.getCell(`${section.productColumn}${rowNumber}`).value = null;
+    }
+  });
 }
 
 function snapshotSectionRow(worksheet, section, rowNumber) {
@@ -843,7 +898,10 @@ function compactWorksheetSections(worksheet, sections, sectionCategoryMap) {
     const reviewRows = getSectionRows(
       worksheet,
       section,
-      Array.from({ length: Math.max(worksheet.rowCount - 8, 0) }, (_, index) => index + 9),
+      Array.from(
+        { length: Math.max(worksheet.rowCount - (PRODUCT_START_ROW - 1), 0) },
+        (_, index) => index + PRODUCT_START_ROW,
+      ),
     ).filter((row) => row.isReview);
 
     if (reviewRows.length) {
@@ -969,6 +1027,7 @@ async function generateMap(config, inputs, outputDir, now) {
   await workbook.xlsx.readFile(templatePath);
 
   const worksheet = workbook.worksheets[0];
+  applyConfiguredProductLists(worksheet, config);
   const templateMap = buildTemplateMap(worksheet, config.sections);
   const sectionCategoryMap = config.sections.map((section) => buildSectionCategories(worksheet, section));
   const writeUnknownItem = createUnknownItemWriter(worksheet, config);

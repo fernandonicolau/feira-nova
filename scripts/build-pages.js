@@ -4,13 +4,13 @@ const path = require("path");
 const ROOT_DIR = path.resolve(__dirname, "..");
 const DIST_DIR = path.join(ROOT_DIR, "dist");
 const TEMPLATE_SOURCE_DIR = path.join(ROOT_DIR, "template");
+const DATA_SOURCE_DIR = path.join(ROOT_DIR, "data");
 
 function ensureCleanDist() {
   if (path.basename(DIST_DIR) !== "dist") {
     throw new Error("Diretorio de build inesperado.");
   }
 
-  fs.rmSync(DIST_DIR, { recursive: true, force: true });
   fs.mkdirSync(DIST_DIR, { recursive: true });
 }
 
@@ -36,6 +36,10 @@ function copyTemplates() {
   fs.cpSync(TEMPLATE_SOURCE_DIR, path.join(DIST_DIR, "template"), { recursive: true });
 }
 
+function copyData() {
+  fs.cpSync(DATA_SOURCE_DIR, path.join(DIST_DIR, "data"), { recursive: true });
+}
+
 function writeNoJekyllFile() {
   fs.writeFileSync(path.join(DIST_DIR, ".nojekyll"), "", "utf8");
 }
@@ -46,6 +50,7 @@ function main() {
   copyFile(path.join("web", "app.js"), "index.js");
   copyFile(path.join("web", "styles.css"), "styles.css");
   copyTemplates();
+  copyData();
   writeNoJekyllFile();
   console.log("Build do GitHub Pages gerado em dist/");
 }

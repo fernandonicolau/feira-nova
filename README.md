@@ -10,6 +10,7 @@ O script principal:
 - identifica a filial pelo cabecalho da planilha ou, como fallback, pelo nome do arquivo
 - extrai os itens e quantidades mesmo quando a planilha vem em formatos um pouco diferentes
 - normaliza nomes de produtos para encaixar no padrao dos mapas
+- aplica duas listas compartilhadas de produtos em `data/produtos-legumes.json` e `data/produtos-frutas.json`
 - preenche os templates em `template/mapa`
 - cria uma pasta de saida no formato `output-AAAA-MM-DD-HH-mm`
 - destaca em amarelo os produtos que nao encontrou no template para revisao manual
@@ -19,6 +20,9 @@ O script principal:
 ```text
 .
 |-- input/
+|-- data/
+|   |-- produtos-legumes.json
+|   `-- produtos-frutas.json
 |-- template/
 |   `-- mapa/
 |       |-- MAPA.xlsx
