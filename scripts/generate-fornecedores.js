@@ -58,13 +58,22 @@ const STORE_ALIASES = new Map([
 ]);
 
 const PRODUCT_REPLACEMENTS = [
+  [/^ABACAXI\b.*$/g, "ABACAXI"],
   [/\bABACAXI UNID\b/g, "ABACAXI"],
   [/\bABOBORA BAHIANA\b/g, "ABOBORA BAIANA"],
   [/\bBATATA BAROA BDJ\b/g, "BATATA BAROA"],
   [/\bBANANA D AGUA\b/g, "BANANA DAGUA"],
   [/\bBANANA DAGUA\b/g, "BANANA DAGUA"],
+  [/^BANANA DA TERRA\b.*$/g, "BANANA DA TERRA"],
+  [/^BANANA DAGUA\b.*$/g, "BANANA DAGUA"],
+  [/^BANANA MACA\b.*$/g, "BANANA MACA"],
+  [/^BANANA OURO\b.*$/g, "BANANA OURO"],
+  [/^BANANA PRATA\b.*$/g, "BANANA PRATA"],
   [/\bCOCO SECO UN\b/g, "COCO SECO"],
+  [/\bCEREJA(?:\s+BANDEJA)?\s+250G\b/g, "CEREJA"],
+  [/\bFRAMBOESA(?:\s+BANDEJA)?\s+100G\b/g, "FRAMBOESA"],
   [/\bGOIABA GRANEL\b/g, "GOIABA"],
+  [/\bJAMBO ROSA(?:\s+BANDEJA)?\s+300G\b/g, "JAMBO"],
   [/\bKIWI KG\b/g, "KIWI"],
   [/\bLARANJA SELETA\b/g, "LARANJA SELETA"],
   [/\bLIMAO THAITI\b/g, "LIMAO"],
@@ -75,16 +84,24 @@ const PRODUCT_REPLACEMENTS = [
   [/\bMELAO CANT\b/g, "MELAO CANTALOUPE"],
   [/\bMILHO VERDE BDJ 3\b/g, "MILHO BDJ"],
   [/\bMILHO VERDE\b/g, "MILHO"],
+  [/\bMIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
   [/\bOVOS BRANCO C 20\b/g, "OVOS BRANCOS C 20"],
+  [/\bOVOS BRANCOS C 20\b/g, "OVOS BRANCOS C 20"],
+  [/\bOVOS BRANCOS 20\b/g, "OVOS BRANCOS C 20"],
   [/\bOVOS BRANCOS 30\b/g, "OVOS BRANCOS C 30"],
   [/\bOVOS CODORNA C 30\b/g, "OVOS CODORNA"],
   [/\bOVOS VERMELHOS C 12\b/g, "OVOS VERMELHO C 12"],
+  [/\bPERA D ANJOUR\b/g, "PERA DANJOUR"],
+  [/\bPERA DANJOUR\b/g, "PERA DANJOUR"],
   [/\bPERA WILLIANS\b/g, "PERA WILLIAMS"],
   [/\bPEPINO COMUM\b/g, "PEPINO"],
   [/\bPIMENTAO VERDE\b/g, "PIMENTAO"],
+  [/\bCEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
   [/\bQUIABO 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO EMBALADOS\b/g, "QUIABO BDJ"],
+  [/\bSAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
+  [/\bTAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/\bTANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
   [/\bTOMATE SWEET 180\b/g, "TOMATE SWEET"],
   [/\bUVA ITALIA\b/g, "UVA ITALIA"],
@@ -96,12 +113,199 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set(["CEBOLA ROXA"]),
   },
   {
+    fornecedor: "adonai",
+    produtos: new Set(["BATATA ASTERIX"]),
+    lojas: new Set(["ANCHIETA"]),
+  },
+  {
+    fornecedor: "adonai",
+    produtos: new Set(["BATATA BOLINHA", "CEBOLA PIRULITO"]),
+    lojas: new Set(["OLINDA"]),
+  },
+  {
+    fornecedor: "adonai",
+    produtos: new Set(["CEBOLA", "CEBOLA PIRULITO"]),
+    lojas: new Set(["IRAJA"]),
+  },
+  {
+    fornecedor: "Agrocomercial",
+    produtos: new Set(["BATATA INGLESA", "CEBOLA"]),
+    lojas: new Set(["OLINDA"]),
+  },
+  {
+    fornecedor: "Baixinho",
+    produtos: new Set(["MILHO BDJ", "QUIABO BDJ"]),
+  },
+  {
+    fornecedor: "BENASSI",
+    produtos: new Set([
+      "AMEIXA",
+      "GOIABA",
+      "KIWI",
+      "LARANJA BAHIA",
+      "MACA FUJI",
+      "MACA RED",
+      "MARACUJA",
+      "MELAO AMARELO",
+      "MORANGO",
+      "PERA PORTUGUESA",
+    ]),
+  },
+  {
+    fornecedor: "Casa dina",
+    produtos: new Set(["ABOBORA JAPONESA", "ABOBORA SERGIPANA", "GENGIBRE", "MELANCIA"]),
+  },
+  {
     fornecedor: "FAISÃO",
-    produtos: new Set(["TANGERINA IMPORTADA"]),
+    produtos: new Set([
+      "BATATA BAROA",
+      "CAQUI",
+      "CEREJA",
+      "FRAMBOESA",
+      "JAMBO",
+      "MELANCIA BABY",
+      "MELAO ORANGE",
+      "MELAO VERDE",
+      "MIRTILO",
+      "PERA DANJOUR",
+      "SAPOTI",
+      "TAMARINDO",
+      "TANGERINA IMPORTADA",
+    ]),
+  },
+  {
+    fornecedor: "Cia dos ovos",
+    produtos: new Set(["OVOS BRANCOS C 20", "OVOS BRANCOS C 30"]),
+  },
+  {
+    fornecedor: "CASSARO",
+    produtos: new Set(["BETERRABA"]),
+    lojas: new Set(["SANTA CRUZ"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["BETERRABA"]),
+    lojas: new Set(["ANCHIETA"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["BERINJELA"]),
+    lojas: new Set(["ANCHIETA", "IRAJA"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["BATATA DOCE"]),
+    lojas: new Set(["ANCHIETA", "FREGUESIA", "SANTOS"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["JILO"]),
+    lojas: new Set(["ANCHIETA"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["PEPINO"]),
+    lojas: new Set(["ANCHIETA"]),
+  },
+  {
+    fornecedor: "JACUBA",
+    produtos: new Set(["LIMAO"]),
   },
   {
     fornecedor: "Kifrut",
-    produtos: new Set(["MACA 850G"]),
+    produtos: new Set([
+      "MACA 850G",
+      "PERA WILLIAMS",
+      "UVA CRIMSON",
+      "UVA ITALIA",
+      "UVA ROSADA",
+      "UVA THOMPSON",
+      "UVA VITORIA",
+    ]),
+  },
+  {
+    fornecedor: "LTB",
+    produtos: new Set(["BATATA ASTERIX"]),
+    lojas: new Set(["CERAMICA", "COELHO", "SANTA CRUZ"]),
+  },
+  {
+    fornecedor: "LTB",
+    produtos: new Set(["CEBOLA PIRULITO"]),
+    lojas: new Set(["CERAMICA", "COELHO", "SANTA CRUZ"]),
+  },
+  {
+    fornecedor: "MIBA",
+    produtos: new Set(["ABACATE", "COCO SECO", "MANGA TOMMY"]),
+  },
+  {
+    fornecedor: "Milanes",
+    produtos: new Set(["LARANJA LIMA", "LARANJA PERA", "LARANJA SELETA"]),
+  },
+  {
+    fornecedor: "NIPPO",
+    produtos: new Set(["ABACAXI"]),
+  },
+  {
+    fornecedor: "ROSSI",
+    produtos: new Set(["MAMAO FORMOSA", "MAMAO HAVAI"]),
+  },
+  {
+    fornecedor: "Real",
+    produtos: new Set(["BANANA DA TERRA", "BANANA DAGUA", "BANANA MACA", "BANANA OURO", "BANANA PRATA"]),
+    lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA"]),
+  },
+  {
+    fornecedor: "SEAL",
+    produtos: new Set(["PIMENTAO", "PIMENTAO AMARELO", "TOMATE ITALIANO", "TOMATE SWEET"]),
+  },
+  {
+    fornecedor: "uvale",
+    produtos: new Set(["BANANA DA TERRA", "BANANA DAGUA", "BANANA MACA", "BANANA OURO", "BANANA PRATA"]),
+    lojas: new Set(["ANCHIETA", "CERAMICA", "COELHO", "IRAJA", "OLINDA", "PIABETA", "QUEIMADOS", "SANTA CRUZ"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["ABOBRINHA"]),
+    lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["BATATA DOCE"]),
+    lojas: new Set(["CERAMICA", "PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["BETERRABA"]),
+    lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["CENOURA", "CHUCHU"]),
+    lojas: new Set(["CERAMICA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["INHAME"]),
+    lojas: new Set(["CERAMICA", "COELHO", "QUEIMADOS", "PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["JILO"]),
+    lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["PEPINO"]),
+    lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["TOMATE"]),
+    lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "brasnica",
+    produtos: new Set(["TANGERINA PONKAN"]),
   },
 ];
 
@@ -271,11 +475,66 @@ function supplierNameFromFile(fileName) {
   return path.basename(fileName, path.extname(fileName));
 }
 
-function isAlwaysSupplierProduct(fileName, product) {
+function isAlwaysSupplierProduct(fileName, product, store) {
   const fornecedor = normalizeText(supplierNameFromFile(fileName));
   const produto = normalizeProduct(product);
 
-  return ALWAYS_SUPPLIER_PRODUCTS.some((rule) => normalizeText(rule.fornecedor) === fornecedor && rule.produtos.has(produto));
+  return ALWAYS_SUPPLIER_PRODUCTS.some((rule) => {
+    if (normalizeText(rule.fornecedor) !== fornecedor || !rule.produtos.has(produto)) {
+      return false;
+    }
+    return !rule.lojas || rule.lojas.has(store);
+  });
+}
+
+function isAssignedToOtherSupplier(fileName, product, store) {
+  const fornecedor = normalizeText(supplierNameFromFile(fileName));
+  const produto = normalizeProduct(product);
+
+  return ALWAYS_SUPPLIER_PRODUCTS.some((rule) => {
+    if (normalizeText(rule.fornecedor) === fornecedor || !rule.produtos.has(produto)) {
+      return false;
+    }
+    return !rule.lojas || rule.lojas.has(store);
+  });
+}
+
+function getAlwaysSupplierRules(fileName) {
+  const fornecedor = normalizeText(supplierNameFromFile(fileName));
+  return ALWAYS_SUPPLIER_PRODUCTS.filter((rule) => normalizeText(rule.fornecedor) === fornecedor);
+}
+
+function findLastProductRow(worksheet, header) {
+  for (let rowNumber = worksheet.rowCount; rowNumber > header.rowNumber; rowNumber -= 1) {
+    const product = worksheetValueToString(worksheet.getRow(rowNumber).getCell(1).value).trim();
+    if (product && !isTitleCell(product)) {
+      return rowNumber;
+    }
+  }
+  return header.rowNumber + 1;
+}
+
+function cloneStyle(style) {
+  return JSON.parse(JSON.stringify(style ?? {}));
+}
+
+function addSupplierProductRow(worksheet, header, product) {
+  const sourceRowNumber = findLastProductRow(worksheet, header);
+  const targetRowNumber = worksheet.rowCount + 1;
+  const sourceRow = worksheet.getRow(sourceRowNumber);
+  const targetRow = worksheet.getRow(targetRowNumber);
+
+  targetRow.height = sourceRow.height;
+
+  for (let columnNumber = 1; columnNumber <= worksheet.columnCount; columnNumber += 1) {
+    const sourceCell = sourceRow.getCell(columnNumber);
+    const targetCell = targetRow.getCell(columnNumber);
+    targetCell.style = cloneStyle(sourceCell.style);
+    targetCell.value = null;
+  }
+
+  targetRow.getCell(1).value = product;
+  return targetRowNumber;
 }
 
 function rowHasStoreQuantity(row, storeColumns) {
@@ -335,6 +594,7 @@ function removeProductRowsWithoutOrders(worksheet, header) {
 function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumedKeys) {
   const header = findHeaderRow(worksheet);
   const mappedCells = [];
+  const existingProducts = new Set();
 
   for (let rowNumber = header.rowNumber + 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
     const row = worksheet.getRow(rowNumber);
@@ -344,12 +604,37 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
       continue;
     }
 
+    existingProducts.add(normalizeProduct(product));
+
     for (const { store, columnNumber } of header.storeColumns) {
       const cell = row.getCell(columnNumber);
-      if (isFilledQuantity(cell.value) || isAlwaysSupplierProduct(fileName, product)) {
+      if (!isAssignedToOtherSupplier(fileName, product, store) && (isFilledQuantity(cell.value) || isAlwaysSupplierProduct(fileName, product, store))) {
         mappedCells.push({ rowNumber, columnNumber, product, store });
       }
       cell.value = null;
+    }
+  }
+
+  for (const rule of getAlwaysSupplierRules(fileName)) {
+    for (const product of rule.produtos) {
+      if (existingProducts.has(product)) {
+        continue;
+      }
+
+      const storesWithQuantity = header.storeColumns.filter(({ store }) => {
+        return (!rule.lojas || rule.lojas.has(store)) && quantities.has(lookupKey(product, store));
+      });
+
+      if (!storesWithQuantity.length) {
+        continue;
+      }
+
+      const rowNumber = addSupplierProductRow(worksheet, header, product);
+      existingProducts.add(product);
+
+      for (const { store, columnNumber } of storesWithQuantity) {
+        mappedCells.push({ rowNumber, columnNumber, product, store });
+      }
     }
   }
 

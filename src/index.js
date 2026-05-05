@@ -127,6 +127,7 @@ const STOP_WORDS = new Set([
 ]);
 
 const PHRASE_REPLACEMENTS = [
+  [/^ABACAXI\b.*$/g, "ABACAXI"],
   [/ABOBORA JAP\b/g, "ABOBORA JAPONESA"],
   [/ABOBORA MOR\b/g, "ABOBORA MORANGA"],
   [/ABOBORA SERG\b/g, "ABOBORA SERGIPANA"],
@@ -152,6 +153,10 @@ const PHRASE_REPLACEMENTS = [
   [/CAJU BANDEJA\b/g, "CAJU"],
   [/CAQUI RAMA FORTE BANDEJA\b/g, "CAQUI RAMA FORTE"],
   [/CARAMBOLA BANDEJA\b/g, "CARAMBOLA"],
+  [/CEREJA(?:\s+BANDEJA)?\s+250G\b/g, "CEREJA"],
+  [/CEBOLA PIRULITO\s+\d+\s*KG\b/g, "CEBOLA PIRULITO"],
+  [/CEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
+  [/CEBOLA PITULITO(?:\s+\d+\s*KG)?\b/g, "CEBOLA PIRULITO"],
   [/CEBOLINHA PIRULITO\b/g, "CEBOLA PIRULITO"],
   [/COGUMELO PARIS(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
   [/COGUMELO PORTOBELLO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
@@ -161,6 +166,8 @@ const PHRASE_REPLACEMENTS = [
   [/GOIABA GRANEL\b/g, "GOIABA"],
   [/COCO SECO\b/g, "COCO SECO"],
   [/COCO VERDE\b/g, "COCO VERDE"],
+  [/FRAMBOESA(?:\s+BANDEJA)?\s+100G\b/g, "FRAMBOESA"],
+  [/JAMBO ROSA(?:\s+BANDEJA)?\s+300G\b/g, "JAMBO"],
   [/LIMAO THAITI\b/g, "LIMAO"],
   [/LIMAO TAHITI\b/g, "LIMAO"],
   [/MACA GALA SUPER K\b/g, "MACA 850G"],
@@ -185,13 +192,16 @@ const PHRASE_REPLACEMENTS = [
   [/MELAO PELE(?: DE)? SAPO\b/g, "MELAO VERDE"],
   [/MILHO VERDE BANDEJA\b/g, "MILHO VERDE"],
   [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE"],
+  [/MIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
   [/MORANGO BJ\b/g, "MORANGO"],
   [/MORANGO BANDEJA\b/g, "MORANGO"],
   [/PITAYA(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PITAYA"],
   [/OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN\b/g, "OVOS 12"],
   [/OVO[S]?\s+VERMELH[OA]?\s+GRANDE\s+12\s*UN\b/g, "OVOS VERMELHOS 12"],
+  [/OVO[S]?\s+BRANCO.*30\s*UN\b/g, "OVOS BRANCOS 30"],
+  [/OVO[S]?\s+BRANCO.*20\s*UN\b/g, "OVOS BRANCOS 20"],
   [/OVO[S]?\s+BRANCO.*30\b/g, "OVOS BRANCOS 30"],
-  [/OVO[S]?\s+BRANCO.*20\b/g, "OVOS BRANCO 20"],
+  [/OVO[S]?\s+BRANCO.*20\b/g, "OVOS BRANCOS 20"],
   [/OVO[S]?.*CODORNA.*30\b/g, "OVOS CODORNA 30"],
   [/CODORNA\b/g, "OVOS CODORNA"],
   [/OVO[S]?\s+VERM\b.*12\b/g, "OVOS VERMELHOS 12"],
@@ -199,6 +209,9 @@ const PHRASE_REPLACEMENTS = [
   [/OVO[S]?.*VERMELH.*20\b/g, "OVOS VERMELHOS 20"],
   [/OVO[S]?.*VERMELH.*30\b/g, "OVOS VERMELHOS 30"],
   [/OVO[S]?.*\bC\b.*12\b/g, "OVOS 12"],
+  [/PERA\s+D.?ANJOUR\b/g, "PERA DANJOUR"],
+  [/PERA\s+D\s+ANJOUR\b/g, "PERA DANJOUR"],
+  [/PERA DANJOUR\b/g, "PERA DANJOUR"],
   [/PERA WILLIAM[SN]?\b/g, "PÊRA WILLIANS"],
   [/PERA WILLIANS\b/g, "PÊRA WILLIANS"],
   [/PERA PORTUGUESA\b/g, "PERA PORTUGUESA"],
@@ -206,6 +219,8 @@ const PHRASE_REPLACEMENTS = [
   [/PIMENTAO VERDE\b/g, "PIMENTAO"],
   [/PIMENTAO VERMEL(?:HO)?\b/g, "PIMENTAO"],
   [/PIMENTAO BRANCO\b/g, "PIMENTAO"],
+  [/SAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
+  [/TAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/TANGERINA POKAN\b/g, "TANGERINA PONKAN"],
   [/TANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
@@ -264,6 +279,11 @@ function canonicalizeProductName(rawName) {
 
   let canonical = filtered
     .replace(/\bD AGUA\b/g, "DAGUA")
+    .replace(/^BANANA DA TERRA\b.*$/, "BANANA DA TERRA")
+    .replace(/^BANANA DAGUA\b.*$/, "BANANA DAGUA")
+    .replace(/^BANANA MACA\b.*$/, "BANANA MACA")
+    .replace(/^BANANA OURO\b.*$/, "BANANA OURO")
+    .replace(/^BANANA PRATA\b.*$/, "BANANA PRATA")
     .replace(/\bSERGIPANA\b/g, "ABOBORA SERGIPANA")
     .replace(/\bJAPONESA\b/g, "ABOBORA JAPONESA")
     .replace(/\bMORANGA\b/g, "ABOBORA MORANGA")
@@ -418,11 +438,14 @@ function outputProductName(rawName, productKey) {
   if (productKey === "COGUMELO SHITAKE") {
     return "COGUMELO SHITAKE BANDEJA 200g";
   }
-  if (productKey === "OVOS BRANCO 20") {
-    return "OVOS BRANCO C/ 20";
+  if (productKey === "OVOS BRANCOS 20") {
+    return "OVOS BRANCOS C/20";
   }
   if (productKey === "OVOS BRANCOS 30") {
-    return "OVOS  BRANCOS C/30";
+    return "OVOS BRANCOS C/30";
+  }
+  if (productKey === "PERA DANJOUR") {
+    return "PÊRA DANJOUR";
   }
   if (productKey === "QUIABO 300G") {
     return "QUIABO BANDEJA 300G";
