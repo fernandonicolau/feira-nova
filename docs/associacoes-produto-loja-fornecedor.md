@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 833
+Total de associacoes: 858
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -21,6 +21,7 @@ Total de associacoes: 833
 | adonai | BATATA INGLESA | Iraja |
 | adonai | BATATA INGLESA | Queimados |
 | adonai | BATATA INGLESA | Santos |
+| adonai | BATATA SUJA | Iraja |
 | adonai | CEBOLA | Iraja |
 | adonai | CEBOLA | Queimados |
 | adonai | CEBOLA PIRULITO | Cachambi |
@@ -141,7 +142,17 @@ Total de associacoes: 833
 | BENASSI | MACA RED | Queimados |
 | BENASSI | MACA RED | Santa Cruz |
 | BENASSI | MACA RED | Santos |
+| BENASSI | MACA VERDE | Anchieta |
+| BENASSI | MACA VERDE | Cachambi |
+| BENASSI | MACA VERDE | Ceramica |
+| BENASSI | MACA VERDE | Coelho |
+| BENASSI | MACA VERDE | Freguesia |
+| BENASSI | MACA VERDE | Iraja |
+| BENASSI | MACA VERDE | Olinda |
+| BENASSI | MACA VERDE | Piabeta |
 | BENASSI | MACA VERDE | Queimados |
+| BENASSI | MACA VERDE | Santa Cruz |
+| BENASSI | MACA VERDE | Santos |
 | BENASSI | MARACUJA | Anchieta |
 | BENASSI | MARACUJA | Ceramica |
 | BENASSI | MARACUJA | Coelho |
@@ -281,6 +292,7 @@ Total de associacoes: 833
 | CRT | beterraba | Iraja |
 | CRT | beterraba | Olinda |
 | CRT | beterraba | Santos |
+| CRT | Cara | Cachambi |
 | CRT | Cara | Santos |
 | CRT | cenoura | Anchieta |
 | CRT | cenoura | Cachambi |
@@ -495,6 +507,7 @@ Total de associacoes: 833
 | Galpão valdair | Inhame | Coelho |
 | Galpão valdair | Inhame | Piabeta |
 | Galpão valdair | Inhame | Queimados |
+| Galpão valdair | jilo | Ceramica |
 | Galpão valdair | jilo | Coelho |
 | Galpão valdair | jilo | Piabeta |
 | Galpão valdair | jilo | Queimados |
@@ -502,6 +515,8 @@ Total de associacoes: 833
 | Galpão valdair | Pepino comum | Coelho |
 | Galpão valdair | Pepino comum | Piabeta |
 | Galpão valdair | Pepino comum | Queimados |
+| Galpão valdair | PEPINO JAPONES | Coelho |
+| Galpão valdair | VAGEM MANT | Coelho |
 | Brasnica | TANGERINA PONKAN | Cachambi |
 | Brasnica | TANGERINA PONKAN | Ceramica |
 | Brasnica | TANGERINA PONKAN | Coelho |
@@ -832,6 +847,17 @@ Total de associacoes: 833
 | uvale | MANGA PALMER | Olinda |
 | uvale | MANGA PALMER | Queimados |
 | uvale | MANGA PALMER | Santa Cruz |
+| uvale | MELAO REI | Anchieta |
+| uvale | MELAO REI | Cachambi |
+| uvale | MELAO REI | Ceramica |
+| uvale | MELAO REI | Coelho |
+| uvale | MELAO REI | Freguesia |
+| uvale | MELAO REI | Iraja |
+| uvale | MELAO REI | Olinda |
+| uvale | MELAO REI | Piabeta |
+| uvale | MELAO REI | Queimados |
+| uvale | MELAO REI | Santa Cruz |
+| uvale | MELAO REI | Santos |
 | Veneza | Aipim | Anchieta |
 | Veneza | Aipim | Cachambi |
 | Veneza | Aipim | Freguesia |

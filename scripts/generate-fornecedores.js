@@ -95,7 +95,10 @@ const PRODUCT_REPLACEMENTS = [
   [/\bPERA DANJOUR\b/g, "PERA DANJOUR"],
   [/\bPERA WILLIANS\b/g, "PERA WILLIAMS"],
   [/\bPEPINO COMUM\b/g, "PEPINO"],
-  [/\bPIMENTAO VERDE\b/g, "PIMENTAO"],
+  [/\bPIMENTAO VERDE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO"],
+  [/\bPIMENTAO AMARELO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO AMARELO"],
+  [/\bPIMENTAO VERMEL(?:HO)?(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO VERMELHO"],
+  [/\bPIMENTAO BRANCO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO BRANCO"],
   [/\bCEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
   [/\bQUIABO 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
@@ -119,12 +122,27 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "adonai",
+    produtos: new Set(["CEBOLA PIRULITO"]),
+    lojas: new Set(["ANCHIETA"]),
+  },
+  {
+    fornecedor: "adonai",
     produtos: new Set(["BATATA BOLINHA", "CEBOLA PIRULITO"]),
     lojas: new Set(["OLINDA"]),
   },
   {
     fornecedor: "adonai",
     produtos: new Set(["CEBOLA", "CEBOLA PIRULITO"]),
+    lojas: new Set(["IRAJA"]),
+  },
+  {
+    fornecedor: "adonai",
+    produtos: new Set(["BATATA BOLINHA", "BATATA INGLESA", "CEBOLA"]),
+    lojas: new Set(["CACHAMBI", "FREGUESIA", "SANTOS"]),
+  },
+  {
+    fornecedor: "adonai",
+    produtos: new Set(["BATATA SUJA"]),
     lojas: new Set(["IRAJA"]),
   },
   {
@@ -140,11 +158,13 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "BENASSI",
     produtos: new Set([
       "AMEIXA",
+      "COCO VERDE",
       "GOIABA",
       "KIWI",
       "LARANJA BAHIA",
       "MACA FUJI",
       "MACA RED",
+      "MACA VERDE",
       "MARACUJA",
       "MELAO AMARELO",
       "MORANGO",
@@ -158,6 +178,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "FAISÃO",
     produtos: new Set([
+      "AMORA",
       "BATATA BAROA",
       "CAQUI",
       "CEREJA",
@@ -189,6 +210,21 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
+    produtos: new Set(["BETERRABA"]),
+    lojas: new Set(["CACHAMBI"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["ERVILHA"]),
+    lojas: new Set(["SANTOS"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["CARA"]),
+    lojas: new Set(["CACHAMBI"]),
+  },
+  {
+    fornecedor: "CRT",
     produtos: new Set(["BERINJELA"]),
     lojas: new Set(["ANCHIETA", "IRAJA"]),
   },
@@ -208,16 +244,24 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     lojas: new Set(["ANCHIETA"]),
   },
   {
+    fornecedor: "CRT",
+    produtos: new Set(["PEPINO", "PEPINO JAPONES", "TOMATE", "VAGEM MANT"]),
+    lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA"]),
+  },
+  {
     fornecedor: "JACUBA",
     produtos: new Set(["LIMAO"]),
   },
   {
     fornecedor: "Kifrut",
     produtos: new Set([
+      "CAJU",
       "MACA 850G",
+      "MACA GALA",
       "PERA WILLIAMS",
       "UVA CRIMSON",
       "UVA ITALIA",
+      "UVA RED GLOB",
       "UVA ROSADA",
       "UVA THOMPSON",
       "UVA VITORIA",
@@ -256,12 +300,16 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO", "PIMENTAO AMARELO", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set(["PIMENTAO", "PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE ITALIANO", "TOMATE SWEET"]),
   },
   {
     fornecedor: "uvale",
     produtos: new Set(["BANANA DA TERRA", "BANANA DAGUA", "BANANA MACA", "BANANA OURO", "BANANA PRATA"]),
     lojas: new Set(["ANCHIETA", "CERAMICA", "COELHO", "IRAJA", "OLINDA", "PIABETA", "QUEIMADOS", "SANTA CRUZ"]),
+  },
+  {
+    fornecedor: "uvale",
+    produtos: new Set(["MANGA PALMER", "MELAO REI"]),
   },
   {
     fornecedor: "Galpão valdair",
@@ -291,12 +339,17 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "Galpão valdair",
     produtos: new Set(["JILO"]),
-    lojas: new Set(["PIABETA"]),
+    lojas: new Set(["CERAMICA", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
     produtos: new Set(["PEPINO"]),
     lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["PEPINO JAPONES", "VAGEM MANT"]),
+    lojas: new Set(["COELHO"]),
   },
   {
     fornecedor: "Galpão valdair",
