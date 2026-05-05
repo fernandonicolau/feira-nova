@@ -623,6 +623,43 @@ function updateTotalFormulas(worksheet, header) {
   }
 }
 
+function sortProductRowsAlphabetically(worksheet, header) {
+  const productRows = [];
+
+  for (let rowNumber = header.rowNumber + 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+    const row = worksheet.getRow(rowNumber);
+    const product = worksheetValueToString(row.getCell(1).value).trim();
+
+    if (isTitleCell(product)) {
+      continue;
+    }
+
+    const values = [];
+    for (let columnNumber = 1; columnNumber <= worksheet.columnCount; columnNumber += 1) {
+      values[columnNumber] = row.getCell(columnNumber).value;
+    }
+
+    productRows.push({
+      product,
+      rowNumber,
+      values,
+    });
+  }
+
+  const sortedRows = [...productRows].sort((a, b) => {
+    return a.product.localeCompare(b.product, "pt-BR");
+  });
+
+  productRows.forEach((target, index) => {
+    const source = sortedRows[index];
+    const row = worksheet.getRow(target.rowNumber);
+
+    for (let columnNumber = 1; columnNumber <= worksheet.columnCount; columnNumber += 1) {
+      row.getCell(columnNumber).value = source.values[columnNumber] ?? null;
+    }
+  });
+}
+
 function removeProductRowsWithoutOrders(worksheet, header) {
   for (let rowNumber = worksheet.rowCount; rowNumber > header.rowNumber; rowNumber -= 1) {
     const row = worksheet.getRow(rowNumber);
@@ -642,6 +679,7 @@ function removeProductRowsWithoutOrders(worksheet, header) {
     }
   }
 
+  sortProductRowsAlphabetically(worksheet, header);
   updateTotalFormulas(worksheet, header);
 }
 
