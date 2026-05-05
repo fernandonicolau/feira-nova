@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 858
+Total de associacoes: 859
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -13,6 +13,7 @@ Total de associacoes: 858
 | adonai | BATATA ASTERIX | Olinda |
 | adonai | BATATA ASTERIX | Queimados |
 | adonai | BATATA ASTERIX | Santos |
+| adonai | BATATA BOLINHA | Anchieta |
 | adonai | BATATA BOLINHA | Iraja |
 | adonai | BATATA BOLINHA | Olinda |
 | adonai | BATATA BOLINHA | Queimados |
@@ -87,17 +88,6 @@ Total de associacoes: 858
 | BENASSI | COGUMELO SHIMEJI BANDEJA 200g | Coelho |
 | BENASSI | COGUMELO SHIMEJI BANDEJA 200g | Iraja |
 | BENASSI | COGUMELO SHITAKE BANDEJA 200g | Iraja |
-| BENASSI | GOIABA | Anchieta |
-| BENASSI | GOIABA | Cachambi |
-| BENASSI | GOIABA | Ceramica |
-| BENASSI | GOIABA | Coelho |
-| BENASSI | GOIABA | Freguesia |
-| BENASSI | GOIABA | Iraja |
-| BENASSI | GOIABA | Olinda |
-| BENASSI | GOIABA | Piabeta |
-| BENASSI | GOIABA | Queimados |
-| BENASSI | GOIABA | Santa Cruz |
-| BENASSI | GOIABA | Santos |
 | BENASSI | KIWI | Anchieta |
 | BENASSI | KIWI | Cachambi |
 | BENASSI | KIWI | Ceramica |
@@ -153,15 +143,26 @@ Total de associacoes: 858
 | BENASSI | MACA VERDE | Queimados |
 | BENASSI | MACA VERDE | Santa Cruz |
 | BENASSI | MACA VERDE | Santos |
-| BENASSI | MARACUJA | Anchieta |
-| BENASSI | MARACUJA | Ceramica |
-| BENASSI | MARACUJA | Coelho |
-| BENASSI | MARACUJA | Freguesia |
-| BENASSI | MARACUJA | Iraja |
-| BENASSI | MARACUJA | Olinda |
-| BENASSI | MARACUJA | Queimados |
-| BENASSI | MARACUJA | Santa Cruz |
-| BENASSI | MARACUJA | Santos |
+| FAISÃƒO | MARACUJA | Anchieta |
+| FAISÃƒO | MARACUJA | Ceramica |
+| FAISÃƒO | MARACUJA | Coelho |
+| FAISÃƒO | MARACUJA | Freguesia |
+| FAISÃƒO | MARACUJA | Iraja |
+| FAISÃƒO | MARACUJA | Olinda |
+| FAISÃƒO | MARACUJA | Queimados |
+| FAISÃƒO | MARACUJA | Santa Cruz |
+| FAISÃƒO | MARACUJA | Santos |
+| BENASSI | MANGA TOMMY | Anchieta |
+| BENASSI | MANGA TOMMY | Cachambi |
+| BENASSI | MANGA TOMMY | Ceramica |
+| BENASSI | MANGA TOMMY | Coelho |
+| BENASSI | MANGA TOMMY | Freguesia |
+| BENASSI | MANGA TOMMY | Iraja |
+| BENASSI | MANGA TOMMY | Olinda |
+| BENASSI | MANGA TOMMY | Piabeta |
+| BENASSI | MANGA TOMMY | Queimados |
+| BENASSI | MANGA TOMMY | Santa Cruz |
+| BENASSI | MANGA TOMMY | Santos |
 | BENASSI | MELAO AMARELO | Anchieta |
 | BENASSI | MELAO AMARELO | Cachambi |
 | BENASSI | MELAO AMARELO | Ceramica |
@@ -373,6 +374,17 @@ Total de associacoes: 858
 | FAISÃO | FRAMBOESA 100G | Queimados |
 | FAISÃO | FRAMBOESA 100G | Santa Cruz |
 | FAISÃO | FRAMBOESA 100G | Santos |
+| FAISÃO | GOIABA | Anchieta |
+| FAISÃO | GOIABA | Cachambi |
+| FAISÃO | GOIABA | Ceramica |
+| FAISÃO | GOIABA | Coelho |
+| FAISÃO | GOIABA | Freguesia |
+| FAISÃO | GOIABA | Iraja |
+| FAISÃO | GOIABA | Olinda |
+| FAISÃO | GOIABA | Piabeta |
+| FAISÃO | GOIABA | Queimados |
+| FAISÃO | GOIABA | Santa Cruz |
+| FAISÃO | GOIABA | Santos |
 | FAISÃO | JAMBO ROSA 300G | Anchieta |
 | FAISÃO | JAMBO ROSA 300G | Cachambi |
 | FAISÃO | JAMBO ROSA 300G | Ceramica |
@@ -663,17 +675,6 @@ Total de associacoes: 858
 | MIBA | COCO SECO | Queimados |
 | MIBA | COCO SECO | Santa Cruz |
 | MIBA | COCO SECO | Santos |
-| MIBA | MANGA TOMMY | Anchieta |
-| MIBA | MANGA TOMMY | Cachambi |
-| MIBA | MANGA TOMMY | Ceramica |
-| MIBA | MANGA TOMMY | Coelho |
-| MIBA | MANGA TOMMY | Freguesia |
-| MIBA | MANGA TOMMY | Iraja |
-| MIBA | MANGA TOMMY | Olinda |
-| MIBA | MANGA TOMMY | Piabeta |
-| MIBA | MANGA TOMMY | Queimados |
-| MIBA | MANGA TOMMY | Santa Cruz |
-| MIBA | MANGA TOMMY | Santos |
 | Milanes | LARANJA LIMA | Anchieta |
 | Milanes | LARANJA LIMA | Cachambi |
 | Milanes | LARANJA LIMA | Ceramica |

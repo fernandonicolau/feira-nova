@@ -117,7 +117,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["BATATA ASTERIX"]),
+    produtos: new Set(["BATATA ASTERIX", "BATATA BOLINHA"]),
     lojas: new Set(["ANCHIETA"]),
   },
   {
@@ -159,13 +159,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set([
       "AMEIXA",
       "COCO VERDE",
-      "GOIABA",
       "KIWI",
       "LARANJA BAHIA",
       "MACA FUJI",
       "MACA RED",
       "MACA VERDE",
-      "MARACUJA",
+      "MANGA TOMMY",
       "MELAO AMARELO",
       "MORANGO",
       "PERA PORTUGUESA",
@@ -183,7 +182,9 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "CAQUI",
       "CEREJA",
       "FRAMBOESA",
+      "GOIABA",
       "JAMBO",
+      "MARACUJA",
       "MELANCIA BABY",
       "MELAO ORANGE",
       "MELAO VERDE",
@@ -279,7 +280,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "MIBA",
-    produtos: new Set(["ABACATE", "COCO SECO", "MANGA TOMMY"]),
+    produtos: new Set(["ABACATE", "COCO SECO"]),
   },
   {
     fornecedor: "Milanes",
