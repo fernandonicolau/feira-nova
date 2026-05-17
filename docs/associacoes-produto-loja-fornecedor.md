@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 859
+Total de associacoes: 862
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -16,6 +16,7 @@ Total de associacoes: 859
 | adonai | BATATA BOLINHA | Anchieta |
 | adonai | BATATA BOLINHA | Iraja |
 | adonai | BATATA BOLINHA | Olinda |
+| adonai | BATATA BOLINHA | Piabeta |
 | adonai | BATATA BOLINHA | Queimados |
 | adonai | BATATA BOLINHA | Santos |
 | adonai | BATATA INGLESA | Cachambi |
@@ -28,6 +29,7 @@ Total de associacoes: 859
 | adonai | CEBOLA PIRULITO | Cachambi |
 | adonai | CEBOLA PIRULITO | Iraja |
 | adonai | CEBOLA PIRULITO | Olinda |
+| adonai | CEBOLA PIRULITO | Piabeta |
 | adonai | CEBOLA PIRULITO | Queimados |
 | adonai | CEBOLA PIRULITO | Santos |
 | adonai | CEBOLA ROXA | Anchieta |
@@ -163,17 +165,6 @@ Total de associacoes: 859
 | BENASSI | MANGA TOMMY | Queimados |
 | BENASSI | MANGA TOMMY | Santa Cruz |
 | BENASSI | MANGA TOMMY | Santos |
-| BENASSI | MELAO AMARELO | Anchieta |
-| BENASSI | MELAO AMARELO | Cachambi |
-| BENASSI | MELAO AMARELO | Ceramica |
-| BENASSI | MELAO AMARELO | Coelho |
-| BENASSI | MELAO AMARELO | Freguesia |
-| BENASSI | MELAO AMARELO | Iraja |
-| BENASSI | MELAO AMARELO | Olinda |
-| BENASSI | MELAO AMARELO | Piabeta |
-| BENASSI | MELAO AMARELO | Queimados |
-| BENASSI | MELAO AMARELO | Santa Cruz |
-| BENASSI | MELAO AMARELO | Santos |
 | BENASSI | MORANGO | Anchieta |
 | BENASSI | MORANGO | Cachambi |
 | BENASSI | MORANGO | Ceramica |
@@ -396,6 +387,7 @@ Total de associacoes: 859
 | FAISÃO | JAMBO ROSA 300G | Queimados |
 | FAISÃO | JAMBO ROSA 300G | Santa Cruz |
 | FAISÃO | JAMBO ROSA 300G | Santos |
+| FAISÃO | LIMA DA PERSIA | Piabeta |
 | FAISÃO | MELANCIA BABY | Anchieta |
 | FAISÃO | MELANCIA BABY | Cachambi |
 | FAISÃO | MELANCIA BABY | Ceramica |
@@ -503,6 +495,7 @@ Total de associacoes: 859
 | Galpão valdair | Batata doce | Queimados |
 | Galpão valdair | Berinjela | Ceramica |
 | Galpão valdair | Berinjela | Coelho |
+| Galpão valdair | Berinjela | Piabeta |
 | Galpão valdair | Berinjela | Queimados |
 | Galpão valdair | beterraba | Coelho |
 | Galpão valdair | beterraba | Piabeta |
@@ -719,6 +712,17 @@ Total de associacoes: 859
 | NIPPO | ABACAXI | Queimados |
 | NIPPO | ABACAXI | Santa Cruz |
 | NIPPO | ABACAXI | Santos |
+| NIPPO | MELAO AMARELO | Anchieta |
+| NIPPO | MELAO AMARELO | Cachambi |
+| NIPPO | MELAO AMARELO | Ceramica |
+| NIPPO | MELAO AMARELO | Coelho |
+| NIPPO | MELAO AMARELO | Freguesia |
+| NIPPO | MELAO AMARELO | Iraja |
+| NIPPO | MELAO AMARELO | Olinda |
+| NIPPO | MELAO AMARELO | Piabeta |
+| NIPPO | MELAO AMARELO | Queimados |
+| NIPPO | MELAO AMARELO | Santa Cruz |
+| NIPPO | MELAO AMARELO | Santos |
 | Real | BANANA DA TERRA | Cachambi |
 | Real | BANANA DA TERRA | Freguesia |
 | Real | BANANA DA TERRA | Santos |

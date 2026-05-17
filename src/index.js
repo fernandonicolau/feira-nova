@@ -190,6 +190,7 @@ const PHRASE_REPLACEMENTS = [
   [/LARANJA SELETA\b/g, "LARANJA SELETA"],
   [/LARANJA PERA\b/g, "LARANJA PERA"],
   [/MELAO AMARELO REDE\b/g, "MELAO REI"],
+  [/MELANCIA PINGO DOCE VERMELHA\b/g, "MELANCIA PINGO VER"],
   [/MELAO PELE(?: DE)? SAPO\b/g, "MELAO VERDE"],
   [/MILHO VERDE BANDEJA\b/g, "MILHO VERDE"],
   [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE"],
@@ -197,6 +198,7 @@ const PHRASE_REPLACEMENTS = [
   [/MORANGO BJ\b/g, "MORANGO"],
   [/MORANGO BANDEJA\b/g, "MORANGO"],
   [/PITAYA(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PITAYA"],
+  [/^OVO[S]?\s+12\s*UN$/g, "OVO BRANCO DZ"],
   [/OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN\b/g, "OVOS 12"],
   [/OVO[S]?\s+VERMELH[OA]?\s+GRANDE\s+12\s*UN\b/g, "OVOS VERMELHOS 12"],
   [/OVO[S]?\s+BRANCO.*30\s*UN\b/g, "OVOS BRANCOS 30"],
@@ -221,6 +223,7 @@ const PHRASE_REPLACEMENTS = [
   [/PIMENTAO VERMEL(?:HO)?(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO VERMELHO"],
   [/PIMENTAO BRANCO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO BRANCO"],
   [/SAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
+  [/SERIGUELA(?:\s+BANDEJA)?\s+250G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/TAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/TANGERINA POKAN\b/g, "TANGERINA PONKAN"],
   [/TANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
@@ -228,6 +231,7 @@ const PHRASE_REPLACEMENTS = [
   [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
   [/TOMATE SWEET GRAPE\b/g, "TOMATE SWEET 180"],
   [/TOMATE SWEET\b/g, "TOMATE SWEET 180"],
+  [/UVA BRASIL\b/g, "UVA BRASIL"],
   [/UVA CRINSON\b/g, "UVA CRIMSON"],
   [/UVA ITALIA\b/g, "UVA ITALIA"],
   [/UVA RED GLOBE\b/g, "UVA RED GLOB"],
@@ -253,6 +257,9 @@ function normalizeText(value) {
 function canonicalizeProductName(rawName) {
   let text = normalizeText(rawName);
 
+  if (/^OVO[S]?\s+SEAL\s+CAIPIRA\s+12\s*UN$/.test(text)) {
+    return text;
+  }
   if (/^OVO[S]?\s+RAIAR\s+GRANDE\s+ORGANICO\s+20\s*UN$/.test(text)) {
     return text;
   }
@@ -359,6 +366,9 @@ function canonicalizeProductName(rawName) {
     if (canonical.includes("ITALIA")) {
       return "UVA ITALIA";
     }
+    if (canonical.includes("BRASIL")) {
+      return "UVA BRASIL";
+    }
     if (canonical.includes("ROSADA")) {
       return "UVA ROSADA";
     }
@@ -412,11 +422,17 @@ function canonicalizeProductName(rawName) {
 function outputProductName(rawName, productKey) {
   const text = normalizeText(rawName);
 
+  if (/^OVO[S]?\s+SEAL\s+CAIPIRA\s+12\s*UN$/.test(text)) {
+    return text;
+  }
   if (/^OVO[S]?\s+RAIAR\s+GRANDE\s+ORGANICO\s+20\s*UN$/.test(text)) {
     return text;
   }
   if (/^OVO[S]?\s+SITIO\s+COCORICO\s+CAIPIRA\s+10\s*UN$/.test(text)) {
     return text;
+  }
+  if (/^OVO[S]?\s+12\s*UN$/.test(text)) {
+    return "OVO BRANCO DZ";
   }
   if (/^OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN$/.test(text)) {
     return "OVOS C/12";
@@ -457,6 +473,13 @@ function outputProductName(rawName, productKey) {
 
 function parseLooseItem(text) {
   const cleaned = String(text ?? "").trim();
+  if (/^OVO[S]?\s+SEAL\s+CAIPIRA\s+12\s*UN$/i.test(cleaned)) {
+    return null;
+  }
+  if (/^OVO[S]?\s+12\s*UN$/i.test(cleaned)) {
+    return null;
+  }
+
   const match = cleaned.match(/^(.*?)(?:\s*[-]?\s*)(\d+(?:[.,]\d+)?)\s*(?:KG|KILO|UNID|UNIDADE|UN|UND|UNID\.|CX|PCT|PACOTE|BDJ)?\s*$/i);
 
   if (!match) {
@@ -1128,7 +1151,7 @@ async function main() {
     console.log(`- ${path.basename(outputPath)}`);
   }
 
-  const supplierOutput = await generateSupplierFiles({ mapDir: outputDir });
+  const supplierOutput = await generateSupplierFiles({ mapDir: outputDir, now });
   console.log(`Arquivos de fornecedores gerados em: ${supplierOutput.outputDir}`);
   for (const fileName of supplierOutput.files) {
     console.log(`- fornecedores/${fileName}`);

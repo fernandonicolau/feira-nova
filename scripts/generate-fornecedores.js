@@ -104,6 +104,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO EMBALADOS\b/g, "QUIABO BDJ"],
   [/\bSAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
+  [/\bSERIGUELA(?:\s+BANDEJA)?\s+250G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/\bTAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/\bTANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
   [/\bTOMATE SWEET 180\b/g, "TOMATE SWEET"],
@@ -124,6 +125,16 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "adonai",
     produtos: new Set(["CEBOLA PIRULITO"]),
     lojas: new Set(["ANCHIETA"]),
+  },
+  {
+    fornecedor: "adonai",
+    produtos: new Set(["CEBOLA PIRULITO"]),
+    lojas: new Set(["FREGUESIA", "PIABETA"]),
+  },
+  {
+    fornecedor: "adonai",
+    produtos: new Set(["BATATA BOLINHA"]),
+    lojas: new Set(["PIABETA"]),
   },
   {
     fornecedor: "adonai",
@@ -158,6 +169,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "BENASSI",
     produtos: new Set([
       "AMEIXA",
+      "COGUMELO",
+      "COGUMELO PARIS BANDEJA 200G",
+      "COGUMELO PORTOBELLO BANDEJA 200G",
+      "COGUMELO SHIMEJI BANDEJA 200G",
+      "COGUMELO SHITAKE BANDEJA 200G",
       "COCO VERDE",
       "KIWI",
       "LARANJA BAHIA",
@@ -165,39 +181,73 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MACA RED",
       "MACA VERDE",
       "MANGA TOMMY",
-      "MELAO AMARELO",
+      "MELANCIA PINGO VER",
       "MORANGO",
       "PERA PORTUGUESA",
     ]),
   },
   {
     fornecedor: "Casa dina",
-    produtos: new Set(["ABOBORA JAPONESA", "ABOBORA SERGIPANA", "GENGIBRE", "MELANCIA"]),
+    produtos: new Set([
+      "ABOBORA BAIANA",
+      "ABOBORA JAPONESA",
+      "ABOBORA MORANGA",
+      "ABOBORA PESCOCO",
+      "ABOBORA SERGIPANA",
+      "GENGIBRE",
+      "MELANCIA",
+    ]),
   },
   {
     fornecedor: "FAISÃO",
     produtos: new Set([
       "AMORA",
       "BATATA BAROA",
+      "CAJA",
       "CAQUI",
       "CEREJA",
       "FRAMBOESA",
       "GOIABA",
       "JAMBO",
+      "LIMAO SICILIANO",
       "MARACUJA",
       "MELANCIA BABY",
       "MELAO ORANGE",
       "MELAO VERDE",
       "MIRTILO",
       "PERA DANJOUR",
+      "PINHA",
+      "PITAYA",
+      "ROMA",
       "SAPOTI",
+      "SERIGUELA",
       "TAMARINDO",
       "TANGERINA IMPORTADA",
     ]),
   },
   {
+    fornecedor: "FAISÃO",
+    produtos: new Set(["LIMA DA PERSIA"]),
+    lojas: new Set(["PIABETA"]),
+  },
+  {
     fornecedor: "Cia dos ovos",
-    produtos: new Set(["OVOS BRANCOS C 20", "OVOS BRANCOS C 30"]),
+    produtos: new Set([
+      "OVO BRANCO DZ",
+      "OVO CODORNA",
+      "OVO VERM C 12",
+      "OVO VERM C 20",
+      "OVO VERM C 30",
+      "OVOS C 12",
+      "OVOS C 20",
+      "OVOS C 30",
+      "OVOS BRANCOS C 20",
+      "OVOS BRANCOS C 30",
+      "OVOS CODORNA",
+      "OVOS VERMELHO C 12",
+      "OVOS VERMELHOS C 20",
+      "OVOS VERMELHOS C 30",
+    ]),
   },
   {
     fornecedor: "CASSARO",
@@ -242,7 +292,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "CRT",
     produtos: new Set(["PEPINO"]),
-    lojas: new Set(["ANCHIETA"]),
+    lojas: new Set(["ANCHIETA", "SANTA CRUZ"]),
   },
   {
     fornecedor: "CRT",
@@ -260,6 +310,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MACA 850G",
       "MACA GALA",
       "PERA WILLIAMS",
+      "UVA BRASIL",
       "UVA CRIMSON",
       "UVA ITALIA",
       "UVA RED GLOB",
@@ -288,7 +339,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "NIPPO",
-    produtos: new Set(["ABACAXI"]),
+    produtos: new Set(["ABACAXI", "MELAO AMARELO"]),
   },
   {
     fornecedor: "ROSSI",
@@ -301,7 +352,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO", "PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set(["PIMENTAO"]),
+    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "SANTA CRUZ", "SANTOS"]),
+  },
+  {
+    fornecedor: "SEAL",
+    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE ITALIANO", "TOMATE SWEET"]),
   },
   {
     fornecedor: "uvale",
@@ -324,8 +380,13 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Galpão valdair",
-    produtos: new Set(["BETERRABA"]),
+    produtos: new Set(["BERINJELA"]),
     lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["BETERRABA"]),
+    lojas: new Set(["CERAMICA", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
@@ -349,8 +410,18 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Galpão valdair",
+    produtos: new Set(["ERVILHA", "MAXIXE"]),
+    lojas: new Set(["COELHO"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
     produtos: new Set(["PEPINO JAPONES", "VAGEM MANT"]),
     lojas: new Set(["COELHO"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["PIMENTAO"]),
+    lojas: new Set(["CERAMICA", "COELHO", "QUEIMADOS", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
@@ -421,6 +492,19 @@ function quantityForCell(value) {
     return value;
   }
   return Number(value.toFixed(2).replace(/\.?0+$/, ""));
+}
+
+function formatDate(value) {
+  const year = value.getFullYear();
+  const month = String(value.getMonth() + 1).padStart(2, "0");
+  const day = String(value.getDate()).padStart(2, "0");
+  return `${day}/${month}/${year}`;
+}
+
+function addDays(value, days) {
+  const date = new Date(value);
+  date.setDate(date.getDate() + days);
+  return date;
 }
 
 function lookupKey(product, store) {
@@ -623,6 +707,22 @@ function updateTotalFormulas(worksheet, header) {
   }
 }
 
+function updateWorksheetDates(worksheet, formattedDate) {
+  const datePattern = /\b\d{2}\/\d{2}\/\d{4}\b/;
+  const allDatesPattern = /\b\d{2}\/\d{2}\/\d{4}\b/g;
+
+  worksheet.eachRow((row) => {
+    row.eachCell((cell) => {
+      const text = worksheetValueToString(cell.value);
+      if (!datePattern.test(text)) {
+        return;
+      }
+
+      cell.value = text.replace(allDatesPattern, formattedDate);
+    });
+  });
+}
+
 function sortProductRowsAlphabetically(worksheet, header) {
   const productRows = [];
 
@@ -795,6 +895,7 @@ async function generateSupplierFiles(options = {}) {
   const mapDir = options.mapDir ?? DEFAULT_MAP_DIR;
   const templateDir = options.templateDir ?? DEFAULT_TEMPLATE_DIR;
   const outputDir = options.outputDir ?? path.join(mapDir, "fornecedores");
+  const formattedDate = formatDate(addDays(options.now ?? new Date(), 1));
 
   if (!fs.existsSync(templateDir)) {
     throw new Error("Pasta exemplo nao encontrada.");
@@ -813,6 +914,8 @@ async function generateSupplierFiles(options = {}) {
   for (const fileName of supplierFiles) {
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(path.join(templateDir, fileName));
+
+    workbook.worksheets.forEach((worksheet) => updateWorksheetDates(worksheet, formattedDate));
 
     if (workbook.worksheets[0]) {
       clearAndFillSupplierWorksheet(workbook.worksheets[0], quantities, fileName, consumedKeys);
