@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 862
+Total de associacoes: 877
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -64,6 +64,17 @@ Total de associacoes: 862
 | Baixinho | MILHO BDJ | Queimados |
 | Baixinho | MILHO BDJ | Santa Cruz |
 | Baixinho | MILHO BDJ | Santos |
+| Baixinho | MILHO ESPIGA | Anchieta |
+| Baixinho | MILHO ESPIGA | Cachambi |
+| Baixinho | MILHO ESPIGA | Ceramica |
+| Baixinho | MILHO ESPIGA | Coelho |
+| Baixinho | MILHO ESPIGA | Freguesia |
+| Baixinho | MILHO ESPIGA | Iraja |
+| Baixinho | MILHO ESPIGA | Olinda |
+| Baixinho | MILHO ESPIGA | Piabeta |
+| Baixinho | MILHO ESPIGA | Queimados |
+| Baixinho | MILHO ESPIGA | Santa Cruz |
+| Baixinho | MILHO ESPIGA | Santos |
 | Baixinho | QUIABO BDJ | Anchieta |
 | Baixinho | QUIABO BDJ | Cachambi |
 | Baixinho | QUIABO BDJ | Ceramica |
@@ -271,23 +282,27 @@ Total de associacoes: 862
 | CRT | Abobrinha | Freguesia |
 | CRT | Abobrinha | Iraja |
 | CRT | Abobrinha | Olinda |
+| CRT | Abobrinha | Queimados |
 | CRT | Abobrinha | Santos |
 | CRT | Batata doce | Anchieta |
 | CRT | Batata doce | Cachambi |
 | CRT | Batata doce | Freguesia |
 | CRT | Batata doce | Iraja |
 | CRT | Batata doce | Olinda |
+| CRT | Batata doce | Queimados |
 | CRT | Batata doce | Santos |
 | CRT | Berinjela | Anchieta |
 | CRT | Berinjela | Cachambi |
 | CRT | Berinjela | Freguesia |
 | CRT | Berinjela | Iraja |
 | CRT | Berinjela | Olinda |
+| CRT | Berinjela | Queimados |
 | CRT | Berinjela | Santos |
 | CRT | beterraba | Anchieta |
 | CRT | beterraba | Freguesia |
 | CRT | beterraba | Iraja |
 | CRT | beterraba | Olinda |
+| CRT | beterraba | Queimados |
 | CRT | beterraba | Santos |
 | CRT | Cara | Cachambi |
 | CRT | Cara | Santos |
@@ -296,27 +311,32 @@ Total de associacoes: 862
 | CRT | cenoura | Freguesia |
 | CRT | cenoura | Iraja |
 | CRT | cenoura | Olinda |
+| CRT | cenoura | Queimados |
 | CRT | cenoura | Santos |
 | CRT | chuchu | Anchieta |
 | CRT | chuchu | Cachambi |
 | CRT | chuchu | Freguesia |
 | CRT | chuchu | Iraja |
 | CRT | chuchu | Olinda |
+| CRT | chuchu | Queimados |
 | CRT | chuchu | Santos |
 | CRT | Inhame | Anchieta |
 | CRT | Inhame | Cachambi |
 | CRT | Inhame | Freguesia |
 | CRT | Inhame | Iraja |
 | CRT | Inhame | Olinda |
+| CRT | Inhame | Queimados |
 | CRT | Inhame | Santos |
 | CRT | jilo | Anchieta |
 | CRT | jilo | Cachambi |
 | CRT | jilo | Freguesia |
 | CRT | jilo | Iraja |
 | CRT | jilo | Olinda |
+| CRT | jilo | Queimados |
 | CRT | Pepino comum | Anchieta |
 | CRT | Pepino comum | Iraja |
 | CRT | Pepino comum | Olinda |
+| CRT | Pepino comum | Queimados |
 | CRT | Pepino japones | Anchieta |
 | CRT | Pepino japones | Freguesia |
 | CRT | Pepino japones | Santos |
@@ -325,6 +345,7 @@ Total de associacoes: 862
 | CRT | Tomate | Freguesia |
 | CRT | Tomate | Iraja |
 | CRT | Tomate | Olinda |
+| CRT | Tomate | Queimados |
 | FAISÃO | BATATA BAROA | Anchieta |
 | FAISÃO | BATATA BAROA | Cachambi |
 | FAISÃO | BATATA BAROA | Ceramica |
@@ -489,57 +510,46 @@ Total de associacoes: 862
 | Galpão valdair | Abobrinha | Ceramica |
 | Galpão valdair | Abobrinha | Coelho |
 | Galpão valdair | Abobrinha | Piabeta |
-| Galpão valdair | Abobrinha | Queimados |
 | Galpão valdair | Aipim | Ceramica |
 | Galpão valdair | Aipim | Coelho |
 | Galpão valdair | Aipim | Piabeta |
-| Galpão valdair | Aipim | Queimados |
 | Galpão valdair | Batata doce | Ceramica |
 | Galpão valdair | Batata doce | Coelho |
 | Galpão valdair | Batata doce | Piabeta |
-| Galpão valdair | Batata doce | Queimados |
 | Galpão valdair | Berinjela | Ceramica |
 | Galpão valdair | Berinjela | Coelho |
 | Galpão valdair | Berinjela | Piabeta |
-| Galpão valdair | Berinjela | Queimados |
 | Galpão valdair | beterraba | Coelho |
 | Galpão valdair | beterraba | Piabeta |
-| Galpão valdair | beterraba | Queimados |
 | Galpão valdair | cenoura | Ceramica |
 | Galpão valdair | cenoura | Coelho |
 | Galpão valdair | cenoura | Piabeta |
-| Galpão valdair | cenoura | Queimados |
 | Galpão valdair | chuchu | Ceramica |
 | Galpão valdair | chuchu | Coelho |
 | Galpão valdair | chuchu | Piabeta |
-| Galpão valdair | chuchu | Queimados |
 | Galpão valdair | Inhame | Ceramica |
 | Galpão valdair | Inhame | Coelho |
 | Galpão valdair | Inhame | Piabeta |
-| Galpão valdair | Inhame | Queimados |
 | Galpão valdair | jilo | Ceramica |
 | Galpão valdair | jilo | Coelho |
 | Galpão valdair | jilo | Piabeta |
-| Galpão valdair | jilo | Queimados |
 | Galpão valdair | Pepino comum | Ceramica |
 | Galpão valdair | Pepino comum | Coelho |
 | Galpão valdair | Pepino comum | Piabeta |
-| Galpão valdair | Pepino comum | Queimados |
 | Galpão valdair | PEPINO JAPONES | Coelho |
 | Galpão valdair | VAGEM MANT | Coelho |
 | Brasnica | TANGERINA PONKAN | Cachambi |
-| Brasnica | TANGERINA PONKAN | Ceramica |
-| Brasnica | TANGERINA PONKAN | Coelho |
 | Brasnica | TANGERINA PONKAN | Freguesia |
 | Brasnica | TANGERINA PONKAN | Olinda |
-| Brasnica | TANGERINA PONKAN | Piabeta |
 | Brasnica | TANGERINA PONKAN | Queimados |
 | Brasnica | TANGERINA PONKAN | Santa Cruz |
 | Brasnica | TANGERINA PONKAN | Santos |
+| Galpão valdair | TANGERINA PONKAN | Ceramica |
+| Galpão valdair | TANGERINA PONKAN | Coelho |
+| Galpão valdair | TANGERINA PONKAN | Piabeta |
 | Galpão valdair | Tomate | Ceramica |
 | Galpão valdair | Tomate | Coelho |
 | Galpão valdair | Tomate | Piabeta |
-| Galpão valdair | Tomate | Queimados |
 | JACUBA | LIMÃO | Anchieta |
 | JACUBA | LIMÃO | Cachambi |
 | JACUBA | LIMÃO | Ceramica |
@@ -870,5 +880,6 @@ Total de associacoes: 862
 | Veneza | Aipim | Freguesia |
 | Veneza | Aipim | Iraja |
 | Veneza | Aipim | Olinda |
+| Veneza | Aipim | Queimados |
 | Veneza | Aipim | Santa Cruz |
 | Veneza | Aipim | Santos |

@@ -170,7 +170,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Baixinho",
-    produtos: new Set(["MILHO BDJ", "QUIABO BDJ"]),
+    produtos: new Set(["MILHO BDJ", "MILHO ESPIGA", "QUIABO BDJ"]),
   },
   {
     fornecedor: "BENASSI",
@@ -212,6 +212,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "BATATA BAROA",
       "CAJA",
       "CAQUI",
+      "CARAMBOLA",
       "CEREJA",
       "FRAMBOESA",
       "GOIABA",
@@ -312,6 +313,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA"]),
   },
   {
+    fornecedor: "CRT",
+    produtos: new Set(["ABOBRINHA", "BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "JILO", "PEPINO", "TOMATE"]),
+    lojas: new Set(["QUEIMADOS"]),
+  },
+  {
     fornecedor: "JACUBA",
     produtos: new Set(["LIMAO"]),
   },
@@ -367,7 +373,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "SEAL",
     produtos: new Set(["PIMENTAO"]),
-    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "SANTA CRUZ", "SANTOS"]),
+    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "QUEIMADOS", "SANTA CRUZ", "SANTOS"]),
   },
   {
     fornecedor: "SEAL",
@@ -410,7 +416,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "Galpão valdair",
     produtos: new Set(["INHAME"]),
-    lojas: new Set(["CERAMICA", "COELHO", "QUEIMADOS", "PIABETA"]),
+    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
@@ -435,7 +441,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "Galpão valdair",
     produtos: new Set(["PIMENTAO"]),
-    lojas: new Set(["CERAMICA", "COELHO", "QUEIMADOS", "PIABETA"]),
+    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["TANGERINA PONKAN"]),
+    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
@@ -445,6 +456,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "brasnica",
     produtos: new Set(["TANGERINA PONKAN"]),
+    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "QUEIMADOS", "SANTA CRUZ", "SANTOS"]),
+  },
+  {
+    fornecedor: "Veneza",
+    produtos: new Set(["AIPIM"]),
+    lojas: new Set(["QUEIMADOS"]),
   },
 ];
 
