@@ -12,25 +12,30 @@ Total de associacoes: 862
 | adonai | BATATA ASTERIX | Iraja |
 | adonai | BATATA ASTERIX | Olinda |
 | adonai | BATATA ASTERIX | Queimados |
+| adonai | BATATA ASTERIX | Santa Cruz |
 | adonai | BATATA ASTERIX | Santos |
 | adonai | BATATA BOLINHA | Anchieta |
 | adonai | BATATA BOLINHA | Iraja |
 | adonai | BATATA BOLINHA | Olinda |
 | adonai | BATATA BOLINHA | Piabeta |
 | adonai | BATATA BOLINHA | Queimados |
+| adonai | BATATA BOLINHA | Santa Cruz |
 | adonai | BATATA BOLINHA | Santos |
 | adonai | BATATA INGLESA | Cachambi |
 | adonai | BATATA INGLESA | Iraja |
 | adonai | BATATA INGLESA | Queimados |
+| adonai | BATATA INGLESA | Santa Cruz |
 | adonai | BATATA INGLESA | Santos |
 | adonai | BATATA SUJA | Iraja |
 | adonai | CEBOLA | Iraja |
 | adonai | CEBOLA | Queimados |
+| adonai | CEBOLA | Santa Cruz |
 | adonai | CEBOLA PIRULITO | Cachambi |
 | adonai | CEBOLA PIRULITO | Iraja |
 | adonai | CEBOLA PIRULITO | Olinda |
 | adonai | CEBOLA PIRULITO | Piabeta |
 | adonai | CEBOLA PIRULITO | Queimados |
+| adonai | CEBOLA PIRULITO | Santa Cruz |
 | adonai | CEBOLA PIRULITO | Santos |
 | adonai | CEBOLA ROXA | Anchieta |
 | adonai | CEBOLA ROXA | Cachambi |
@@ -112,6 +117,17 @@ Total de associacoes: 862
 | BENASSI | LARANJA BAHIA | Queimados |
 | BENASSI | LARANJA BAHIA | Santa Cruz |
 | BENASSI | LARANJA BAHIA | Santos |
+| BENASSI | MACA GALA 850G | Anchieta |
+| BENASSI | MACA GALA 850G | Cachambi |
+| BENASSI | MACA GALA 850G | Ceramica |
+| BENASSI | MACA GALA 850G | Coelho |
+| BENASSI | MACA GALA 850G | Freguesia |
+| BENASSI | MACA GALA 850G | Iraja |
+| BENASSI | MACA GALA 850G | Olinda |
+| BENASSI | MACA GALA 850G | Piabeta |
+| BENASSI | MACA GALA 850G | Queimados |
+| BENASSI | MACA GALA 850G | Santa Cruz |
+| BENASSI | MACA GALA 850G | Santos |
 | BENASSI | MACA FUJI | Anchieta |
 | BENASSI | MACA FUJI | Cachambi |
 | BENASSI | MACA FUJI | Ceramica |
@@ -165,17 +181,6 @@ Total de associacoes: 862
 | BENASSI | MANGA TOMMY | Queimados |
 | BENASSI | MANGA TOMMY | Santa Cruz |
 | BENASSI | MANGA TOMMY | Santos |
-| BENASSI | MORANGO | Anchieta |
-| BENASSI | MORANGO | Cachambi |
-| BENASSI | MORANGO | Ceramica |
-| BENASSI | MORANGO | Coelho |
-| BENASSI | MORANGO | Freguesia |
-| BENASSI | MORANGO | Iraja |
-| BENASSI | MORANGO | Olinda |
-| BENASSI | MORANGO | Piabeta |
-| BENASSI | MORANGO | Queimados |
-| BENASSI | MORANGO | Santa Cruz |
-| BENASSI | MORANGO | Santos |
 | BENASSI | PERA PORTUGUESA | Anchieta |
 | BENASSI | PERA PORTUGUESA | Cachambi |
 | BENASSI | PERA PORTUGUESA | Ceramica |
@@ -555,17 +560,6 @@ Total de associacoes: 862
 | Kifrut | MAÇÃ GALA | Queimados |
 | Kifrut | MAÇÃ GALA | Santa Cruz |
 | Kifrut | MAÇÃ GALA | Santos |
-| Kifrut | MACA GALA 850G | Anchieta |
-| Kifrut | MACA GALA 850G | Cachambi |
-| Kifrut | MACA GALA 850G | Ceramica |
-| Kifrut | MACA GALA 850G | Coelho |
-| Kifrut | MACA GALA 850G | Freguesia |
-| Kifrut | MACA GALA 850G | Iraja |
-| Kifrut | MACA GALA 850G | Olinda |
-| Kifrut | MACA GALA 850G | Piabeta |
-| Kifrut | MACA GALA 850G | Queimados |
-| Kifrut | MACA GALA 850G | Santa Cruz |
-| Kifrut | MACA GALA 850G | Santos |
 | Kifrut | PERA WILLIAMS | Anchieta |
 | Kifrut | PERA WILLIAMS | Cachambi |
 | Kifrut | PERA WILLIAMS | Ceramica |
@@ -634,18 +628,13 @@ Total de associacoes: 862
 | Kifrut | UVA VITORIA | Santos |
 | LTB | BATATA ASTERIX | Ceramica |
 | LTB | BATATA ASTERIX | Coelho |
-| LTB | BATATA ASTERIX | Santa Cruz |
 | LTB | BATATA BOLINHA | Coelho |
-| LTB | BATATA BOLINHA | Santa Cruz |
 | LTB | BATATA INGLESA | Ceramica |
 | LTB | BATATA INGLESA | Coelho |
-| LTB | BATATA INGLESA | Santa Cruz |
 | LTB | CEBOLA | Ceramica |
 | LTB | CEBOLA | Coelho |
-| LTB | CEBOLA | Santa Cruz |
 | LTB | CEBOLA PIRULITO | Ceramica |
 | LTB | CEBOLA PIRULITO | Coelho |
-| LTB | CEBOLA PIRULITO | Santa Cruz |
 | MIBA | ABACATE | Anchieta |
 | MIBA | ABACATE | Cachambi |
 | MIBA | ABACATE | Ceramica |
@@ -701,6 +690,17 @@ Total de associacoes: 862
 | Milanes | LARANJA SELETA | Queimados |
 | Milanes | LARANJA SELETA | Santa Cruz |
 | Milanes | LARANJA SELETA | Santos |
+| Minas rio | MORANGO | Anchieta |
+| Minas rio | MORANGO | Cachambi |
+| Minas rio | MORANGO | Ceramica |
+| Minas rio | MORANGO | Coelho |
+| Minas rio | MORANGO | Freguesia |
+| Minas rio | MORANGO | Iraja |
+| Minas rio | MORANGO | Olinda |
+| Minas rio | MORANGO | Piabeta |
+| Minas rio | MORANGO | Queimados |
+| Minas rio | MORANGO | Santa Cruz |
+| Minas rio | MORANGO | Santos |
 | NIPPO | ABACAXI | Anchieta |
 | NIPPO | ABACAXI | Cachambi |
 | NIPPO | ABACAXI | Ceramica |
@@ -723,6 +723,17 @@ Total de associacoes: 862
 | NIPPO | MELAO AMARELO | Queimados |
 | NIPPO | MELAO AMARELO | Santa Cruz |
 | NIPPO | MELAO AMARELO | Santos |
+| NIPPO | MAMAO HAVAI | Anchieta |
+| NIPPO | MAMAO HAVAI | Cachambi |
+| NIPPO | MAMAO HAVAI | Ceramica |
+| NIPPO | MAMAO HAVAI | Coelho |
+| NIPPO | MAMAO HAVAI | Freguesia |
+| NIPPO | MAMAO HAVAI | Iraja |
+| NIPPO | MAMAO HAVAI | Olinda |
+| NIPPO | MAMAO HAVAI | Piabeta |
+| NIPPO | MAMAO HAVAI | Queimados |
+| NIPPO | MAMAO HAVAI | Santa Cruz |
+| NIPPO | MAMAO HAVAI | Santos |
 | Real | BANANA DA TERRA | Cachambi |
 | Real | BANANA DA TERRA | Freguesia |
 | Real | BANANA DA TERRA | Santos |
@@ -747,15 +758,6 @@ Total de associacoes: 862
 | ROSSI | MAMAO FORMOSA | Piabeta |
 | ROSSI | MAMAO FORMOSA | Queimados |
 | ROSSI | MAMAO FORMOSA | Santos |
-| ROSSI | MAMAO HAVAI | Anchieta |
-| ROSSI | MAMAO HAVAI | Cachambi |
-| ROSSI | MAMAO HAVAI | Coelho |
-| ROSSI | MAMAO HAVAI | Freguesia |
-| ROSSI | MAMAO HAVAI | Iraja |
-| ROSSI | MAMAO HAVAI | Olinda |
-| ROSSI | MAMAO HAVAI | Piabeta |
-| ROSSI | MAMAO HAVAI | Queimados |
-| ROSSI | MAMAO HAVAI | Santos |
 | SEAL | PIMENTAO | Anchieta |
 | SEAL | PIMENTAO | Cachambi |
 | SEAL | PIMENTAO | Ceramica |

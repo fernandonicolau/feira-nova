@@ -109,6 +109,8 @@ const PRODUCT_REPLACEMENTS = [
   [/\bTANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
   [/\bTOMATE SWEET 180\b/g, "TOMATE SWEET"],
   [/\bUVA ITALIA\b/g, "UVA ITALIA"],
+  [/\bVAGEM MACARRAO\b/g, "VAGEM MANT"],
+  [/\bVAGEM MANTEIGA\b/g, "VAGEM MANT"],
 ];
 
 const ALWAYS_SUPPLIER_PRODUCTS = [
@@ -157,6 +159,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     lojas: new Set(["IRAJA"]),
   },
   {
+    fornecedor: "adonai",
+    produtos: new Set(["BATATA ASTERIX", "BATATA BOLINHA", "BATATA INGLESA", "CEBOLA", "CEBOLA PIRULITO"]),
+    lojas: new Set(["SANTA CRUZ"]),
+  },
+  {
     fornecedor: "Agrocomercial",
     produtos: new Set(["BATATA INGLESA", "CEBOLA"]),
     lojas: new Set(["OLINDA"]),
@@ -177,12 +184,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "COCO VERDE",
       "KIWI",
       "LARANJA BAHIA",
-      "MACA FUJI",
+      "MACA 850G",
       "MACA RED",
       "MACA VERDE",
       "MANGA TOMMY",
+      "MELANCIA PINGO AM",
       "MELANCIA PINGO VER",
-      "MORANGO",
       "PERA PORTUGUESA",
     ]),
   },
@@ -255,6 +262,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
+    fornecedor: "CASSARO",
+    produtos: new Set(["VAGEM MANT"]),
+    lojas: new Set(["SANTA CRUZ"]),
+  },
+  {
     fornecedor: "CRT",
     produtos: new Set(["BETERRABA"]),
     lojas: new Set(["ANCHIETA"]),
@@ -307,8 +319,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "Kifrut",
     produtos: new Set([
       "CAJU",
-      "MACA 850G",
-      "MACA GALA",
       "PERA WILLIAMS",
       "UVA BRASIL",
       "UVA CRIMSON",
@@ -322,12 +332,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "LTB",
     produtos: new Set(["BATATA ASTERIX"]),
-    lojas: new Set(["CERAMICA", "COELHO", "SANTA CRUZ"]),
+    lojas: new Set(["CERAMICA", "COELHO"]),
   },
   {
     fornecedor: "LTB",
     produtos: new Set(["CEBOLA PIRULITO"]),
-    lojas: new Set(["CERAMICA", "COELHO", "SANTA CRUZ"]),
+    lojas: new Set(["CERAMICA", "COELHO"]),
   },
   {
     fornecedor: "MIBA",
@@ -338,12 +348,16 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set(["LARANJA LIMA", "LARANJA PERA", "LARANJA SELETA"]),
   },
   {
+    fornecedor: "Minas rio",
+    produtos: new Set(["MORANGO"]),
+  },
+  {
     fornecedor: "NIPPO",
-    produtos: new Set(["ABACAXI", "MELAO AMARELO"]),
+    produtos: new Set(["ABACAXI", "MAMAO HAVAI", "MELAO AMARELO"]),
   },
   {
     fornecedor: "ROSSI",
-    produtos: new Set(["MAMAO FORMOSA", "MAMAO HAVAI"]),
+    produtos: new Set(["MAMAO FORMOSA"]),
   },
   {
     fornecedor: "Real",
@@ -366,7 +380,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "uvale",
-    produtos: new Set(["MANGA PALMER", "MELAO REI"]),
+    produtos: new Set(["MACA FUJI", "MACA GALA", "MANGA PALMER", "MELAO REI"]),
   },
   {
     fornecedor: "Galpão valdair",
@@ -411,12 +425,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "Galpão valdair",
     produtos: new Set(["ERVILHA", "MAXIXE"]),
-    lojas: new Set(["COELHO"]),
+    lojas: new Set(["COELHO", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
     produtos: new Set(["PEPINO JAPONES", "VAGEM MANT"]),
-    lojas: new Set(["COELHO"]),
+    lojas: new Set(["COELHO", "PIABETA"]),
   },
   {
     fornecedor: "Galpão valdair",
