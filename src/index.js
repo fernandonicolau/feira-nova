@@ -172,6 +172,7 @@ const PHRASE_REPLACEMENTS = [
   [/LIMAO TAHITI\b/g, "LIMAO"],
   [/MACA GALA SUPER K\b/g, "MACA 850G"],
   [/MACA GALA BENASSI\b/g, "MACA 850G"],
+  [/MACA BENNI\b/g, "MACA 850G"],
   [/MACA PACOTE\b/g, "MACA 850G"],
   [/MACA PCT\b/g, "MACA 850G"],
   [/MACA FUG\b/g, "MACA FUJI"],
@@ -351,7 +352,7 @@ function canonicalizeProductName(rawName) {
     return "OVOS CODORNA";
   }
 
-  if (canonical.includes("MACA") && (canonical.includes("850G") || canonical.includes("SUPER K") || canonical.includes("BENASSI") || canonical.includes("PCT"))) {
+  if (canonical.includes("MACA") && (canonical.includes("850G") || canonical.includes("SUPER K") || canonical.includes("BENASSI") || canonical.includes("BENNI") || canonical.includes("PCT"))) {
     return "MACA 850G";
   }
   if (canonical === "MACA") {

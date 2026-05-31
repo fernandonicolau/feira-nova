@@ -83,6 +83,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bMACA RED IMPORT\b/g, "MACA RED"],
   [/\bMACA VERDE GRAN\b/g, "MACA VERDE"],
   [/\bMACA GALA 850G\b/g, "MACA 850G"],
+  [/\bMACA BENNI\b/g, "MACA 850G"],
   [/\bMAMAO PAPAYA\b/g, "MAMAO HAVAI"],
   [/\bMELAO CANT\b/g, "MELAO CANTALOUPE"],
   [/\bMILHO VERDE BDJ 3\b/g, "MILHO BDJ"],
@@ -248,7 +249,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "FAISÃO",
     produtos: new Set(["LIMA DA PERSIA"]),
-    lojas: new Set(["PIABETA"]),
   },
   {
     fornecedor: "Cia dos ovos",
@@ -441,7 +441,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Galpão valdair",
-    produtos: new Set(["PEPINO JAPONES", "VAGEM MANT"]),
+    produtos: new Set(["PEPINO JAPONES"]),
+    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
+  },
+  {
+    fornecedor: "Galpão valdair",
+    produtos: new Set(["VAGEM MANT"]),
     lojas: new Set(["COELHO", "PIABETA"]),
   },
   {

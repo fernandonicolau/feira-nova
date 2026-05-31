@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 909
+Total de associacoes: 910
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -591,6 +591,7 @@ Total de associacoes: 909
 | Galpão valdair | Pepino comum | Ceramica |
 | Galpão valdair | Pepino comum | Coelho |
 | Galpão valdair | Pepino comum | Piabeta |
+| Galpão valdair | PEPINO JAPONES | Ceramica |
 | Galpão valdair | PEPINO JAPONES | Coelho |
 | Galpão valdair | VAGEM MANT | Coelho |
 | Brasnica | TANGERINA PONKAN | Cachambi |
