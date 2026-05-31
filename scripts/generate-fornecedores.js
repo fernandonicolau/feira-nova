@@ -58,6 +58,7 @@ const STORE_ALIASES = new Map([
 ]);
 
 const PRODUCT_REPLACEMENTS = [
+  [/\bORGANIC[AO]S?\b/g, "ORGANICO"],
   [/^ABACAXI\b.*$/g, "ABACAXI"],
   [/\bABACAXI UNID\b/g, "ABACAXI"],
   [/\bABOBORA BAHIANA\b/g, "ABOBORA BAIANA"],
@@ -71,6 +72,8 @@ const PRODUCT_REPLACEMENTS = [
   [/^BANANA PRATA\b.*$/g, "BANANA PRATA"],
   [/\bCOCO SECO UN\b/g, "COCO SECO"],
   [/\bCEREJA(?:\s+BANDEJA)?\s+250G\b/g, "CEREJA"],
+  [/\bATEMOIA(?:\s+BANDEJA)?(?:\s+(?:\d+\s*)?KG)?\b/g, "ATEMOIA"],
+  [/\bFIGO ROXO(?:\s+BANDEJA)?\s+300G\b/g, "FIGO"],
   [/\bFRAMBOESA(?:\s+BANDEJA)?\s+100G\b/g, "FRAMBOESA"],
   [/\bGOIABA GRANEL\b/g, "GOIABA"],
   [/\bJAMBO ROSA(?:\s+BANDEJA)?\s+300G\b/g, "JAMBO"],
@@ -93,18 +96,21 @@ const PRODUCT_REPLACEMENTS = [
   [/\bOVOS VERMELHOS C 12\b/g, "OVOS VERMELHO C 12"],
   [/\bPERA D ANJOUR\b/g, "PERA DANJOUR"],
   [/\bPERA DANJOUR\b/g, "PERA DANJOUR"],
-  [/\bPERA WILLIANS\b/g, "PERA WILLIAMS"],
+  [/\bPERA WIL?LIANS\b/g, "PERA WILLIAMS"],
   [/\bPEPINO COMUM\b/g, "PEPINO"],
+  [/\bPITAYA\b(?:\s+BANDEJA\b)?(?:\s+(?:\d+\s*)?(?:G|KG))?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "PITAYA"],
   [/\bPIMENTAO VERDE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO"],
   [/\bPIMENTAO AMARELO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO AMARELO"],
   [/\bPIMENTAO VERMEL(?:HO)?(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO VERMELHO"],
   [/\bPIMENTAO BRANCO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO BRANCO"],
+  [/\bCEBOLA PIRULITO(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA PIRULITO"],
   [/\bCEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
   [/\bQUIABO 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO EMBALADOS\b/g, "QUIABO BDJ"],
   [/\bSAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
   [/\bSERIGUELA(?:\s+BANDEJA)?\s+250G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
+  [/\bSERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/\bTAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/\bTANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
   [/\bTOMATE SWEET 180\b/g, "TOMATE SWEET"],
@@ -190,7 +196,10 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MANGA TOMMY",
       "MELANCIA PINGO AM",
       "MELANCIA PINGO VER",
+      "MORANGO",
       "PERA PORTUGUESA",
+      "UVA THOMPSON",
+      "UVA VITORIA",
     ]),
   },
   {
@@ -209,11 +218,13 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "FAISÃO",
     produtos: new Set([
       "AMORA",
+      "ATEMOIA",
       "BATATA BAROA",
       "CAJA",
       "CAQUI",
       "CARAMBOLA",
       "CEREJA",
+      "FIGO",
       "FRAMBOESA",
       "GOIABA",
       "JAMBO",
@@ -285,7 +296,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "CRT",
     produtos: new Set(["CARA"]),
-    lojas: new Set(["CACHAMBI"]),
+    lojas: new Set(["CACHAMBI", "FREGUESIA"]),
   },
   {
     fornecedor: "CRT",
@@ -331,8 +342,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "UVA ITALIA",
       "UVA RED GLOB",
       "UVA ROSADA",
-      "UVA THOMPSON",
-      "UVA VITORIA",
     ]),
   },
   {
@@ -354,10 +363,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set(["LARANJA LIMA", "LARANJA PERA", "LARANJA SELETA"]),
   },
   {
-    fornecedor: "Minas rio",
-    produtos: new Set(["MORANGO"]),
-  },
-  {
     fornecedor: "NIPPO",
     produtos: new Set(["ABACAXI", "MAMAO HAVAI", "MELAO AMARELO"]),
   },
@@ -377,7 +382,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE ITALIANO", "TOMATE SWEET"]),
   },
   {
     fornecedor: "uvale",

@@ -117,7 +117,6 @@ const STOP_WORDS = new Set([
   "SEM",
   "CAROCO",
   "GRANDE",
-  "ORGANICO",
   "CAIPIRA",
   "SITIO",
   "RAIAR",
@@ -134,6 +133,7 @@ const PHRASE_REPLACEMENTS = [
   [/ABOBORA SERGIPANA\b/g, "ABOBORA SERGIPANA"],
   [/ABOBRINHA ITALIANA\b/g, "ABOBRINHA"],
   [/AMORA(?:\s+BANDEJA)?\s+100G\b/g, "AMORA"],
+  [/ATEMOIA(?:\s+BANDEJA)?(?:\s+(?:\d+\s*)?KG)?\b/g, "ATEMOIA"],
   [/BANANA D AGUA\b/g, "BANANA DAGUA"],
   [/BANANA DAGUA\b/g, "BANANA DAGUA"],
   [/BANANA TERRA\b/g, "BANANA DA TERRA"],
@@ -154,7 +154,7 @@ const PHRASE_REPLACEMENTS = [
   [/CAQUI RAMA FORTE BANDEJA\b/g, "CAQUI RAMA FORTE"],
   [/CARAMBOLA BANDEJA\b/g, "CARAMBOLA"],
   [/CEREJA(?:\s+BANDEJA)?\s+250G\b/g, "CEREJA"],
-  [/CEBOLA PIRULITO\s+\d+\s*KG\b/g, "CEBOLA PIRULITO"],
+  [/CEBOLA PIRULITO(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA PIRULITO"],
   [/CEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
   [/CEBOLA PITULITO(?:\s+\d+\s*KG)?\b/g, "CEBOLA PIRULITO"],
   [/CEBOLINHA PIRULITO\b/g, "CEBOLA PIRULITO"],
@@ -195,9 +195,10 @@ const PHRASE_REPLACEMENTS = [
   [/MILHO VERDE BANDEJA\b/g, "MILHO VERDE"],
   [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE"],
   [/MIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
+  [/FIGO ROXO(?:\s+BANDEJA)?\s+300G\b/g, "FIGO"],
   [/MORANGO BJ\b/g, "MORANGO"],
   [/MORANGO BANDEJA\b/g, "MORANGO"],
-  [/PITAYA(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PITAYA"],
+  [/PITAYA\b(?:\s+BANDEJA\b)?(?:\s+(?:\d+\s*)?(?:G|KG))?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "PITAYA"],
   [/^OVO[S]?\s+12\s*UN$/g, "OVO BRANCO DZ"],
   [/OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN\b/g, "OVOS 12"],
   [/OVO[S]?\s+VERMELH[OA]?\s+GRANDE\s+12\s*UN\b/g, "OVOS VERMELHOS 12"],
@@ -215,8 +216,8 @@ const PHRASE_REPLACEMENTS = [
   [/PERA\s+D.?ANJOUR\b/g, "PERA DANJOUR"],
   [/PERA\s+D\s+ANJOUR\b/g, "PERA DANJOUR"],
   [/PERA DANJOUR\b/g, "PERA DANJOUR"],
-  [/PERA WILLIAM[SN]?\b/g, "PÊRA WILLIANS"],
-  [/PERA WILLIANS\b/g, "PÊRA WILLIANS"],
+  [/PERA WIL?LIAM[SN]?\b/g, "PÊRA WILLIANS"],
+  [/PERA WIL?LIANS\b/g, "PÊRA WILLIANS"],
   [/PERA PORTUGUESA\b/g, "PERA PORTUGUESA"],
   [/PIMENTAO AMARELO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO AMARELO"],
   [/PIMENTAO VERDE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO"],
@@ -224,6 +225,7 @@ const PHRASE_REPLACEMENTS = [
   [/PIMENTAO BRANCO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO BRANCO"],
   [/SAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
   [/SERIGUELA(?:\s+BANDEJA)?\s+250G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
+  [/SERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/TAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/TANGERINA POKAN\b/g, "TANGERINA PONKAN"],
   [/TANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
@@ -256,6 +258,7 @@ function normalizeText(value) {
 
 function canonicalizeProductName(rawName) {
   let text = normalizeText(rawName);
+  text = text.replace(/\bORGANIC[AO]S?\b/g, "ORGANICO");
 
   if (/^OVO[S]?\s+SEAL\s+CAIPIRA\s+12\s*UN$/.test(text)) {
     return text;
@@ -302,7 +305,8 @@ function canonicalizeProductName(rawName) {
     .replace(/^BATATA BAROA.*$/, "BATATA BAROA")
     .replace(/^BATATA BOLINHA.*$/, "BATATA BOLINHA")
     .replace(/^BATATA ASTERIX.*$/, "BATATA ASTERIX")
-    .replace(/^BATATA DOCE.*$/, "BATATA DOCE")
+    .replace(/^BATATA DOCE\s+ORGANICO\b.*$/, "BATATA DOCE ORGANICO")
+    .replace(/^BATATA DOCE(?!\s+ORGANICO\b).*$/, "BATATA DOCE")
     .replace(/^BATATA INGLESA.*$/, "BATATA INGLESA")
     .replace(/^BATATA SUJA.*$/, "BATATA SUJA")
     .replace(/\s+/g, " ")

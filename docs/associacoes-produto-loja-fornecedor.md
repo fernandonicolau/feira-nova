@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 877
+Total de associacoes: 909
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -192,6 +192,17 @@ Total de associacoes: 877
 | BENASSI | MANGA TOMMY | Queimados |
 | BENASSI | MANGA TOMMY | Santa Cruz |
 | BENASSI | MANGA TOMMY | Santos |
+| BENASSI | MORANGO | Anchieta |
+| BENASSI | MORANGO | Cachambi |
+| BENASSI | MORANGO | Ceramica |
+| BENASSI | MORANGO | Coelho |
+| BENASSI | MORANGO | Freguesia |
+| BENASSI | MORANGO | Iraja |
+| BENASSI | MORANGO | Olinda |
+| BENASSI | MORANGO | Piabeta |
+| BENASSI | MORANGO | Queimados |
+| BENASSI | MORANGO | Santa Cruz |
+| BENASSI | MORANGO | Santos |
 | BENASSI | PERA PORTUGUESA | Anchieta |
 | BENASSI | PERA PORTUGUESA | Cachambi |
 | BENASSI | PERA PORTUGUESA | Ceramica |
@@ -203,6 +214,28 @@ Total de associacoes: 877
 | BENASSI | PERA PORTUGUESA | Queimados |
 | BENASSI | PERA PORTUGUESA | Santa Cruz |
 | BENASSI | PERA PORTUGUESA | Santos |
+| BENASSI | UVA THOMPSON | Anchieta |
+| BENASSI | UVA THOMPSON | Cachambi |
+| BENASSI | UVA THOMPSON | Ceramica |
+| BENASSI | UVA THOMPSON | Coelho |
+| BENASSI | UVA THOMPSON | Freguesia |
+| BENASSI | UVA THOMPSON | Iraja |
+| BENASSI | UVA THOMPSON | Olinda |
+| BENASSI | UVA THOMPSON | Piabeta |
+| BENASSI | UVA THOMPSON | Queimados |
+| BENASSI | UVA THOMPSON | Santa Cruz |
+| BENASSI | UVA THOMPSON | Santos |
+| BENASSI | UVA VITORIA | Anchieta |
+| BENASSI | UVA VITORIA | Cachambi |
+| BENASSI | UVA VITORIA | Ceramica |
+| BENASSI | UVA VITORIA | Coelho |
+| BENASSI | UVA VITORIA | Freguesia |
+| BENASSI | UVA VITORIA | Iraja |
+| BENASSI | UVA VITORIA | Olinda |
+| BENASSI | UVA VITORIA | Piabeta |
+| BENASSI | UVA VITORIA | Queimados |
+| BENASSI | UVA VITORIA | Santa Cruz |
+| BENASSI | UVA VITORIA | Santos |
 | Casa dina | ABOBORA JAPONESA | Anchieta |
 | Casa dina | ABOBORA JAPONESA | Cachambi |
 | Casa dina | ABOBORA JAPONESA | Ceramica |
@@ -305,6 +338,7 @@ Total de associacoes: 877
 | CRT | beterraba | Queimados |
 | CRT | beterraba | Santos |
 | CRT | Cara | Cachambi |
+| CRT | Cara | Freguesia |
 | CRT | Cara | Santos |
 | CRT | cenoura | Anchieta |
 | CRT | cenoura | Cachambi |
@@ -346,6 +380,17 @@ Total de associacoes: 877
 | CRT | Tomate | Iraja |
 | CRT | Tomate | Olinda |
 | CRT | Tomate | Queimados |
+| FAISÃO | ATEMOIA | Anchieta |
+| FAISÃO | ATEMOIA | Cachambi |
+| FAISÃO | ATEMOIA | Ceramica |
+| FAISÃO | ATEMOIA | Coelho |
+| FAISÃO | ATEMOIA | Freguesia |
+| FAISÃO | ATEMOIA | Iraja |
+| FAISÃO | ATEMOIA | Olinda |
+| FAISÃO | ATEMOIA | Piabeta |
+| FAISÃO | ATEMOIA | Queimados |
+| FAISÃO | ATEMOIA | Santa Cruz |
+| FAISÃO | ATEMOIA | Santos |
 | FAISÃO | BATATA BAROA | Anchieta |
 | FAISÃO | BATATA BAROA | Cachambi |
 | FAISÃO | BATATA BAROA | Ceramica |
@@ -379,7 +424,17 @@ Total de associacoes: 877
 | FAISÃO | CEREJA 250G | Queimados |
 | FAISÃO | CEREJA 250G | Santa Cruz |
 | FAISÃO | CEREJA 250G | Santos |
+| FAISÃO | FIGO | Anchieta |
+| FAISÃO | FIGO | Cachambi |
+| FAISÃO | FIGO | Ceramica |
+| FAISÃO | FIGO | Coelho |
+| FAISÃO | FIGO | Freguesia |
 | FAISÃO | FIGO | Iraja |
+| FAISÃO | FIGO | Olinda |
+| FAISÃO | FIGO | Piabeta |
+| FAISÃO | FIGO | Queimados |
+| FAISÃO | FIGO | Santa Cruz |
+| FAISÃO | FIGO | Santos |
 | FAISÃO | FRAMBOESA 100G | Anchieta |
 | FAISÃO | FRAMBOESA 100G | Cachambi |
 | FAISÃO | FRAMBOESA 100G | Ceramica |
@@ -614,28 +669,6 @@ Total de associacoes: 877
 | Kifrut | UVA ROSADA | Queimados |
 | Kifrut | UVA ROSADA | Santa Cruz |
 | Kifrut | UVA ROSADA | Santos |
-| Kifrut | UVA THOMPSON | Anchieta |
-| Kifrut | UVA THOMPSON | Cachambi |
-| Kifrut | UVA THOMPSON | Ceramica |
-| Kifrut | UVA THOMPSON | Coelho |
-| Kifrut | UVA THOMPSON | Freguesia |
-| Kifrut | UVA THOMPSON | Iraja |
-| Kifrut | UVA THOMPSON | Olinda |
-| Kifrut | UVA THOMPSON | Piabeta |
-| Kifrut | UVA THOMPSON | Queimados |
-| Kifrut | UVA THOMPSON | Santa Cruz |
-| Kifrut | UVA THOMPSON | Santos |
-| Kifrut | UVA VITORIA | Anchieta |
-| Kifrut | UVA VITORIA | Cachambi |
-| Kifrut | UVA VITORIA | Ceramica |
-| Kifrut | UVA VITORIA | Coelho |
-| Kifrut | UVA VITORIA | Freguesia |
-| Kifrut | UVA VITORIA | Iraja |
-| Kifrut | UVA VITORIA | Olinda |
-| Kifrut | UVA VITORIA | Piabeta |
-| Kifrut | UVA VITORIA | Queimados |
-| Kifrut | UVA VITORIA | Santa Cruz |
-| Kifrut | UVA VITORIA | Santos |
 | LTB | BATATA ASTERIX | Ceramica |
 | LTB | BATATA ASTERIX | Coelho |
 | LTB | BATATA BOLINHA | Coelho |
@@ -700,17 +733,6 @@ Total de associacoes: 877
 | Milanes | LARANJA SELETA | Queimados |
 | Milanes | LARANJA SELETA | Santa Cruz |
 | Milanes | LARANJA SELETA | Santos |
-| Minas rio | MORANGO | Anchieta |
-| Minas rio | MORANGO | Cachambi |
-| Minas rio | MORANGO | Ceramica |
-| Minas rio | MORANGO | Coelho |
-| Minas rio | MORANGO | Freguesia |
-| Minas rio | MORANGO | Iraja |
-| Minas rio | MORANGO | Olinda |
-| Minas rio | MORANGO | Piabeta |
-| Minas rio | MORANGO | Queimados |
-| Minas rio | MORANGO | Santa Cruz |
-| Minas rio | MORANGO | Santos |
 | NIPPO | ABACAXI | Anchieta |
 | NIPPO | ABACAXI | Cachambi |
 | NIPPO | ABACAXI | Ceramica |
@@ -794,6 +816,17 @@ Total de associacoes: 877
 | SEAL | PIMENTAO VERMELHO | Olinda |
 | SEAL | PIMENTAO VERMELHO | Queimados |
 | SEAL | PIMENTAO VERMELHO | Santos |
+| SEAL | TOMATE COQUETEL | Anchieta |
+| SEAL | TOMATE COQUETEL | Cachambi |
+| SEAL | TOMATE COQUETEL | Ceramica |
+| SEAL | TOMATE COQUETEL | Coelho |
+| SEAL | TOMATE COQUETEL | Freguesia |
+| SEAL | TOMATE COQUETEL | Iraja |
+| SEAL | TOMATE COQUETEL | Olinda |
+| SEAL | TOMATE COQUETEL | Piabeta |
+| SEAL | TOMATE COQUETEL | Queimados |
+| SEAL | TOMATE COQUETEL | Santa Cruz |
+| SEAL | TOMATE COQUETEL | Santos |
 | SEAL | TOMATE ITALIANO | Anchieta |
 | SEAL | TOMATE ITALIANO | Cachambi |
 | SEAL | TOMATE ITALIANO | Ceramica |
