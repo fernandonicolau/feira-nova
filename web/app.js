@@ -207,6 +207,7 @@
     [/PERA\s+D.?ANJOUR\b/g, "PERA DANJOUR"],
     [/PERA\s+D\s+ANJOUR\b/g, "PERA DANJOUR"],
     [/PERA DANJOUR\b/g, "PERA DANJOUR"],
+    [/PERA WILHIA[MN][SN]?\b/g, "PÊRA WILLIANS"],
     [/PERA WIL?LIAM[SN]?\b/g, "PÊRA WILLIANS"],
     [/PERA WIL?LIANS\b/g, "PÊRA WILLIANS"],
     [/PERA PORTUGUESA\b/g, "PERA PORTUGUESA"],

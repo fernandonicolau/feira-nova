@@ -96,6 +96,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bOVOS VERMELHOS C 12\b/g, "OVOS VERMELHO C 12"],
   [/\bPERA D ANJOUR\b/g, "PERA DANJOUR"],
   [/\bPERA DANJOUR\b/g, "PERA DANJOUR"],
+  [/\bPERA WILHIA[MN][SN]?\b/g, "PERA WILLIAMS"],
   [/\bPERA WIL?LIANS\b/g, "PERA WILLIAMS"],
   [/\bPEPINO COMUM\b/g, "PEPINO"],
   [/\bPITAYA\b(?:\s+BANDEJA\b)?(?:\s+(?:\d+\s*)?(?:G|KG))?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "PITAYA"],
