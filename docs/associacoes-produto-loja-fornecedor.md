@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 910
+Total de associacoes: 900
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -53,6 +53,7 @@ Total de associacoes: 910
 | Agrocomercial | CEBOLA | Anchieta |
 | Agrocomercial | CEBOLA | Olinda |
 | Agrocomercial | CEBOLA | Piabeta |
+| alevan | PINHA | Iraja |
 | Baixinho | MILHO BDJ | Anchieta |
 | Baixinho | MILHO BDJ | Cachambi |
 | Baixinho | MILHO BDJ | Ceramica |
@@ -402,17 +403,6 @@ Total de associacoes: 910
 | FAISÃO | BATATA BAROA | Queimados |
 | FAISÃO | BATATA BAROA | Santa Cruz |
 | FAISÃO | BATATA BAROA | Santos |
-| FAISÃO | CAQUI | Anchieta |
-| FAISÃO | CAQUI | Cachambi |
-| FAISÃO | CAQUI | Ceramica |
-| FAISÃO | CAQUI | Coelho |
-| FAISÃO | CAQUI | Freguesia |
-| FAISÃO | CAQUI | Iraja |
-| FAISÃO | CAQUI | Olinda |
-| FAISÃO | CAQUI | Piabeta |
-| FAISÃO | CAQUI | Queimados |
-| FAISÃO | CAQUI | Santa Cruz |
-| FAISÃO | CAQUI | Santos |
 | FAISÃO | CEREJA 250G | Anchieta |
 | FAISÃO | CEREJA 250G | Cachambi |
 | FAISÃO | CEREJA 250G | Ceramica |
@@ -524,7 +514,6 @@ Total de associacoes: 910
 | FAISÃO | PÊRA DANJOUR | Queimados |
 | FAISÃO | PÊRA DANJOUR | Santa Cruz |
 | FAISÃO | PÊRA DANJOUR | Santos |
-| FAISÃO | PINHA | Iraja |
 | FAISÃO | PITAYA | Coelho |
 | FAISÃO | ROMA | Coelho |
 | FAISÃO | SAPOTI 300G | Anchieta |

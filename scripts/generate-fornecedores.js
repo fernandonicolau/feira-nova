@@ -177,6 +177,10 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     lojas: new Set(["OLINDA"]),
   },
   {
+    fornecedor: "alevan",
+    produtos: new Set(["PINHA"]),
+  },
+  {
     fornecedor: "Baixinho",
     produtos: new Set(["MILHO BDJ", "MILHO ESPIGA", "QUIABO BDJ"]),
   },
@@ -223,7 +227,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "ATEMOIA",
       "BATATA BAROA",
       "CAJA",
-      "CAQUI",
       "CARAMBOLA",
       "CEREJA",
       "FIGO",
@@ -237,7 +240,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MELAO VERDE",
       "MIRTILO",
       "PERA DANJOUR",
-      "PINHA",
       "PITAYA",
       "ROMA",
       "SAPOTI",
