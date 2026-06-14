@@ -69,7 +69,8 @@ const PRODUCT_REPLACEMENTS = [
   [/^BANANA DAGUA\b.*$/g, "BANANA DAGUA"],
   [/^BANANA MACA\b.*$/g, "BANANA MACA"],
   [/^BANANA OURO\b.*$/g, "BANANA OURO"],
-  [/^BANANA PRATA\b.*$/g, "BANANA PRATA"],
+  [/^BANANA PRATA\s+ORGANICO\b.*$/g, "BANANA PRATA ORGANICO"],
+  [/^BANANA PRATA(?!\s+ORGANICO\b)\b.*$/g, "BANANA PRATA"],
   [/\bCOCO SECO UN\b/g, "COCO SECO"],
   [/\bCEREJA(?:\s+BANDEJA)?\s+250G\b/g, "CEREJA"],
   [/\bATEMOIA(?:\s+BANDEJA)?(?:\s+(?:\d+\s*)?KG)?\b/g, "ATEMOIA"],
@@ -86,10 +87,17 @@ const PRODUCT_REPLACEMENTS = [
   [/\bMACA BENNI\b/g, "MACA 850G"],
   [/\bMAMAO PAPAYA\b/g, "MAMAO HAVAI"],
   [/\bMELAO CANT\b/g, "MELAO CANTALOUPE"],
+  [/\bMELAO AMARELO REDE\b/g, "MELAO REI"],
+  [/\bMELAO REDE\b/g, "MELAO REI"],
+  [/\bMILHO VERDE 3\s+500G\b/g, "MILHO BDJ"],
+  [/\bMILHO VERDE BANDEJA\b/g, "MILHO BDJ"],
   [/\bMILHO VERDE BDJ 3\b/g, "MILHO BDJ"],
-  [/\bMILHO VERDE\b/g, "MILHO"],
+  [/^MILHO VERDE$/g, "MILHO ESPIGA"],
   [/\bMIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
+  [/\bOVO BRANCO DZ\b/g, "OVOS BRANCOS DZ"],
   [/\bOVOS BRANCO C 20\b/g, "OVOS BRANCOS C 20"],
+  [/\bOVOS BRANCO 30\b/g, "OVOS BRANCOS C 30"],
+  [/\bOVOS BRANCOS DZ\b/g, "OVOS BRANCOS DZ"],
   [/\bOVOS BRANCOS C 20\b/g, "OVOS BRANCOS C 20"],
   [/\bOVOS BRANCOS 20\b/g, "OVOS BRANCOS C 20"],
   [/\bOVOS BRANCOS 30\b/g, "OVOS BRANCOS C 30"],
@@ -114,7 +122,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bSERIGUELA(?:\s+BANDEJA)?\s+250G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/\bSERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/\bTAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
-  [/\bTANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
+  [/\bTANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
   [/\bTOMATE SWEET 180\b/g, "TOMATE SWEET"],
   [/\bUVA ITALIA\b/g, "UVA ITALIA"],
   [/\bVAGEM MACARRAO\b/g, "VAGEM MANT"],
@@ -188,12 +196,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "BENASSI",
     produtos: new Set([
       "AMEIXA",
+      "COCO VERDE",
       "COGUMELO",
       "COGUMELO PARIS BANDEJA 200G",
       "COGUMELO PORTOBELLO BANDEJA 200G",
       "COGUMELO SHIMEJI BANDEJA 200G",
       "COGUMELO SHITAKE BANDEJA 200G",
-      "COCO VERDE",
       "KIWI",
       "LARANJA BAHIA",
       "MACA 850G",
@@ -204,6 +212,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MELANCIA PINGO VER",
       "MORANGO",
       "PERA PORTUGUESA",
+      "UVA BRASIL",
+      "UVA CRIMSON",
+      "UVA ITALIA",
+      "UVA RED GLOB",
+      "UVA ROSADA",
       "UVA THOMPSON",
       "UVA VITORIA",
     ]),
@@ -236,6 +249,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "LIMAO SICILIANO",
       "MARACUJA",
       "MELANCIA BABY",
+      "MELAO GALIA",
       "MELAO ORANGE",
       "MELAO VERDE",
       "MIRTILO",
@@ -255,7 +269,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "Cia dos ovos",
     produtos: new Set([
-      "OVO BRANCO DZ",
       "OVO CODORNA",
       "OVO VERM C 12",
       "OVO VERM C 20",
@@ -265,6 +278,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "OVOS C 30",
       "OVOS BRANCOS C 20",
       "OVOS BRANCOS C 30",
+      "OVOS BRANCOS DZ",
       "OVOS CODORNA",
       "OVOS VERMELHO C 12",
       "OVOS VERMELHOS C 20",
@@ -273,7 +287,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CASSARO",
-    produtos: new Set(["BETERRABA"]),
+    produtos: new Set(["BETERRABA", "JILO"]),
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
@@ -324,7 +338,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "CRT",
     produtos: new Set(["PEPINO", "PEPINO JAPONES", "TOMATE", "VAGEM MANT"]),
-    lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA"]),
+    lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA", "OLINDA"]),
   },
   {
     fornecedor: "CRT",
@@ -337,20 +351,17 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Kifrut",
-    produtos: new Set([
-      "CAJU",
-      "PERA WILLIAMS",
-      "UVA BRASIL",
-      "UVA CRIMSON",
-      "UVA ITALIA",
-      "UVA RED GLOB",
-      "UVA ROSADA",
-    ]),
+    produtos: new Set(["CAJU", "PERA WILLIAMS"]),
   },
   {
     fornecedor: "LTB",
     produtos: new Set(["BATATA ASTERIX"]),
     lojas: new Set(["CERAMICA", "COELHO"]),
+  },
+  {
+    fornecedor: "LTB",
+    produtos: new Set(["BATATA BOLINHA"]),
+    lojas: new Set(["CERAMICA"]),
   },
   {
     fornecedor: "LTB",
@@ -385,7 +396,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
   },
   {
     fornecedor: "uvale",
@@ -465,6 +476,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "Galpão valdair",
     produtos: new Set(["TOMATE"]),
     lojas: new Set(["PIABETA"]),
+  },
+  {
+    fornecedor: "brasnica",
+    produtos: new Set(["BANANA PRATA ORGANICO"]),
+    lojas: new Set(["IRAJA", "SANTOS"]),
   },
   {
     fornecedor: "brasnica",
@@ -840,7 +856,11 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
       continue;
     }
 
-    existingProducts.add(normalizeProduct(product));
+    const normalizedProduct = normalizeProduct(product);
+    if (normalizedProduct === "OVOS BRANCOS DZ" && product !== "OVOS BRANCOS DZ") {
+      row.getCell(1).value = "OVOS BRANCOS DZ";
+    }
+    existingProducts.add(normalizedProduct);
 
     for (const { store, columnNumber } of header.storeColumns) {
       const cell = row.getCell(columnNumber);

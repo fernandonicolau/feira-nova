@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 900
+Total de associacoes: 959
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -215,6 +215,61 @@ Total de associacoes: 900
 | BENASSI | PERA PORTUGUESA | Queimados |
 | BENASSI | PERA PORTUGUESA | Santa Cruz |
 | BENASSI | PERA PORTUGUESA | Santos |
+| BENASSI | UVA BRASIL | Anchieta |
+| BENASSI | UVA BRASIL | Cachambi |
+| BENASSI | UVA BRASIL | Ceramica |
+| BENASSI | UVA BRASIL | Coelho |
+| BENASSI | UVA BRASIL | Freguesia |
+| BENASSI | UVA BRASIL | Iraja |
+| BENASSI | UVA BRASIL | Olinda |
+| BENASSI | UVA BRASIL | Piabeta |
+| BENASSI | UVA BRASIL | Queimados |
+| BENASSI | UVA BRASIL | Santa Cruz |
+| BENASSI | UVA BRASIL | Santos |
+| BENASSI | UVA CRIMSON | Anchieta |
+| BENASSI | UVA CRIMSON | Cachambi |
+| BENASSI | UVA CRIMSON | Ceramica |
+| BENASSI | UVA CRIMSON | Coelho |
+| BENASSI | UVA CRIMSON | Freguesia |
+| BENASSI | UVA CRIMSON | Iraja |
+| BENASSI | UVA CRIMSON | Olinda |
+| BENASSI | UVA CRIMSON | Piabeta |
+| BENASSI | UVA CRIMSON | Queimados |
+| BENASSI | UVA CRIMSON | Santa Cruz |
+| BENASSI | UVA CRIMSON | Santos |
+| BENASSI | UVA ITALIA | Anchieta |
+| BENASSI | UVA ITALIA | Cachambi |
+| BENASSI | UVA ITALIA | Ceramica |
+| BENASSI | UVA ITALIA | Coelho |
+| BENASSI | UVA ITALIA | Freguesia |
+| BENASSI | UVA ITALIA | Iraja |
+| BENASSI | UVA ITALIA | Olinda |
+| BENASSI | UVA ITALIA | Piabeta |
+| BENASSI | UVA ITALIA | Queimados |
+| BENASSI | UVA ITALIA | Santa Cruz |
+| BENASSI | UVA ITALIA | Santos |
+| BENASSI | UVA RED GLOB | Anchieta |
+| BENASSI | UVA RED GLOB | Cachambi |
+| BENASSI | UVA RED GLOB | Ceramica |
+| BENASSI | UVA RED GLOB | Coelho |
+| BENASSI | UVA RED GLOB | Freguesia |
+| BENASSI | UVA RED GLOB | Iraja |
+| BENASSI | UVA RED GLOB | Olinda |
+| BENASSI | UVA RED GLOB | Piabeta |
+| BENASSI | UVA RED GLOB | Queimados |
+| BENASSI | UVA RED GLOB | Santa Cruz |
+| BENASSI | UVA RED GLOB | Santos |
+| BENASSI | UVA ROSADA | Anchieta |
+| BENASSI | UVA ROSADA | Cachambi |
+| BENASSI | UVA ROSADA | Ceramica |
+| BENASSI | UVA ROSADA | Coelho |
+| BENASSI | UVA ROSADA | Freguesia |
+| BENASSI | UVA ROSADA | Iraja |
+| BENASSI | UVA ROSADA | Olinda |
+| BENASSI | UVA ROSADA | Piabeta |
+| BENASSI | UVA ROSADA | Queimados |
+| BENASSI | UVA ROSADA | Santa Cruz |
+| BENASSI | UVA ROSADA | Santos |
 | BENASSI | UVA THOMPSON | Anchieta |
 | BENASSI | UVA THOMPSON | Cachambi |
 | BENASSI | UVA THOMPSON | Ceramica |
@@ -310,6 +365,17 @@ Total de associacoes: 900
 | Cia dos ovos | OVOS BRANCOS C/30 | Queimados |
 | Cia dos ovos | OVOS BRANCOS C/30 | Santa Cruz |
 | Cia dos ovos | OVOS BRANCOS C/30 | Santos |
+| Cia dos ovos | OVOS BRANCOS DZ | Anchieta |
+| Cia dos ovos | OVOS BRANCOS DZ | Cachambi |
+| Cia dos ovos | OVOS BRANCOS DZ | Ceramica |
+| Cia dos ovos | OVOS BRANCOS DZ | Coelho |
+| Cia dos ovos | OVOS BRANCOS DZ | Freguesia |
+| Cia dos ovos | OVOS BRANCOS DZ | Iraja |
+| Cia dos ovos | OVOS BRANCOS DZ | Olinda |
+| Cia dos ovos | OVOS BRANCOS DZ | Piabeta |
+| Cia dos ovos | OVOS BRANCOS DZ | Queimados |
+| Cia dos ovos | OVOS BRANCOS DZ | Santa Cruz |
+| Cia dos ovos | OVOS BRANCOS DZ | Santos |
 | Cia dos ovos | OVOS CODORNA | Coelho |
 | CRT | Abobrinha | Anchieta |
 | CRT | Abobrinha | Cachambi |
@@ -374,6 +440,7 @@ Total de associacoes: 900
 | CRT | Pepino comum | Queimados |
 | CRT | Pepino japones | Anchieta |
 | CRT | Pepino japones | Freguesia |
+| CRT | Pepino japones | Olinda |
 | CRT | Pepino japones | Santos |
 | CRT | Tomate | Anchieta |
 | CRT | Tomate | Cachambi |
@@ -470,6 +537,17 @@ Total de associacoes: 900
 | FAISÃO | MELANCIA BABY | Queimados |
 | FAISÃO | MELANCIA BABY | Santa Cruz |
 | FAISÃO | MELANCIA BABY | Santos |
+| FAISÃO | MELAO GALIA | Anchieta |
+| FAISÃO | MELAO GALIA | Cachambi |
+| FAISÃO | MELAO GALIA | Ceramica |
+| FAISÃO | MELAO GALIA | Coelho |
+| FAISÃO | MELAO GALIA | Freguesia |
+| FAISÃO | MELAO GALIA | Iraja |
+| FAISÃO | MELAO GALIA | Olinda |
+| FAISÃO | MELAO GALIA | Piabeta |
+| FAISÃO | MELAO GALIA | Queimados |
+| FAISÃO | MELAO GALIA | Santa Cruz |
+| FAISÃO | MELAO GALIA | Santos |
 | FAISÃO | MELAO ORANGE | Anchieta |
 | FAISÃO | MELAO ORANGE | Cachambi |
 | FAISÃO | MELAO ORANGE | Ceramica |
@@ -583,6 +661,8 @@ Total de associacoes: 900
 | Galpão valdair | PEPINO JAPONES | Ceramica |
 | Galpão valdair | PEPINO JAPONES | Coelho |
 | Galpão valdair | VAGEM MANT | Coelho |
+| Brasnica | BANANA PRATA ORGANICO | Iraja |
+| Brasnica | BANANA PRATA ORGANICO | Santos |
 | Brasnica | TANGERINA PONKAN | Cachambi |
 | Brasnica | TANGERINA PONKAN | Freguesia |
 | Brasnica | TANGERINA PONKAN | Olinda |
@@ -626,41 +706,9 @@ Total de associacoes: 900
 | Kifrut | PERA WILLIAMS | Queimados |
 | Kifrut | PERA WILLIAMS | Santa Cruz |
 | Kifrut | PERA WILLIAMS | Santos |
-| Kifrut | UVA ITALIA | Anchieta |
-| Kifrut | UVA ITALIA | Cachambi |
-| Kifrut | UVA ITALIA | Ceramica |
-| Kifrut | UVA ITALIA | Coelho |
-| Kifrut | UVA ITALIA | Freguesia |
-| Kifrut | UVA ITALIA | Iraja |
-| Kifrut | UVA ITALIA | Olinda |
-| Kifrut | UVA ITALIA | Piabeta |
-| Kifrut | UVA ITALIA | Queimados |
-| Kifrut | UVA ITALIA | Santa Cruz |
-| Kifrut | UVA ITALIA | Santos |
-| Kifrut | UVA CRIMSON | Anchieta |
-| Kifrut | UVA CRIMSON | Cachambi |
-| Kifrut | UVA CRIMSON | Ceramica |
-| Kifrut | UVA CRIMSON | Coelho |
-| Kifrut | UVA CRIMSON | Freguesia |
-| Kifrut | UVA CRIMSON | Iraja |
-| Kifrut | UVA CRIMSON | Olinda |
-| Kifrut | UVA CRIMSON | Piabeta |
-| Kifrut | UVA CRIMSON | Queimados |
-| Kifrut | UVA CRIMSON | Santa Cruz |
-| Kifrut | UVA CRIMSON | Santos |
-| Kifrut | UVA ROSADA | Anchieta |
-| Kifrut | UVA ROSADA | Cachambi |
-| Kifrut | UVA ROSADA | Ceramica |
-| Kifrut | UVA ROSADA | Coelho |
-| Kifrut | UVA ROSADA | Freguesia |
-| Kifrut | UVA ROSADA | Iraja |
-| Kifrut | UVA ROSADA | Olinda |
-| Kifrut | UVA ROSADA | Piabeta |
-| Kifrut | UVA ROSADA | Queimados |
-| Kifrut | UVA ROSADA | Santa Cruz |
-| Kifrut | UVA ROSADA | Santos |
 | LTB | BATATA ASTERIX | Ceramica |
 | LTB | BATATA ASTERIX | Coelho |
+| LTB | BATATA BOLINHA | Ceramica |
 | LTB | BATATA BOLINHA | Coelho |
 | LTB | BATATA INGLESA | Ceramica |
 | LTB | BATATA INGLESA | Coelho |
@@ -734,17 +782,6 @@ Total de associacoes: 900
 | NIPPO | ABACAXI | Queimados |
 | NIPPO | ABACAXI | Santa Cruz |
 | NIPPO | ABACAXI | Santos |
-| NIPPO | MELAO AMARELO | Anchieta |
-| NIPPO | MELAO AMARELO | Cachambi |
-| NIPPO | MELAO AMARELO | Ceramica |
-| NIPPO | MELAO AMARELO | Coelho |
-| NIPPO | MELAO AMARELO | Freguesia |
-| NIPPO | MELAO AMARELO | Iraja |
-| NIPPO | MELAO AMARELO | Olinda |
-| NIPPO | MELAO AMARELO | Piabeta |
-| NIPPO | MELAO AMARELO | Queimados |
-| NIPPO | MELAO AMARELO | Santa Cruz |
-| NIPPO | MELAO AMARELO | Santos |
 | NIPPO | MAMAO HAVAI | Anchieta |
 | NIPPO | MAMAO HAVAI | Cachambi |
 | NIPPO | MAMAO HAVAI | Ceramica |
@@ -756,6 +793,17 @@ Total de associacoes: 900
 | NIPPO | MAMAO HAVAI | Queimados |
 | NIPPO | MAMAO HAVAI | Santa Cruz |
 | NIPPO | MAMAO HAVAI | Santos |
+| NIPPO | MELAO AMARELO | Anchieta |
+| NIPPO | MELAO AMARELO | Cachambi |
+| NIPPO | MELAO AMARELO | Ceramica |
+| NIPPO | MELAO AMARELO | Coelho |
+| NIPPO | MELAO AMARELO | Freguesia |
+| NIPPO | MELAO AMARELO | Iraja |
+| NIPPO | MELAO AMARELO | Olinda |
+| NIPPO | MELAO AMARELO | Piabeta |
+| NIPPO | MELAO AMARELO | Queimados |
+| NIPPO | MELAO AMARELO | Santa Cruz |
+| NIPPO | MELAO AMARELO | Santos |
 | Real | BANANA DA TERRA | Cachambi |
 | Real | BANANA DA TERRA | Freguesia |
 | Real | BANANA DA TERRA | Santos |
@@ -817,6 +865,17 @@ Total de associacoes: 900
 | SEAL | TOMATE COQUETEL | Queimados |
 | SEAL | TOMATE COQUETEL | Santa Cruz |
 | SEAL | TOMATE COQUETEL | Santos |
+| SEAL | TOMATE GRAPE MISTO 250G | Anchieta |
+| SEAL | TOMATE GRAPE MISTO 250G | Cachambi |
+| SEAL | TOMATE GRAPE MISTO 250G | Ceramica |
+| SEAL | TOMATE GRAPE MISTO 250G | Coelho |
+| SEAL | TOMATE GRAPE MISTO 250G | Freguesia |
+| SEAL | TOMATE GRAPE MISTO 250G | Iraja |
+| SEAL | TOMATE GRAPE MISTO 250G | Olinda |
+| SEAL | TOMATE GRAPE MISTO 250G | Piabeta |
+| SEAL | TOMATE GRAPE MISTO 250G | Queimados |
+| SEAL | TOMATE GRAPE MISTO 250G | Santa Cruz |
+| SEAL | TOMATE GRAPE MISTO 250G | Santos |
 | SEAL | TOMATE ITALIANO | Anchieta |
 | SEAL | TOMATE ITALIANO | Cachambi |
 | SEAL | TOMATE ITALIANO | Ceramica |

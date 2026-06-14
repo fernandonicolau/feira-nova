@@ -191,16 +191,19 @@ const PHRASE_REPLACEMENTS = [
   [/LARANJA SELETA\b/g, "LARANJA SELETA"],
   [/LARANJA PERA\b/g, "LARANJA PERA"],
   [/MELAO AMARELO REDE\b/g, "MELAO REI"],
+  [/MELAO REDE\b/g, "MELAO REI"],
   [/MELANCIA PINGO DOCE VERMELHA\b/g, "MELANCIA PINGO VER"],
   [/MELAO PELE(?: DE)? SAPO\b/g, "MELAO VERDE"],
-  [/MILHO VERDE BANDEJA\b/g, "MILHO VERDE"],
-  [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE"],
+  [/MILHO VERDE 3\s+500G\b/g, "MILHO VERDE BDJ 3"],
+  [/MILHO VERDE BANDEJA\b/g, "MILHO VERDE BDJ 3"],
+  [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE BDJ 3"],
   [/MIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
   [/FIGO ROXO(?:\s+BANDEJA)?\s+300G\b/g, "FIGO"],
   [/MORANGO BJ\b/g, "MORANGO"],
   [/MORANGO BANDEJA\b/g, "MORANGO"],
   [/PITAYA\b(?:\s+BANDEJA\b)?(?:\s+(?:\d+\s*)?(?:G|KG))?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "PITAYA"],
-  [/^OVO[S]?\s+12\s*UN$/g, "OVO BRANCO DZ"],
+  [/^OVO[S]?\s+12\s*UN$/g, "OVOS BRANCOS DZ"],
+  [/\bOVO BRANCO DZ\b/g, "OVOS BRANCOS DZ"],
   [/OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN\b/g, "OVOS 12"],
   [/OVO[S]?\s+VERMELH[OA]?\s+GRANDE\s+12\s*UN\b/g, "OVOS VERMELHOS 12"],
   [/OVO[S]?\s+BRANCO.*30\s*UN\b/g, "OVOS BRANCOS 30"],
@@ -230,9 +233,10 @@ const PHRASE_REPLACEMENTS = [
   [/SERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/TAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/TANGERINA POKAN\b/g, "TANGERINA PONKAN"],
-  [/TANGERINA IMP\b/g, "TANGERINA IMPORTADA"],
+  [/TANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
+  [/TOMATINHO(?:\s+BANDEJA)?\s+180G\b/g, "TOMATE SWEET 180"],
   [/TOMATE SWEET GRAPE\b/g, "TOMATE SWEET 180"],
   [/TOMATE SWEET\b/g, "TOMATE SWEET 180"],
   [/UVA BRASIL\b/g, "UVA BRASIL"],
@@ -296,7 +300,8 @@ function canonicalizeProductName(rawName) {
     .replace(/^BANANA DAGUA\b.*$/, "BANANA DAGUA")
     .replace(/^BANANA MACA\b.*$/, "BANANA MACA")
     .replace(/^BANANA OURO\b.*$/, "BANANA OURO")
-    .replace(/^BANANA PRATA\b.*$/, "BANANA PRATA")
+    .replace(/^BANANA PRATA\s+ORGANICO\b.*$/, "BANANA PRATA ORGANICO")
+    .replace(/^BANANA PRATA(?!\s+ORGANICO\b)\b.*$/, "BANANA PRATA")
     .replace(/\bSERGIPANA\b/g, "ABOBORA SERGIPANA")
     .replace(/\bJAPONESA\b/g, "ABOBORA JAPONESA")
     .replace(/\bMORANGA\b/g, "ABOBORA MORANGA")
@@ -395,8 +400,12 @@ function canonicalizeProductName(rawName) {
     return "CARAMBOLA";
   }
 
-  if (canonical.includes("MILHO VERDE")) {
-    return "MILHO VERDE";
+  if (canonical === "MILHO VERDE") {
+    return "MILHO ESPIGA";
+  }
+
+  if (canonical.startsWith("MILHO VERDE BDJ")) {
+    return "MILHO VERDE BDJ 3";
   }
 
   if (canonical.startsWith("MORANGO")) {
@@ -438,7 +447,10 @@ function outputProductName(rawName, productKey) {
     return text;
   }
   if (/^OVO[S]?\s+12\s*UN$/.test(text)) {
-    return "OVO BRANCO DZ";
+    return "OVOS BRANCOS DZ";
+  }
+  if (productKey === "OVO BRANCO DZ") {
+    return "OVOS BRANCOS DZ";
   }
   if (/^OVO[S]?\s+BRANCO\s+GRANDE\s+12\s*UN$/.test(text)) {
     return "OVOS C/12";
