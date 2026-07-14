@@ -57,6 +57,34 @@ const STORE_ALIASES = new Map([
   ["SANTOS", "SANTOS"],
 ]);
 
+const STORE_HEADER_LABELS = new Map([
+  ["ANCHIETA", "ANCHIETA"],
+  ["CACHAMBI", "CACHAMBI"],
+  ["CERAMICA", "CERAMICA"],
+  ["COELHO", "COELHO"],
+  ["FREGUESIA", "FREGUESIA"],
+  ["IRAJA", "IRAJÁ"],
+  ["OLINDA", "OLINDA"],
+  ["PIABETA", "PIABETA"],
+  ["QUEIMADOS", "QUEIMADOS"],
+  ["SANTA CRUZ", "STA.CRUZ"],
+  ["SANTOS", "SANTOS"],
+]);
+
+const STORE_ORDER = [
+  "IRAJA",
+  "CACHAMBI",
+  "SANTOS",
+  "FREGUESIA",
+  "ANCHIETA",
+  "OLINDA",
+  "CERAMICA",
+  "COELHO",
+  "PIABETA",
+  "SANTA CRUZ",
+  "QUEIMADOS",
+];
+
 const PRODUCT_REPLACEMENTS = [
   [/\bORGANIC[AO]S?\b/g, "ORGANICO"],
   [/^ABACAXI\b.*$/g, "ABACAXI"],
@@ -79,6 +107,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bGOIABA GRANEL\b/g, "GOIABA"],
   [/\bJAMBO ROSA(?:\s+BANDEJA)?\s+300G\b/g, "JAMBO"],
   [/\bKIWI KG\b/g, "KIWI"],
+  [/\bLARANJA LIMA(?: DA)? PERSIA\b/g, "LIMA DA PERSIA"],
   [/\bLARANJA SELETA\b/g, "LARANJA SELETA"],
   [/\bLIMAO THAITI\b/g, "LIMAO"],
   [/\bMACA RED IMPORT\b/g, "MACA RED"],
@@ -87,13 +116,14 @@ const PRODUCT_REPLACEMENTS = [
   [/\bMACA BENNI\b/g, "MACA 850G"],
   [/\bMAMAO PAPAYA\b/g, "MAMAO HAVAI"],
   [/\bMELAO CANT\b/g, "MELAO CANTALOUPE"],
+  [/\bMELAO REI REDE\b/g, "MELAO REI"],
   [/\bMELAO AMARELO REDE\b/g, "MELAO REI"],
   [/\bMELAO REDE\b/g, "MELAO REI"],
   [/\bMILHO VERDE 3\s+500G\b/g, "MILHO BDJ"],
   [/\bMILHO VERDE BANDEJA\b/g, "MILHO BDJ"],
   [/\bMILHO VERDE BDJ 3\b/g, "MILHO BDJ"],
   [/^MILHO VERDE$/g, "MILHO ESPIGA"],
-  [/\bMIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
+  [/\bMIRTILLO(?:\s+BANDEJA)?(?:\s+\d+G)?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "MIRTILO"],
   [/\bOVO BRANCO DZ\b/g, "OVOS BRANCOS DZ"],
   [/\bOVOS BRANCO C 20\b/g, "OVOS BRANCOS C 20"],
   [/\bOVOS BRANCO 30\b/g, "OVOS BRANCOS C 30"],
@@ -113,8 +143,16 @@ const PRODUCT_REPLACEMENTS = [
   [/\bPIMENTAO AMARELO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO AMARELO"],
   [/\bPIMENTAO VERMEL(?:HO)?(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO VERMELHO"],
   [/\bPIMENTAO BRANCO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO BRANCO"],
+  [/\bREPOLHO VERDE\b/g, "REPOLHO"],
+  [/\bCEBOLA MIUDA(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA CALABRESA"],
+  [/\bCEBOLA CALABRESA(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA CALABRESA"],
   [/\bCEBOLA PIRULITO(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA PIRULITO"],
   [/\bCEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
+  [/\bCOGUMELO PARIS(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
+  [/\bCOGUMELO PORTO\s*BELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
+  [/\bCOGUMELO PORTOBELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
+  [/\bCOGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
+  [/\bCOGUMELO SHITAKE(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
   [/\bQUIABO 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO EMBALADOS\b/g, "QUIABO BDJ"],
@@ -141,12 +179,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["CEBOLA PIRULITO"]),
+    produtos: new Set(["CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["ANCHIETA"]),
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["CEBOLA PIRULITO"]),
+    produtos: new Set(["CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["FREGUESIA", "PIABETA"]),
   },
   {
@@ -156,12 +194,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["BATATA BOLINHA", "CEBOLA PIRULITO"]),
+    produtos: new Set(["BATATA BOLINHA", "CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["OLINDA"]),
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["CEBOLA", "CEBOLA PIRULITO"]),
+    produtos: new Set(["CEBOLA", "CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["IRAJA"]),
   },
   {
@@ -176,7 +214,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["BATATA ASTERIX", "BATATA BOLINHA", "BATATA INGLESA", "CEBOLA", "CEBOLA PIRULITO"]),
+    produtos: new Set(["BATATA ASTERIX", "BATATA BOLINHA", "BATATA INGLESA", "CEBOLA", "CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
@@ -195,30 +233,20 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "BENASSI",
     produtos: new Set([
-      "AMEIXA",
       "COCO VERDE",
       "COGUMELO",
-      "COGUMELO PARIS BANDEJA 200G",
-      "COGUMELO PORTOBELLO BANDEJA 200G",
-      "COGUMELO SHIMEJI BANDEJA 200G",
-      "COGUMELO SHITAKE BANDEJA 200G",
-      "KIWI",
-      "LARANJA BAHIA",
+      "COGUMELO PARIS",
+      "COGUMELO PORTOBELLO",
+      "COGUMELO SHIMEJI",
+      "COGUMELO SHITAKE",
       "MACA 850G",
-      "MACA RED",
       "MACA VERDE",
-      "MANGA TOMMY",
       "MELANCIA PINGO AM",
       "MELANCIA PINGO VER",
       "MORANGO",
-      "PERA PORTUGUESA",
       "UVA BRASIL",
       "UVA CRIMSON",
-      "UVA ITALIA",
-      "UVA RED GLOB",
-      "UVA ROSADA",
       "UVA THOMPSON",
-      "UVA VITORIA",
     ]),
   },
   {
@@ -236,6 +264,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "FAISÃO",
     produtos: new Set([
+      "AMEIXA",
       "AMORA",
       "ATEMOIA",
       "BATATA BAROA",
@@ -246,8 +275,9 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "FRAMBOESA",
       "GOIABA",
       "JAMBO",
+      "LARANJA BAHIA",
       "LIMAO SICILIANO",
-      "MARACUJA",
+      "MACA RED",
       "MELANCIA BABY",
       "MELAO GALIA",
       "MELAO ORANGE",
@@ -260,6 +290,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "SERIGUELA",
       "TAMARINDO",
       "TANGERINA IMPORTADA",
+      "UVA ITALIA",
     ]),
   },
   {
@@ -286,14 +317,19 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     ]),
   },
   {
-    fornecedor: "CASSARO",
-    produtos: new Set(["BETERRABA", "JILO"]),
+    fornecedor: "BENASSI",
+    produtos: new Set(["BETERRABA"]),
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
-    fornecedor: "CASSARO",
+    fornecedor: "BENASSI",
     produtos: new Set(["VAGEM MANT"]),
     lojas: new Set(["SANTA CRUZ"]),
+  },
+  {
+    fornecedor: "BENASSI",
+    produtos: new Set(["REPOLHO ROXO"]),
+    lojas: new Set(["COELHO"]),
   },
   {
     fornecedor: "CRT",
@@ -307,8 +343,8 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["ERVILHA"]),
-    lojas: new Set(["SANTOS"]),
+    produtos: new Set(["MAXIXE"]),
+    lojas: new Set(["CACHAMBI", "SANTOS"]),
   },
   {
     fornecedor: "CRT",
@@ -327,11 +363,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["JILO"]),
-    lojas: new Set(["ANCHIETA"]),
-  },
-  {
-    fornecedor: "CRT",
     produtos: new Set(["PEPINO"]),
     lojas: new Set(["ANCHIETA", "SANTA CRUZ"]),
   },
@@ -342,7 +373,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["ABOBRINHA", "BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "JILO", "PEPINO", "TOMATE"]),
+    produtos: new Set(["REPOLHO", "REPOLHO ROXO"]),
+    lojas: new Set(["OLINDA"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["ABOBRINHA", "BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "PEPINO", "TOMATE"]),
     lojas: new Set(["QUEIMADOS"]),
   },
   {
@@ -351,7 +387,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Kifrut",
-    produtos: new Set(["CAJU", "PERA WILLIAMS"]),
+    produtos: new Set(["CAJU", "PERA WILLIAMS", "UVA RED GLOB", "UVA ROSADA"]),
   },
   {
     fornecedor: "LTB",
@@ -365,7 +401,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "LTB",
-    produtos: new Set(["CEBOLA PIRULITO"]),
+    produtos: new Set(["CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["CERAMICA", "COELHO"]),
   },
   {
@@ -378,7 +414,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "NIPPO",
-    produtos: new Set(["ABACAXI", "MAMAO HAVAI", "MELAO AMARELO"]),
+    produtos: new Set(["ABACAXI", "MAMAO HAVAI", "MELAO AMARELO", "UVA VITORIA"]),
   },
   {
     fornecedor: "ROSSI",
@@ -396,7 +432,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE GRAPE AMARELO 250G", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
   },
   {
     fornecedor: "uvale",
@@ -405,77 +441,36 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "uvale",
-    produtos: new Set(["MACA FUJI", "MACA GALA", "MANGA PALMER", "MELAO REI"]),
+    produtos: new Set(["MANGA PALMER", "MANGA TOMMY", "MELAO REI"]),
   },
   {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["ABOBRINHA"]),
-    lojas: new Set(["PIABETA"]),
+    fornecedor: "Vitoria",
+    produtos: new Set(["KIWI", "MACA FUJI", "MACA GALA", "PERA PORTUGUESA"]),
   },
   {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["BATATA DOCE"]),
-    lojas: new Set(["CERAMICA", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["BERINJELA"]),
-    lojas: new Set(["PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["BETERRABA"]),
-    lojas: new Set(["CERAMICA", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["CENOURA", "CHUCHU"]),
-    lojas: new Set(["CERAMICA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["INHAME"]),
+    fornecedor: "BENASSI",
+    produtos: new Set([
+      "ABOBRINHA",
+      "AIPIM",
+      "BATATA DOCE",
+      "BERINJELA",
+      "BETERRABA",
+      "CENOURA",
+      "CHUCHU",
+      "INHAME",
+      "MAXIXE",
+      "PEPINO",
+      "PEPINO JAPONES",
+      "PIMENTAO",
+      "TOMATE",
+      "VAGEM MANT",
+    ]),
     lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
   },
   {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["JILO"]),
-    lojas: new Set(["CERAMICA", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["PEPINO"]),
-    lojas: new Set(["PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["ERVILHA", "MAXIXE"]),
-    lojas: new Set(["COELHO", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["PEPINO JAPONES"]),
-    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["VAGEM MANT"]),
-    lojas: new Set(["COELHO", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["PIMENTAO"]),
-    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["TANGERINA PONKAN"]),
-    lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
-  },
-  {
-    fornecedor: "Galpão valdair",
-    produtos: new Set(["TOMATE"]),
-    lojas: new Set(["PIABETA"]),
+    fornecedor: "BENASSI",
+    produtos: new Set(["ABOBRINHA", "BATATA DOCE", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "TOMATE", "VAGEM MANT"]),
+    lojas: new Set(["SANTA CRUZ"]),
   },
   {
     fornecedor: "brasnica",
@@ -485,12 +480,16 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "brasnica",
     produtos: new Set(["TANGERINA PONKAN"]),
-    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "QUEIMADOS", "SANTA CRUZ", "SANTOS"]),
+    lojas: new Set(["ANCHIETA", "CACHAMBI", "CERAMICA", "COELHO", "FREGUESIA", "IRAJA", "OLINDA", "PIABETA", "QUEIMADOS", "SANTA CRUZ", "SANTOS"]),
   },
   {
     fornecedor: "Veneza",
     produtos: new Set(["AIPIM"]),
     lojas: new Set(["QUEIMADOS"]),
+  },
+  {
+    fornecedor: "Veneza",
+    produtos: new Set(["ERVILHA", "JILO", "MARACUJA"]),
   },
 ];
 
@@ -649,6 +648,64 @@ function findHeaderRow(worksheet) {
   }
 
   return best;
+}
+
+function addStoreColumn(worksheet, header, store) {
+  const insertAt = header.totalColumn || (header.storeColumns.at(-1)?.columnNumber ?? worksheet.columnCount) + 1;
+  const sourceColumn = Math.max(insertAt - 1, 1);
+
+  worksheet.spliceColumns(insertAt, 0, []);
+  const source = worksheet.getColumn(sourceColumn);
+  const target = worksheet.getColumn(insertAt);
+  target.width = source.width;
+  target.hidden = source.hidden;
+  target.outlineLevel = source.outlineLevel || 0;
+
+  for (let rowNumber = 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+    const sourceCell = worksheet.getRow(rowNumber).getCell(sourceColumn);
+    const targetCell = worksheet.getRow(rowNumber).getCell(insertAt);
+    targetCell.style = cloneStyle(sourceCell.style);
+  }
+
+  worksheet.getRow(header.rowNumber).getCell(insertAt).value = STORE_HEADER_LABELS.get(store) || store;
+  header.storeColumns = header.storeColumns.map(({ store: currentStore, columnNumber }) => ({
+    store: currentStore,
+    columnNumber: columnNumber >= insertAt ? columnNumber + 1 : columnNumber,
+  }));
+  header.storeColumns.push({ store, columnNumber: insertAt });
+  header.storeColumns.sort((a, b) => a.columnNumber - b.columnNumber);
+
+  if (header.totalColumn && header.totalColumn >= insertAt) {
+    header.totalColumn += 1;
+  }
+}
+
+function ensureStoreColumnsForAlwaysSupplierProducts(worksheet, header, quantities, fileName) {
+  const existingStores = new Set(header.storeColumns.map(({ store }) => store));
+  const missingStores = new Set();
+
+  for (const rule of getAlwaysSupplierRules(fileName)) {
+    for (const product of rule.produtos) {
+      for (const store of STORE_ORDER) {
+        if (existingStores.has(store) || (rule.lojas && !rule.lojas.has(store))) {
+          continue;
+        }
+
+        if (quantities.has(lookupKey(product, store))) {
+          missingStores.add(store);
+        }
+      }
+    }
+  }
+
+  for (const store of STORE_ORDER) {
+    if (!missingStores.has(store)) {
+      continue;
+    }
+
+    addStoreColumn(worksheet, header, store);
+    existingStores.add(store);
+  }
 }
 
 function isTitleCell(value) {
@@ -820,6 +877,57 @@ function sortProductRowsAlphabetically(worksheet, header) {
   });
 }
 
+function moveTotalRowToEnd(worksheet, header) {
+  let totalRowNumber = null;
+
+  for (let rowNumber = header.rowNumber + 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+    const label = normalizeText(worksheetValueToString(worksheet.getRow(rowNumber).getCell(1).value));
+    if (label === "TOTAL") {
+      totalRowNumber = rowNumber;
+      break;
+    }
+  }
+
+  if (!totalRowNumber) {
+    return;
+  }
+
+  const sourceRow = worksheet.getRow(totalRowNumber);
+  const sourceHeight = sourceRow.height;
+  const sourceCells = [];
+  for (let columnNumber = 1; columnNumber <= worksheet.columnCount; columnNumber += 1) {
+    const cell = sourceRow.getCell(columnNumber);
+    sourceCells[columnNumber] = {
+      style: cloneStyle(cell.style),
+      value: cell.value,
+    };
+  }
+
+  if (totalRowNumber !== worksheet.rowCount) {
+    worksheet.spliceRows(totalRowNumber, 1);
+    totalRowNumber = worksheet.rowCount + 1;
+  }
+
+  const totalRow = worksheet.getRow(totalRowNumber);
+  totalRow.height = sourceHeight;
+  for (let columnNumber = 1; columnNumber <= worksheet.columnCount; columnNumber += 1) {
+    totalRow.getCell(columnNumber).style = sourceCells[columnNumber].style;
+    totalRow.getCell(columnNumber).value = sourceCells[columnNumber].value;
+  }
+
+  totalRow.getCell(1).value = "TOTAL";
+  const firstProductRow = header.rowNumber + 1;
+  const lastProductRow = totalRowNumber - 1;
+  const columnsToSum = [...header.storeColumns.map(({ columnNumber }) => columnNumber), header.totalColumn].filter(Boolean);
+
+  for (const columnNumber of columnsToSum) {
+    const columnName = columnNumberToName(columnNumber);
+    totalRow.getCell(columnNumber).value = {
+      formula: `SUM(${columnName}${firstProductRow}:${columnName}${lastProductRow})`,
+    };
+  }
+}
+
 function removeProductRowsWithoutOrders(worksheet, header) {
   for (let rowNumber = worksheet.rowCount; rowNumber > header.rowNumber; rowNumber -= 1) {
     const row = worksheet.getRow(rowNumber);
@@ -840,13 +948,33 @@ function removeProductRowsWithoutOrders(worksheet, header) {
   }
 
   sortProductRowsAlphabetically(worksheet, header);
+  moveTotalRowToEnd(worksheet, header);
   updateTotalFormulas(worksheet, header);
+}
+
+function hasSupplierOrders(worksheet, header) {
+  for (let rowNumber = header.rowNumber + 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+    const row = worksheet.getRow(rowNumber);
+    const product = worksheetValueToString(row.getCell(1).value).trim();
+
+    if (!product || isTitleCell(product)) {
+      continue;
+    }
+
+    if (rowHasStoreQuantity(row, header.storeColumns)) {
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumedKeys) {
   const header = findHeaderRow(worksheet);
+  ensureStoreColumnsForAlwaysSupplierProducts(worksheet, header, quantities, fileName);
   const mappedCells = [];
   const existingProducts = new Set();
+  const existingProductRows = new Map();
 
   for (let rowNumber = header.rowNumber + 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
     const row = worksheet.getRow(rowNumber);
@@ -861,6 +989,9 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
       row.getCell(1).value = "OVOS BRANCOS DZ";
     }
     existingProducts.add(normalizedProduct);
+    if (!existingProductRows.has(normalizedProduct)) {
+      existingProductRows.set(normalizedProduct, rowNumber);
+    }
 
     for (const { store, columnNumber } of header.storeColumns) {
       const cell = row.getCell(columnNumber);
@@ -873,10 +1004,6 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
 
   for (const rule of getAlwaysSupplierRules(fileName)) {
     for (const product of rule.produtos) {
-      if (existingProducts.has(product)) {
-        continue;
-      }
-
       const storesWithQuantity = header.storeColumns.filter(({ store }) => {
         return (!rule.lojas || rule.lojas.has(store)) && quantities.has(lookupKey(product, store));
       });
@@ -885,8 +1012,12 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
         continue;
       }
 
-      const rowNumber = addSupplierProductRow(worksheet, header, product);
-      existingProducts.add(product);
+      let rowNumber = existingProductRows.get(product);
+      if (!rowNumber) {
+        rowNumber = addSupplierProductRow(worksheet, header, product);
+        existingProducts.add(product);
+        existingProductRows.set(product, rowNumber);
+      }
 
       for (const { store, columnNumber } of storesWithQuantity) {
         mappedCells.push({ rowNumber, columnNumber, product, store });
@@ -907,6 +1038,7 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
   }
 
   removeProductRowsWithoutOrders(worksheet, header);
+  return hasSupplierOrders(worksheet, header);
 }
 
 async function writeUnmatchedWorkbook(outputDir, pendingEntries) {
@@ -972,8 +1104,9 @@ async function generateSupplierFiles(options = {}) {
 
   const supplierFiles = fs
     .readdirSync(templateDir)
-    .filter((fileName) => /\.xlsx$/i.test(fileName))
+    .filter((fileName) => !/^~\$/.test(fileName) && /\.xlsx$/i.test(fileName))
     .sort((a, b) => a.localeCompare(b, "pt-BR"));
+  const generatedFiles = [];
 
   for (const fileName of supplierFiles) {
     const workbook = new ExcelJS.Workbook();
@@ -981,11 +1114,17 @@ async function generateSupplierFiles(options = {}) {
 
     workbook.worksheets.forEach((worksheet) => updateWorksheetDates(worksheet, formattedDate));
 
+    let hasOrders = false;
     if (workbook.worksheets[0]) {
-      clearAndFillSupplierWorksheet(workbook.worksheets[0], quantities, fileName, consumedKeys);
+      hasOrders = clearAndFillSupplierWorksheet(workbook.worksheets[0], quantities, fileName, consumedKeys);
+    }
+
+    if (!hasOrders) {
+      continue;
     }
 
     await workbook.xlsx.writeFile(path.join(outputDir, fileName));
+    generatedFiles.push(fileName);
   }
 
   const pendingEntries = entries.filter((entry) => !consumedKeys.has(entry.key));
@@ -993,7 +1132,7 @@ async function generateSupplierFiles(options = {}) {
 
   return {
     outputDir,
-    files: supplierFiles,
+    files: generatedFiles,
     unmatched: pendingEntries,
     unmatchedFile,
   };

@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 959
+Total de associacoes: 1037
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -30,6 +30,13 @@ Total de associacoes: 959
 | adonai | CEBOLA | Iraja |
 | adonai | CEBOLA | Queimados |
 | adonai | CEBOLA | Santa Cruz |
+| adonai | CEBOLA CALABRESA | Cachambi |
+| adonai | CEBOLA CALABRESA | Iraja |
+| adonai | CEBOLA CALABRESA | Olinda |
+| adonai | CEBOLA CALABRESA | Piabeta |
+| adonai | CEBOLA CALABRESA | Queimados |
+| adonai | CEBOLA CALABRESA | Santa Cruz |
+| adonai | CEBOLA CALABRESA | Santos |
 | adonai | CEBOLA PIRULITO | Cachambi |
 | adonai | CEBOLA PIRULITO | Iraja |
 | adonai | CEBOLA PIRULITO | Olinda |
@@ -87,48 +94,43 @@ Total de associacoes: 959
 | Baixinho | QUIABO BDJ | Queimados |
 | Baixinho | QUIABO BDJ | Santa Cruz |
 | Baixinho | QUIABO BDJ | Santos |
-| BENASSI | AMEIXA | Anchieta |
-| BENASSI | AMEIXA | Cachambi |
-| BENASSI | AMEIXA | Ceramica |
-| BENASSI | AMEIXA | Coelho |
-| BENASSI | AMEIXA | Freguesia |
-| BENASSI | AMEIXA | Iraja |
-| BENASSI | AMEIXA | Olinda |
-| BENASSI | AMEIXA | Piabeta |
-| BENASSI | AMEIXA | Queimados |
-| BENASSI | AMEIXA | Santa Cruz |
-| BENASSI | AMEIXA | Santos |
+| BENASSI | ABOBRINHA | Ceramica |
+| BENASSI | ABOBRINHA | Coelho |
+| BENASSI | ABOBRINHA | Piabeta |
+| BENASSI | AIPIM | Ceramica |
+| BENASSI | AIPIM | Coelho |
+| BENASSI | AIPIM | Piabeta |
+| BENASSI | BATATA DOCE | Ceramica |
+| BENASSI | BATATA DOCE | Coelho |
+| BENASSI | BATATA DOCE | Piabeta |
+| BENASSI | BERINJELA | Ceramica |
+| BENASSI | BERINJELA | Coelho |
+| BENASSI | BERINJELA | Piabeta |
+| BENASSI | BETERRABA | Ceramica |
+| BENASSI | BETERRABA | Coelho |
+| BENASSI | BETERRABA | Piabeta |
+| BENASSI | CENOURA | Ceramica |
+| BENASSI | CENOURA | Coelho |
+| BENASSI | CENOURA | Piabeta |
+| BENASSI | CHUCHU | Ceramica |
+| BENASSI | CHUCHU | Coelho |
+| BENASSI | CHUCHU | Piabeta |
 | BENASSI | COCO VERDE | Ceramica |
 | BENASSI | COCO VERDE | Coelho |
 | BENASSI | COGUMELO PARIS BANDEJA 200g | Coelho |
 | BENASSI | COGUMELO PARIS BANDEJA 200g | Iraja |
+| BENASSI | COGUMELO PARIS BANDEJA 200g | Queimados |
 | BENASSI | COGUMELO PORTOBELLO BANDEJA 200g | Coelho |
 | BENASSI | COGUMELO PORTOBELLO BANDEJA 200g | Iraja |
+| BENASSI | COGUMELO PORTOBELLO BANDEJA 200g | Queimados |
 | BENASSI | COGUMELO SHIMEJI BANDEJA 200g | Coelho |
 | BENASSI | COGUMELO SHIMEJI BANDEJA 200g | Iraja |
+| BENASSI | COGUMELO SHIMEJI BANDEJA 200g | Queimados |
 | BENASSI | COGUMELO SHITAKE BANDEJA 200g | Iraja |
-| BENASSI | KIWI | Anchieta |
-| BENASSI | KIWI | Cachambi |
-| BENASSI | KIWI | Ceramica |
-| BENASSI | KIWI | Coelho |
-| BENASSI | KIWI | Freguesia |
-| BENASSI | KIWI | Iraja |
-| BENASSI | KIWI | Olinda |
-| BENASSI | KIWI | Piabeta |
-| BENASSI | KIWI | Queimados |
-| BENASSI | KIWI | Santa Cruz |
-| BENASSI | KIWI | Santos |
-| BENASSI | LARANJA BAHIA | Anchieta |
-| BENASSI | LARANJA BAHIA | Cachambi |
-| BENASSI | LARANJA BAHIA | Ceramica |
-| BENASSI | LARANJA BAHIA | Coelho |
-| BENASSI | LARANJA BAHIA | Freguesia |
-| BENASSI | LARANJA BAHIA | Iraja |
-| BENASSI | LARANJA BAHIA | Olinda |
-| BENASSI | LARANJA BAHIA | Piabeta |
-| BENASSI | LARANJA BAHIA | Queimados |
-| BENASSI | LARANJA BAHIA | Santa Cruz |
-| BENASSI | LARANJA BAHIA | Santos |
+| BENASSI | COGUMELO SHITAKE BANDEJA 200g | Queimados |
+| BENASSI | INHAME | Ceramica |
+| BENASSI | INHAME | Coelho |
+| BENASSI | INHAME | Piabeta |
 | BENASSI | MACA GALA 850G | Anchieta |
 | BENASSI | MACA GALA 850G | Cachambi |
 | BENASSI | MACA GALA 850G | Ceramica |
@@ -140,28 +142,6 @@ Total de associacoes: 959
 | BENASSI | MACA GALA 850G | Queimados |
 | BENASSI | MACA GALA 850G | Santa Cruz |
 | BENASSI | MACA GALA 850G | Santos |
-| BENASSI | MACA FUJI | Anchieta |
-| BENASSI | MACA FUJI | Cachambi |
-| BENASSI | MACA FUJI | Ceramica |
-| BENASSI | MACA FUJI | Coelho |
-| BENASSI | MACA FUJI | Freguesia |
-| BENASSI | MACA FUJI | Iraja |
-| BENASSI | MACA FUJI | Olinda |
-| BENASSI | MACA FUJI | Piabeta |
-| BENASSI | MACA FUJI | Queimados |
-| BENASSI | MACA FUJI | Santa Cruz |
-| BENASSI | MACA FUJI | Santos |
-| BENASSI | MACA RED | Anchieta |
-| BENASSI | MACA RED | Cachambi |
-| BENASSI | MACA RED | Ceramica |
-| BENASSI | MACA RED | Coelho |
-| BENASSI | MACA RED | Freguesia |
-| BENASSI | MACA RED | Iraja |
-| BENASSI | MACA RED | Olinda |
-| BENASSI | MACA RED | Piabeta |
-| BENASSI | MACA RED | Queimados |
-| BENASSI | MACA RED | Santa Cruz |
-| BENASSI | MACA RED | Santos |
 | BENASSI | MACA VERDE | Anchieta |
 | BENASSI | MACA VERDE | Cachambi |
 | BENASSI | MACA VERDE | Ceramica |
@@ -173,26 +153,9 @@ Total de associacoes: 959
 | BENASSI | MACA VERDE | Queimados |
 | BENASSI | MACA VERDE | Santa Cruz |
 | BENASSI | MACA VERDE | Santos |
-| FAISÃƒO | MARACUJA | Anchieta |
-| FAISÃƒO | MARACUJA | Ceramica |
-| FAISÃƒO | MARACUJA | Coelho |
-| FAISÃƒO | MARACUJA | Freguesia |
-| FAISÃƒO | MARACUJA | Iraja |
-| FAISÃƒO | MARACUJA | Olinda |
-| FAISÃƒO | MARACUJA | Queimados |
-| FAISÃƒO | MARACUJA | Santa Cruz |
-| FAISÃƒO | MARACUJA | Santos |
-| BENASSI | MANGA TOMMY | Anchieta |
-| BENASSI | MANGA TOMMY | Cachambi |
-| BENASSI | MANGA TOMMY | Ceramica |
-| BENASSI | MANGA TOMMY | Coelho |
-| BENASSI | MANGA TOMMY | Freguesia |
-| BENASSI | MANGA TOMMY | Iraja |
-| BENASSI | MANGA TOMMY | Olinda |
-| BENASSI | MANGA TOMMY | Piabeta |
-| BENASSI | MANGA TOMMY | Queimados |
-| BENASSI | MANGA TOMMY | Santa Cruz |
-| BENASSI | MANGA TOMMY | Santos |
+| BENASSI | MAXIXE | Ceramica |
+| BENASSI | MAXIXE | Coelho |
+| BENASSI | MAXIXE | Piabeta |
 | BENASSI | MORANGO | Anchieta |
 | BENASSI | MORANGO | Cachambi |
 | BENASSI | MORANGO | Ceramica |
@@ -204,17 +167,19 @@ Total de associacoes: 959
 | BENASSI | MORANGO | Queimados |
 | BENASSI | MORANGO | Santa Cruz |
 | BENASSI | MORANGO | Santos |
-| BENASSI | PERA PORTUGUESA | Anchieta |
-| BENASSI | PERA PORTUGUESA | Cachambi |
-| BENASSI | PERA PORTUGUESA | Ceramica |
-| BENASSI | PERA PORTUGUESA | Coelho |
-| BENASSI | PERA PORTUGUESA | Freguesia |
-| BENASSI | PERA PORTUGUESA | Iraja |
-| BENASSI | PERA PORTUGUESA | Olinda |
-| BENASSI | PERA PORTUGUESA | Piabeta |
-| BENASSI | PERA PORTUGUESA | Queimados |
-| BENASSI | PERA PORTUGUESA | Santa Cruz |
-| BENASSI | PERA PORTUGUESA | Santos |
+| BENASSI | PEPINO | Ceramica |
+| BENASSI | PEPINO | Coelho |
+| BENASSI | PEPINO | Piabeta |
+| BENASSI | PEPINO JAPONES | Ceramica |
+| BENASSI | PEPINO JAPONES | Coelho |
+| BENASSI | PEPINO JAPONES | Piabeta |
+| BENASSI | PIMENTAO | Ceramica |
+| BENASSI | PIMENTAO | Coelho |
+| BENASSI | PIMENTAO | Piabeta |
+| BENASSI | REPOLHO ROXO | Coelho |
+| BENASSI | TOMATE | Ceramica |
+| BENASSI | TOMATE | Coelho |
+| BENASSI | TOMATE | Piabeta |
 | BENASSI | UVA BRASIL | Anchieta |
 | BENASSI | UVA BRASIL | Cachambi |
 | BENASSI | UVA BRASIL | Ceramica |
@@ -237,39 +202,6 @@ Total de associacoes: 959
 | BENASSI | UVA CRIMSON | Queimados |
 | BENASSI | UVA CRIMSON | Santa Cruz |
 | BENASSI | UVA CRIMSON | Santos |
-| BENASSI | UVA ITALIA | Anchieta |
-| BENASSI | UVA ITALIA | Cachambi |
-| BENASSI | UVA ITALIA | Ceramica |
-| BENASSI | UVA ITALIA | Coelho |
-| BENASSI | UVA ITALIA | Freguesia |
-| BENASSI | UVA ITALIA | Iraja |
-| BENASSI | UVA ITALIA | Olinda |
-| BENASSI | UVA ITALIA | Piabeta |
-| BENASSI | UVA ITALIA | Queimados |
-| BENASSI | UVA ITALIA | Santa Cruz |
-| BENASSI | UVA ITALIA | Santos |
-| BENASSI | UVA RED GLOB | Anchieta |
-| BENASSI | UVA RED GLOB | Cachambi |
-| BENASSI | UVA RED GLOB | Ceramica |
-| BENASSI | UVA RED GLOB | Coelho |
-| BENASSI | UVA RED GLOB | Freguesia |
-| BENASSI | UVA RED GLOB | Iraja |
-| BENASSI | UVA RED GLOB | Olinda |
-| BENASSI | UVA RED GLOB | Piabeta |
-| BENASSI | UVA RED GLOB | Queimados |
-| BENASSI | UVA RED GLOB | Santa Cruz |
-| BENASSI | UVA RED GLOB | Santos |
-| BENASSI | UVA ROSADA | Anchieta |
-| BENASSI | UVA ROSADA | Cachambi |
-| BENASSI | UVA ROSADA | Ceramica |
-| BENASSI | UVA ROSADA | Coelho |
-| BENASSI | UVA ROSADA | Freguesia |
-| BENASSI | UVA ROSADA | Iraja |
-| BENASSI | UVA ROSADA | Olinda |
-| BENASSI | UVA ROSADA | Piabeta |
-| BENASSI | UVA ROSADA | Queimados |
-| BENASSI | UVA ROSADA | Santa Cruz |
-| BENASSI | UVA ROSADA | Santos |
 | BENASSI | UVA THOMPSON | Anchieta |
 | BENASSI | UVA THOMPSON | Cachambi |
 | BENASSI | UVA THOMPSON | Ceramica |
@@ -281,17 +213,9 @@ Total de associacoes: 959
 | BENASSI | UVA THOMPSON | Queimados |
 | BENASSI | UVA THOMPSON | Santa Cruz |
 | BENASSI | UVA THOMPSON | Santos |
-| BENASSI | UVA VITORIA | Anchieta |
-| BENASSI | UVA VITORIA | Cachambi |
-| BENASSI | UVA VITORIA | Ceramica |
-| BENASSI | UVA VITORIA | Coelho |
-| BENASSI | UVA VITORIA | Freguesia |
-| BENASSI | UVA VITORIA | Iraja |
-| BENASSI | UVA VITORIA | Olinda |
-| BENASSI | UVA VITORIA | Piabeta |
-| BENASSI | UVA VITORIA | Queimados |
-| BENASSI | UVA VITORIA | Santa Cruz |
-| BENASSI | UVA VITORIA | Santos |
+| BENASSI | VAGEM MANT | Ceramica |
+| BENASSI | VAGEM MANT | Coelho |
+| BENASSI | VAGEM MANT | Piabeta |
 | Casa dina | ABOBORA JAPONESA | Anchieta |
 | Casa dina | ABOBORA JAPONESA | Cachambi |
 | Casa dina | ABOBORA JAPONESA | Ceramica |
@@ -336,13 +260,14 @@ Total de associacoes: 959
 | Casa dina | MELANCIA | Queimados |
 | Casa dina | MELANCIA | Santa Cruz |
 | Casa dina | MELANCIA | Santos |
-| CASSARO | Abobrinha | Santa Cruz |
-| CASSARO | Batata doce | Santa Cruz |
-| CASSARO | beterraba | Santa Cruz |
-| CASSARO | cenoura | Santa Cruz |
-| CASSARO | chuchu | Santa Cruz |
-| CASSARO | Inhame | Santa Cruz |
-| CASSARO | Tomate | Santa Cruz |
+| BENASSI | Abobrinha | Santa Cruz |
+| BENASSI | Batata doce | Santa Cruz |
+| BENASSI | beterraba | Santa Cruz |
+| BENASSI | cenoura | Santa Cruz |
+| BENASSI | chuchu | Santa Cruz |
+| BENASSI | Inhame | Santa Cruz |
+| BENASSI | Tomate | Santa Cruz |
+| BENASSI | VAGEM MANT | Santa Cruz |
 | Cia dos ovos | OVOS BRANCOS C/20 | Anchieta |
 | Cia dos ovos | OVOS BRANCOS C/20 | Cachambi |
 | Cia dos ovos | OVOS BRANCOS C/20 | Ceramica |
@@ -428,12 +353,7 @@ Total de associacoes: 959
 | CRT | Inhame | Olinda |
 | CRT | Inhame | Queimados |
 | CRT | Inhame | Santos |
-| CRT | jilo | Anchieta |
-| CRT | jilo | Cachambi |
-| CRT | jilo | Freguesia |
-| CRT | jilo | Iraja |
-| CRT | jilo | Olinda |
-| CRT | jilo | Queimados |
+| CRT | Maxixe | Cachambi |
 | CRT | Pepino comum | Anchieta |
 | CRT | Pepino comum | Iraja |
 | CRT | Pepino comum | Olinda |
@@ -442,12 +362,25 @@ Total de associacoes: 959
 | CRT | Pepino japones | Freguesia |
 | CRT | Pepino japones | Olinda |
 | CRT | Pepino japones | Santos |
+| CRT | REPOLHO | Olinda |
+| CRT | REPOLHO ROXO | Olinda |
 | CRT | Tomate | Anchieta |
 | CRT | Tomate | Cachambi |
 | CRT | Tomate | Freguesia |
 | CRT | Tomate | Iraja |
 | CRT | Tomate | Olinda |
 | CRT | Tomate | Queimados |
+| FAISÃO | AMEIXA | Anchieta |
+| FAISÃO | AMEIXA | Cachambi |
+| FAISÃO | AMEIXA | Ceramica |
+| FAISÃO | AMEIXA | Coelho |
+| FAISÃO | AMEIXA | Freguesia |
+| FAISÃO | AMEIXA | Iraja |
+| FAISÃO | AMEIXA | Olinda |
+| FAISÃO | AMEIXA | Piabeta |
+| FAISÃO | AMEIXA | Queimados |
+| FAISÃO | AMEIXA | Santa Cruz |
+| FAISÃO | AMEIXA | Santos |
 | FAISÃO | ATEMOIA | Anchieta |
 | FAISÃO | ATEMOIA | Cachambi |
 | FAISÃO | ATEMOIA | Ceramica |
@@ -525,7 +458,31 @@ Total de associacoes: 959
 | FAISÃO | JAMBO ROSA 300G | Queimados |
 | FAISÃO | JAMBO ROSA 300G | Santa Cruz |
 | FAISÃO | JAMBO ROSA 300G | Santos |
+| FAISÃO | LARANJA BAHIA | Anchieta |
+| FAISÃO | LARANJA BAHIA | Cachambi |
+| FAISÃO | LARANJA BAHIA | Ceramica |
+| FAISÃO | LARANJA BAHIA | Coelho |
+| FAISÃO | LARANJA BAHIA | Freguesia |
+| FAISÃO | LARANJA BAHIA | Iraja |
+| FAISÃO | LARANJA BAHIA | Olinda |
+| FAISÃO | LARANJA BAHIA | Piabeta |
+| FAISÃO | LARANJA BAHIA | Queimados |
+| FAISÃO | LARANJA BAHIA | Santa Cruz |
+| FAISÃO | LARANJA BAHIA | Santos |
+| FAISÃO | LARANJA LIMA DA PERSIA | Piabeta |
+| FAISÃO | LARANJA LIMA PERSIA | Piabeta |
 | FAISÃO | LIMA DA PERSIA | Piabeta |
+| FAISÃO | MACA RED | Anchieta |
+| FAISÃO | MACA RED | Cachambi |
+| FAISÃO | MACA RED | Ceramica |
+| FAISÃO | MACA RED | Coelho |
+| FAISÃO | MACA RED | Freguesia |
+| FAISÃO | MACA RED | Iraja |
+| FAISÃO | MACA RED | Olinda |
+| FAISÃO | MACA RED | Piabeta |
+| FAISÃO | MACA RED | Queimados |
+| FAISÃO | MACA RED | Santa Cruz |
+| FAISÃO | MACA RED | Santos |
 | FAISÃO | MELANCIA BABY | Anchieta |
 | FAISÃO | MELANCIA BABY | Cachambi |
 | FAISÃO | MELANCIA BABY | Ceramica |
@@ -570,17 +527,17 @@ Total de associacoes: 959
 | FAISÃO | MELAO VERDE | Queimados |
 | FAISÃO | MELAO VERDE | Santa Cruz |
 | FAISÃO | MELAO VERDE | Santos |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Anchieta |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Cachambi |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Ceramica |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Coelho |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Freguesia |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Iraja |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Olinda |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Piabeta |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Queimados |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Santa Cruz |
-| FAISÃO | MIRTILLO 125G <<< REVISAR >>> | Santos |
+| FAISÃO | MIRTILO | Anchieta |
+| FAISÃO | MIRTILO | Cachambi |
+| FAISÃO | MIRTILO | Ceramica |
+| FAISÃO | MIRTILO | Coelho |
+| FAISÃO | MIRTILO | Freguesia |
+| FAISÃO | MIRTILO | Iraja |
+| FAISÃO | MIRTILO | Olinda |
+| FAISÃO | MIRTILO | Piabeta |
+| FAISÃO | MIRTILO | Queimados |
+| FAISÃO | MIRTILO | Santa Cruz |
+| FAISÃO | MIRTILO | Santos |
 | FAISÃO | PÊRA DANJOUR | Anchieta |
 | FAISÃO | PÊRA DANJOUR | Cachambi |
 | FAISÃO | PÊRA DANJOUR | Ceramica |
@@ -629,52 +586,30 @@ Total de associacoes: 959
 | FAISÃO | TANGERINA IMPORTADA | Queimados |
 | FAISÃO | TANGERINA IMPORTADA | Santa Cruz |
 | FAISÃO | TANGERINA IMPORTADA | Santos |
-| Galpão valdair | Abobrinha | Ceramica |
-| Galpão valdair | Abobrinha | Coelho |
-| Galpão valdair | Abobrinha | Piabeta |
-| Galpão valdair | Aipim | Ceramica |
-| Galpão valdair | Aipim | Coelho |
-| Galpão valdair | Aipim | Piabeta |
-| Galpão valdair | Batata doce | Ceramica |
-| Galpão valdair | Batata doce | Coelho |
-| Galpão valdair | Batata doce | Piabeta |
-| Galpão valdair | Berinjela | Ceramica |
-| Galpão valdair | Berinjela | Coelho |
-| Galpão valdair | Berinjela | Piabeta |
-| Galpão valdair | beterraba | Coelho |
-| Galpão valdair | beterraba | Piabeta |
-| Galpão valdair | cenoura | Ceramica |
-| Galpão valdair | cenoura | Coelho |
-| Galpão valdair | cenoura | Piabeta |
-| Galpão valdair | chuchu | Ceramica |
-| Galpão valdair | chuchu | Coelho |
-| Galpão valdair | chuchu | Piabeta |
-| Galpão valdair | Inhame | Ceramica |
-| Galpão valdair | Inhame | Coelho |
-| Galpão valdair | Inhame | Piabeta |
-| Galpão valdair | jilo | Ceramica |
-| Galpão valdair | jilo | Coelho |
-| Galpão valdair | jilo | Piabeta |
-| Galpão valdair | Pepino comum | Ceramica |
-| Galpão valdair | Pepino comum | Coelho |
-| Galpão valdair | Pepino comum | Piabeta |
-| Galpão valdair | PEPINO JAPONES | Ceramica |
-| Galpão valdair | PEPINO JAPONES | Coelho |
-| Galpão valdair | VAGEM MANT | Coelho |
+| FAISÃO | UVA ITALIA | Anchieta |
+| FAISÃO | UVA ITALIA | Cachambi |
+| FAISÃO | UVA ITALIA | Ceramica |
+| FAISÃO | UVA ITALIA | Coelho |
+| FAISÃO | UVA ITALIA | Freguesia |
+| FAISÃO | UVA ITALIA | Iraja |
+| FAISÃO | UVA ITALIA | Olinda |
+| FAISÃO | UVA ITALIA | Piabeta |
+| FAISÃO | UVA ITALIA | Queimados |
+| FAISÃO | UVA ITALIA | Santa Cruz |
+| FAISÃO | UVA ITALIA | Santos |
 | Brasnica | BANANA PRATA ORGANICO | Iraja |
 | Brasnica | BANANA PRATA ORGANICO | Santos |
+| Brasnica | TANGERINA PONKAN | Anchieta |
 | Brasnica | TANGERINA PONKAN | Cachambi |
+| Brasnica | TANGERINA PONKAN | Ceramica |
+| Brasnica | TANGERINA PONKAN | Coelho |
 | Brasnica | TANGERINA PONKAN | Freguesia |
+| Brasnica | TANGERINA PONKAN | Iraja |
 | Brasnica | TANGERINA PONKAN | Olinda |
+| Brasnica | TANGERINA PONKAN | Piabeta |
 | Brasnica | TANGERINA PONKAN | Queimados |
 | Brasnica | TANGERINA PONKAN | Santa Cruz |
 | Brasnica | TANGERINA PONKAN | Santos |
-| Galpão valdair | TANGERINA PONKAN | Ceramica |
-| Galpão valdair | TANGERINA PONKAN | Coelho |
-| Galpão valdair | TANGERINA PONKAN | Piabeta |
-| Galpão valdair | Tomate | Ceramica |
-| Galpão valdair | Tomate | Coelho |
-| Galpão valdair | Tomate | Piabeta |
 | JACUBA | LIMÃO | Anchieta |
 | JACUBA | LIMÃO | Cachambi |
 | JACUBA | LIMÃO | Ceramica |
@@ -687,14 +622,6 @@ Total de associacoes: 959
 | JACUBA | LIMÃO | Santa Cruz |
 | JACUBA | LIMÃO | Santos |
 | Kifrut | CAJU | Iraja |
-| Kifrut | MAÇÃ GALA | Ceramica |
-| Kifrut | MAÇÃ GALA | Coelho |
-| Kifrut | MAÇÃ GALA | Iraja |
-| Kifrut | MAÇÃ GALA | Olinda |
-| Kifrut | MAÇÃ GALA | Piabeta |
-| Kifrut | MAÇÃ GALA | Queimados |
-| Kifrut | MAÇÃ GALA | Santa Cruz |
-| Kifrut | MAÇÃ GALA | Santos |
 | Kifrut | PERA WILLIAMS | Anchieta |
 | Kifrut | PERA WILLIAMS | Cachambi |
 | Kifrut | PERA WILLIAMS | Ceramica |
@@ -706,6 +633,28 @@ Total de associacoes: 959
 | Kifrut | PERA WILLIAMS | Queimados |
 | Kifrut | PERA WILLIAMS | Santa Cruz |
 | Kifrut | PERA WILLIAMS | Santos |
+| Kifrut | UVA RED GLOB | Anchieta |
+| Kifrut | UVA RED GLOB | Cachambi |
+| Kifrut | UVA RED GLOB | Ceramica |
+| Kifrut | UVA RED GLOB | Coelho |
+| Kifrut | UVA RED GLOB | Freguesia |
+| Kifrut | UVA RED GLOB | Iraja |
+| Kifrut | UVA RED GLOB | Olinda |
+| Kifrut | UVA RED GLOB | Piabeta |
+| Kifrut | UVA RED GLOB | Queimados |
+| Kifrut | UVA RED GLOB | Santa Cruz |
+| Kifrut | UVA RED GLOB | Santos |
+| Kifrut | UVA ROSADA | Anchieta |
+| Kifrut | UVA ROSADA | Cachambi |
+| Kifrut | UVA ROSADA | Ceramica |
+| Kifrut | UVA ROSADA | Coelho |
+| Kifrut | UVA ROSADA | Freguesia |
+| Kifrut | UVA ROSADA | Iraja |
+| Kifrut | UVA ROSADA | Olinda |
+| Kifrut | UVA ROSADA | Piabeta |
+| Kifrut | UVA ROSADA | Queimados |
+| Kifrut | UVA ROSADA | Santa Cruz |
+| Kifrut | UVA ROSADA | Santos |
 | LTB | BATATA ASTERIX | Ceramica |
 | LTB | BATATA ASTERIX | Coelho |
 | LTB | BATATA BOLINHA | Ceramica |
@@ -714,6 +663,8 @@ Total de associacoes: 959
 | LTB | BATATA INGLESA | Coelho |
 | LTB | CEBOLA | Ceramica |
 | LTB | CEBOLA | Coelho |
+| LTB | CEBOLA CALABRESA | Ceramica |
+| LTB | CEBOLA CALABRESA | Coelho |
 | LTB | CEBOLA PIRULITO | Ceramica |
 | LTB | CEBOLA PIRULITO | Coelho |
 | MIBA | ABACATE | Anchieta |
@@ -804,6 +755,17 @@ Total de associacoes: 959
 | NIPPO | MELAO AMARELO | Queimados |
 | NIPPO | MELAO AMARELO | Santa Cruz |
 | NIPPO | MELAO AMARELO | Santos |
+| NIPPO | UVA VITORIA | Anchieta |
+| NIPPO | UVA VITORIA | Cachambi |
+| NIPPO | UVA VITORIA | Ceramica |
+| NIPPO | UVA VITORIA | Coelho |
+| NIPPO | UVA VITORIA | Freguesia |
+| NIPPO | UVA VITORIA | Iraja |
+| NIPPO | UVA VITORIA | Olinda |
+| NIPPO | UVA VITORIA | Piabeta |
+| NIPPO | UVA VITORIA | Queimados |
+| NIPPO | UVA VITORIA | Santa Cruz |
+| NIPPO | UVA VITORIA | Santos |
 | Real | BANANA DA TERRA | Cachambi |
 | Real | BANANA DA TERRA | Freguesia |
 | Real | BANANA DA TERRA | Santos |
@@ -854,6 +816,28 @@ Total de associacoes: 959
 | SEAL | PIMENTAO VERMELHO | Olinda |
 | SEAL | PIMENTAO VERMELHO | Queimados |
 | SEAL | PIMENTAO VERMELHO | Santos |
+| SEAL | TOMATE CEREJA | Anchieta |
+| SEAL | TOMATE CEREJA | Cachambi |
+| SEAL | TOMATE CEREJA | Ceramica |
+| SEAL | TOMATE CEREJA | Coelho |
+| SEAL | TOMATE CEREJA | Freguesia |
+| SEAL | TOMATE CEREJA | Iraja |
+| SEAL | TOMATE CEREJA | Olinda |
+| SEAL | TOMATE CEREJA | Piabeta |
+| SEAL | TOMATE CEREJA | Queimados |
+| SEAL | TOMATE CEREJA | Santa Cruz |
+| SEAL | TOMATE CEREJA | Santos |
+| SEAL | TOMATE CEREJA 300G | Anchieta |
+| SEAL | TOMATE CEREJA 300G | Cachambi |
+| SEAL | TOMATE CEREJA 300G | Ceramica |
+| SEAL | TOMATE CEREJA 300G | Coelho |
+| SEAL | TOMATE CEREJA 300G | Freguesia |
+| SEAL | TOMATE CEREJA 300G | Iraja |
+| SEAL | TOMATE CEREJA 300G | Olinda |
+| SEAL | TOMATE CEREJA 300G | Piabeta |
+| SEAL | TOMATE CEREJA 300G | Queimados |
+| SEAL | TOMATE CEREJA 300G | Santa Cruz |
+| SEAL | TOMATE CEREJA 300G | Santos |
 | SEAL | TOMATE COQUETEL | Anchieta |
 | SEAL | TOMATE COQUETEL | Cachambi |
 | SEAL | TOMATE COQUETEL | Ceramica |
@@ -865,6 +849,17 @@ Total de associacoes: 959
 | SEAL | TOMATE COQUETEL | Queimados |
 | SEAL | TOMATE COQUETEL | Santa Cruz |
 | SEAL | TOMATE COQUETEL | Santos |
+| SEAL | TOMATE GRAPE AMARELO 250G | Anchieta |
+| SEAL | TOMATE GRAPE AMARELO 250G | Cachambi |
+| SEAL | TOMATE GRAPE AMARELO 250G | Ceramica |
+| SEAL | TOMATE GRAPE AMARELO 250G | Coelho |
+| SEAL | TOMATE GRAPE AMARELO 250G | Freguesia |
+| SEAL | TOMATE GRAPE AMARELO 250G | Iraja |
+| SEAL | TOMATE GRAPE AMARELO 250G | Olinda |
+| SEAL | TOMATE GRAPE AMARELO 250G | Piabeta |
+| SEAL | TOMATE GRAPE AMARELO 250G | Queimados |
+| SEAL | TOMATE GRAPE AMARELO 250G | Santa Cruz |
+| SEAL | TOMATE GRAPE AMARELO 250G | Santos |
 | SEAL | TOMATE GRAPE MISTO 250G | Anchieta |
 | SEAL | TOMATE GRAPE MISTO 250G | Cachambi |
 | SEAL | TOMATE GRAPE MISTO 250G | Ceramica |
@@ -946,6 +941,17 @@ Total de associacoes: 959
 | uvale | MANGA PALMER | Olinda |
 | uvale | MANGA PALMER | Queimados |
 | uvale | MANGA PALMER | Santa Cruz |
+| uvale | MANGA TOMMY | Anchieta |
+| uvale | MANGA TOMMY | Cachambi |
+| uvale | MANGA TOMMY | Ceramica |
+| uvale | MANGA TOMMY | Coelho |
+| uvale | MANGA TOMMY | Freguesia |
+| uvale | MANGA TOMMY | Iraja |
+| uvale | MANGA TOMMY | Olinda |
+| uvale | MANGA TOMMY | Piabeta |
+| uvale | MANGA TOMMY | Queimados |
+| uvale | MANGA TOMMY | Santa Cruz |
+| uvale | MANGA TOMMY | Santos |
 | uvale | MELAO REI | Anchieta |
 | uvale | MELAO REI | Cachambi |
 | uvale | MELAO REI | Ceramica |
@@ -965,3 +971,75 @@ Total de associacoes: 959
 | Veneza | Aipim | Queimados |
 | Veneza | Aipim | Santa Cruz |
 | Veneza | Aipim | Santos |
+| Veneza | ERVILHA | Anchieta |
+| Veneza | ERVILHA | Cachambi |
+| Veneza | ERVILHA | Ceramica |
+| Veneza | ERVILHA | Coelho |
+| Veneza | ERVILHA | Freguesia |
+| Veneza | ERVILHA | Iraja |
+| Veneza | ERVILHA | Olinda |
+| Veneza | ERVILHA | Piabeta |
+| Veneza | ERVILHA | Queimados |
+| Veneza | ERVILHA | Santa Cruz |
+| Veneza | ERVILHA | Santos |
+| Veneza | JILO | Anchieta |
+| Veneza | JILO | Cachambi |
+| Veneza | JILO | Ceramica |
+| Veneza | JILO | Coelho |
+| Veneza | JILO | Freguesia |
+| Veneza | JILO | Iraja |
+| Veneza | JILO | Olinda |
+| Veneza | JILO | Piabeta |
+| Veneza | JILO | Queimados |
+| Veneza | JILO | Santa Cruz |
+| Veneza | JILO | Santos |
+| Veneza | MARACUJA | Anchieta |
+| Veneza | MARACUJA | Ceramica |
+| Veneza | MARACUJA | Coelho |
+| Veneza | MARACUJA | Freguesia |
+| Veneza | MARACUJA | Iraja |
+| Veneza | MARACUJA | Olinda |
+| Veneza | MARACUJA | Queimados |
+| Veneza | MARACUJA | Santa Cruz |
+| Veneza | MARACUJA | Santos |
+| Vitoria | KIWI | Anchieta |
+| Vitoria | KIWI | Cachambi |
+| Vitoria | KIWI | Ceramica |
+| Vitoria | KIWI | Coelho |
+| Vitoria | KIWI | Freguesia |
+| Vitoria | KIWI | Iraja |
+| Vitoria | KIWI | Olinda |
+| Vitoria | KIWI | Piabeta |
+| Vitoria | KIWI | Queimados |
+| Vitoria | KIWI | Santa Cruz |
+| Vitoria | KIWI | Santos |
+| Vitoria | MACA FUJI | Anchieta |
+| Vitoria | MACA FUJI | Cachambi |
+| Vitoria | MACA FUJI | Ceramica |
+| Vitoria | MACA FUJI | Coelho |
+| Vitoria | MACA FUJI | Freguesia |
+| Vitoria | MACA FUJI | Iraja |
+| Vitoria | MACA FUJI | Olinda |
+| Vitoria | MACA FUJI | Piabeta |
+| Vitoria | MACA FUJI | Queimados |
+| Vitoria | MACA FUJI | Santa Cruz |
+| Vitoria | MACA FUJI | Santos |
+| Vitoria | MAÇÃ GALA | Ceramica |
+| Vitoria | MAÇÃ GALA | Coelho |
+| Vitoria | MAÇÃ GALA | Iraja |
+| Vitoria | MAÇÃ GALA | Olinda |
+| Vitoria | MAÇÃ GALA | Piabeta |
+| Vitoria | MAÇÃ GALA | Queimados |
+| Vitoria | MAÇÃ GALA | Santa Cruz |
+| Vitoria | MAÇÃ GALA | Santos |
+| Vitoria | PERA PORTUGUESA | Anchieta |
+| Vitoria | PERA PORTUGUESA | Cachambi |
+| Vitoria | PERA PORTUGUESA | Ceramica |
+| Vitoria | PERA PORTUGUESA | Coelho |
+| Vitoria | PERA PORTUGUESA | Freguesia |
+| Vitoria | PERA PORTUGUESA | Iraja |
+| Vitoria | PERA PORTUGUESA | Olinda |
+| Vitoria | PERA PORTUGUESA | Piabeta |
+| Vitoria | PERA PORTUGUESA | Queimados |
+| Vitoria | PERA PORTUGUESA | Santa Cruz |
+| Vitoria | PERA PORTUGUESA | Santos |

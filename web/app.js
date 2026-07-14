@@ -24,6 +24,7 @@
       storeAliases: {
         CERAMICA: "CERAM",
         CERAM: "CERAM",
+        "NOVA IGUACU": "CERAM",
         COELHO: "COELHO",
         QUEIMADOS: "QUEIM",
         QUEIM: "QUEIM",
@@ -145,14 +146,17 @@
     [/CAQUI RAMA FORTE BANDEJA\b/g, "CAQUI RAMA FORTE"],
     [/CARAMBOLA BANDEJA\b/g, "CARAMBOLA"],
     [/CEREJA(?:\s+BANDEJA)?\s+250G\b/g, "CEREJA"],
+    [/CEBOLA MIUDA(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA CALABRESA"],
+    [/CEBOLA CALABRESA(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA CALABRESA"],
     [/CEBOLA PIRULITO(?:\s+(?:PACOTE|PCT))?(?:\s+\d+\s*(?:KG|UNID?|UNIDADE|UNIDADES))?\b/g, "CEBOLA PIRULITO"],
     [/CEBOLA PIRUTLIO\b/g, "CEBOLA PIRULITO"],
     [/CEBOLA PITULITO(?:\s+\d+\s*KG)?\b/g, "CEBOLA PIRULITO"],
     [/CEBOLINHA PIRULITO\b/g, "CEBOLA PIRULITO"],
-    [/COGUMELO PARIS(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
-    [/COGUMELO PORTOBELLO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
-    [/COGUMELO SHIMEJI(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
-    [/COGUMELO SHITAKE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
+    [/COGUMELO PARIS(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
+    [/COGUMELO PORTO\s*BELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
+    [/COGUMELO PORTOBELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
+    [/COGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
+    [/COGUMELO SHITAKE(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
     [/GOIABA VERMELHA\b/g, "GOIABA"],
     [/GOIABA GRANEL\b/g, "GOIABA"],
     [/COCO SECO\b/g, "COCO SECO"],
@@ -178,9 +182,11 @@
     [/GOIABA\b/g, "GOIABA"],
     [/KIWI KILO\b/g, "KIWI"],
     [/KIWI IMPORTADO\b/g, "KIWI"],
+    [/LARANJA LIMA(?: DA)? PERSIA\b/g, "LIMA DA PERSIA"],
     [/LARANJA BAIA\b/g, "LARANJA BAHIA"],
     [/LARANJA SELETA\b/g, "LARANJA SELETA"],
     [/LARANJA PERA\b/g, "LARANJA PERA"],
+    [/MELAO REI REDE\b/g, "MELAO REI"],
     [/MELAO AMARELO REDE\b/g, "MELAO REI"],
     [/MELAO REDE\b/g, "MELAO REI"],
     [/MELANCIA PINGO DOCE VERMELHA\b/g, "MELANCIA PINGO VER"],
@@ -188,7 +194,7 @@
     [/MILHO VERDE 3\s+500G\b/g, "MILHO VERDE BDJ 3"],
     [/MILHO VERDE BANDEJA\b/g, "MILHO VERDE BDJ 3"],
     [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE BDJ 3"],
-    [/MIRTILLO(?:\s+BANDEJA)?\s+125G\s+<<<\s+REVISAR\s+>>>/g, "MIRTILO"],
+    [/MIRTILLO(?:\s+BANDEJA)?(?:\s+\d+G)?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "MIRTILO"],
     [/FIGO ROXO(?:\s+BANDEJA)?\s+300G\b/g, "FIGO"],
     [/MORANGO BJ\b/g, "MORANGO"],
     [/MORANGO BANDEJA\b/g, "MORANGO"],
@@ -219,6 +225,7 @@
     [/PIMENTAO VERDE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO"],
     [/PIMENTAO VERMEL(?:HO)?(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO VERMELHO"],
     [/PIMENTAO BRANCO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO BRANCO"],
+    [/REPOLHO VERDE\b/g, "REPOLHO"],
     [/SAPOTI(?:\s+BANDEJA)?\s+300G\b/g, "SAPOTI"],
     [/SERIGUELA(?:\s+BANDEJA)?\s+250G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
     [/SERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
@@ -227,8 +234,9 @@
     [/TANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
+    [/\bTOMATE CEREJA(?:\s+300G)?\b/g, "TOMATE SWEET 180"],
     [/TOMATE SWEET GRAPE\b/g, "TOMATE SWEET 180"],
-    [/TOMATE SWEET\b/g, "TOMATE SWEET 180"],
+    [/TOMATE SWEET(?!\s+180)\b/g, "TOMATE SWEET 180"],
     [/UVA BRASIL\b/g, "UVA BRASIL"],
     [/UVA CRINSON\b/g, "UVA CRIMSON"],
     [/UVA ITALIA\b/g, "UVA ITALIA"],
@@ -420,7 +428,7 @@
       return "MELAO VERDE";
     }
 
-    if (canonical.includes("TOMATE SWEET")) {
+    if (canonical.includes("TOMATE SWEET") || canonical.includes("TOMATE CEREJA")) {
       return "TOMATE SWEET 180";
     }
 
@@ -546,7 +554,7 @@
   }
 
   function canonicalStoreName(rawName) {
-    const normalized = normalizeText(rawName).replace(/\d+\s*/g, "");
+    const normalized = normalizeText(rawName).replace(/^\d+\s*[-–—]?\s*/, "");
     return normalized
       .replace(/\bDA ROCHA\b/g, "")
       .replace(/\bII\b/g, "")
