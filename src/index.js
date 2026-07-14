@@ -283,6 +283,9 @@ function canonicalizeProductName(rawName) {
   if (text.startsWith("TANGERINA IMPORTADA")) {
     return "TANGERINA IMPORTADA";
   }
+  if (text.startsWith("MILHO VERDE BDJ")) {
+    return "MILHO VERDE BDJ 3";
+  }
 
   text = text
     .replace(/\s+/g, " ")
