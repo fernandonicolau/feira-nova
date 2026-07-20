@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 1037
+Total de associacoes: 1048
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -24,7 +24,6 @@ Total de associacoes: 1037
 | adonai | BATATA INGLESA | Cachambi |
 | adonai | BATATA INGLESA | Iraja |
 | adonai | BATATA INGLESA | Queimados |
-| adonai | BATATA INGLESA | Santa Cruz |
 | adonai | BATATA INGLESA | Santos |
 | adonai | BATATA SUJA | Iraja |
 | adonai | CEBOLA | Iraja |
@@ -360,6 +359,7 @@ Total de associacoes: 1037
 | CRT | Pepino comum | Queimados |
 | CRT | Pepino japones | Anchieta |
 | CRT | Pepino japones | Freguesia |
+| CRT | Pepino japones | Iraja |
 | CRT | Pepino japones | Olinda |
 | CRT | Pepino japones | Santos |
 | CRT | REPOLHO | Olinda |
@@ -381,17 +381,6 @@ Total de associacoes: 1037
 | FAISÃO | AMEIXA | Queimados |
 | FAISÃO | AMEIXA | Santa Cruz |
 | FAISÃO | AMEIXA | Santos |
-| FAISÃO | ATEMOIA | Anchieta |
-| FAISÃO | ATEMOIA | Cachambi |
-| FAISÃO | ATEMOIA | Ceramica |
-| FAISÃO | ATEMOIA | Coelho |
-| FAISÃO | ATEMOIA | Freguesia |
-| FAISÃO | ATEMOIA | Iraja |
-| FAISÃO | ATEMOIA | Olinda |
-| FAISÃO | ATEMOIA | Piabeta |
-| FAISÃO | ATEMOIA | Queimados |
-| FAISÃO | ATEMOIA | Santa Cruz |
-| FAISÃO | ATEMOIA | Santos |
 | FAISÃO | BATATA BAROA | Anchieta |
 | FAISÃO | BATATA BAROA | Cachambi |
 | FAISÃO | BATATA BAROA | Ceramica |
@@ -621,6 +610,17 @@ Total de associacoes: 1037
 | JACUBA | LIMÃO | Queimados |
 | JACUBA | LIMÃO | Santa Cruz |
 | JACUBA | LIMÃO | Santos |
+| Kifrut | ATEMOIA | Anchieta |
+| Kifrut | ATEMOIA | Cachambi |
+| Kifrut | ATEMOIA | Ceramica |
+| Kifrut | ATEMOIA | Coelho |
+| Kifrut | ATEMOIA | Freguesia |
+| Kifrut | ATEMOIA | Iraja |
+| Kifrut | ATEMOIA | Olinda |
+| Kifrut | ATEMOIA | Piabeta |
+| Kifrut | ATEMOIA | Queimados |
+| Kifrut | ATEMOIA | Santa Cruz |
+| Kifrut | ATEMOIA | Santos |
 | Kifrut | CAJU | Iraja |
 | Kifrut | PERA WILLIAMS | Anchieta |
 | Kifrut | PERA WILLIAMS | Cachambi |
@@ -722,6 +722,17 @@ Total de associacoes: 1037
 | Milanes | LARANJA SELETA | Queimados |
 | Milanes | LARANJA SELETA | Santa Cruz |
 | Milanes | LARANJA SELETA | Santos |
+| Milanes | TANGERINA MORCOTE | Anchieta |
+| Milanes | TANGERINA MORCOTE | Cachambi |
+| Milanes | TANGERINA MORCOTE | Ceramica |
+| Milanes | TANGERINA MORCOTE | Coelho |
+| Milanes | TANGERINA MORCOTE | Freguesia |
+| Milanes | TANGERINA MORCOTE | Iraja |
+| Milanes | TANGERINA MORCOTE | Olinda |
+| Milanes | TANGERINA MORCOTE | Piabeta |
+| Milanes | TANGERINA MORCOTE | Queimados |
+| Milanes | TANGERINA MORCOTE | Santa Cruz |
+| Milanes | TANGERINA MORCOTE | Santos |
 | NIPPO | ABACAXI | Anchieta |
 | NIPPO | ABACAXI | Cachambi |
 | NIPPO | ABACAXI | Ceramica |

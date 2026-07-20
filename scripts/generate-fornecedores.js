@@ -214,7 +214,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "adonai",
-    produtos: new Set(["BATATA ASTERIX", "BATATA BOLINHA", "BATATA INGLESA", "CEBOLA", "CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
+    produtos: new Set(["BATATA ASTERIX", "BATATA BOLINHA", "CEBOLA", "CEBOLA CALABRESA", "CEBOLA PIRULITO"]),
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
@@ -266,7 +266,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set([
       "AMEIXA",
       "AMORA",
-      "ATEMOIA",
       "BATATA BAROA",
       "CAJA",
       "CARAMBOLA",
@@ -292,6 +291,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "TANGERINA IMPORTADA",
       "UVA ITALIA",
     ]),
+  },
+  {
+    fornecedor: "FAISÃO",
+    produtos: new Set(["GRAVIOLA"]),
+    lojas: new Set(["SANTOS"]),
   },
   {
     fornecedor: "FAISÃO",
@@ -368,6 +372,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
+    produtos: new Set(["PEPINO JAPONES"]),
+    lojas: new Set(["IRAJA"]),
+  },
+  {
+    fornecedor: "CRT",
     produtos: new Set(["PEPINO", "PEPINO JAPONES", "TOMATE", "VAGEM MANT"]),
     lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA", "OLINDA"]),
   },
@@ -387,7 +396,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Kifrut",
-    produtos: new Set(["CAJU", "PERA WILLIAMS", "UVA RED GLOB", "UVA ROSADA"]),
+    produtos: new Set(["ATEMOIA", "CAJU", "UVA RED GLOB", "UVA ROSADA"]),
   },
   {
     fornecedor: "LTB",
@@ -406,11 +415,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "MIBA",
-    produtos: new Set(["ABACATE", "COCO SECO"]),
+    produtos: new Set(["ABACATE", "COCO SECO", "MANGA PALMER"]),
   },
   {
     fornecedor: "Milanes",
-    produtos: new Set(["LARANJA LIMA", "LARANJA PERA", "LARANJA SELETA"]),
+    produtos: new Set(["LARANJA LIMA", "LARANJA PERA", "LARANJA SELETA", "TANGERINA MORCOTE"]),
   },
   {
     fornecedor: "NIPPO",
@@ -441,11 +450,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "uvale",
-    produtos: new Set(["MANGA PALMER", "MANGA TOMMY", "MELAO REI"]),
+    produtos: new Set(["MANGA TOMMY", "MELAO REI"]),
   },
   {
     fornecedor: "Vitoria",
-    produtos: new Set(["KIWI", "MACA FUJI", "MACA GALA", "PERA PORTUGUESA"]),
+    produtos: new Set(["KIWI", "MACA FUJI", "MACA GALA", "PERA PORTUGUESA", "PERA WILLIAMS"]),
   },
   {
     fornecedor: "BENASSI",
@@ -492,6 +501,10 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set(["ERVILHA", "JILO", "MARACUJA"]),
   },
 ];
+
+const FORCED_PENDING_ASSOCIATIONS = new Set([
+  "BATATA INGLESA|SANTA CRUZ",
+]);
 
 function worksheetValueToString(value) {
   if (value == null) {
@@ -728,6 +741,10 @@ function columnNumberToName(columnNumber) {
 
 function supplierNameFromFile(fileName) {
   return path.basename(fileName, path.extname(fileName));
+}
+
+function isForcedPendingAssociation(product, store) {
+  return FORCED_PENDING_ASSOCIATIONS.has(lookupKey(product, store));
 }
 
 function isAlwaysSupplierProduct(fileName, product, store) {
@@ -995,7 +1012,9 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
 
     for (const { store, columnNumber } of header.storeColumns) {
       const cell = row.getCell(columnNumber);
-      if (!isAssignedToOtherSupplier(fileName, product, store) && (isFilledQuantity(cell.value) || isAlwaysSupplierProduct(fileName, product, store))) {
+      if (!isForcedPendingAssociation(product, store)
+        && !isAssignedToOtherSupplier(fileName, product, store)
+        && (isFilledQuantity(cell.value) || isAlwaysSupplierProduct(fileName, product, store))) {
         mappedCells.push({ rowNumber, columnNumber, product, store });
       }
       cell.value = null;
@@ -1005,7 +1024,9 @@ function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumed
   for (const rule of getAlwaysSupplierRules(fileName)) {
     for (const product of rule.produtos) {
       const storesWithQuantity = header.storeColumns.filter(({ store }) => {
-        return (!rule.lojas || rule.lojas.has(store)) && quantities.has(lookupKey(product, store));
+        return !isForcedPendingAssociation(product, store)
+          && (!rule.lojas || rule.lojas.has(store))
+          && quantities.has(lookupKey(product, store));
       });
 
       if (!storesWithQuantity.length) {
