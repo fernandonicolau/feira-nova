@@ -2,7 +2,7 @@
 
 Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
 
-Total de associacoes: 1048
+Total de associacoes: 1050
 
 | Fornecedor | Produto | Loja |
 |---|---|---|
@@ -28,7 +28,6 @@ Total de associacoes: 1048
 | adonai | BATATA SUJA | Iraja |
 | adonai | CEBOLA | Iraja |
 | adonai | CEBOLA | Queimados |
-| adonai | CEBOLA | Santa Cruz |
 | adonai | CEBOLA CALABRESA | Cachambi |
 | adonai | CEBOLA CALABRESA | Iraja |
 | adonai | CEBOLA CALABRESA | Olinda |
@@ -60,6 +59,8 @@ Total de associacoes: 1048
 | Agrocomercial | CEBOLA | Olinda |
 | Agrocomercial | CEBOLA | Piabeta |
 | alevan | PINHA | Iraja |
+| Delorenze | BATATA INGLESA | Santa Cruz |
+| Delorenze | CEBOLA | Santa Cruz |
 | Baixinho | MILHO BDJ | Anchieta |
 | Baixinho | MILHO BDJ | Cachambi |
 | Baixinho | MILHO BDJ | Ceramica |
@@ -155,17 +156,17 @@ Total de associacoes: 1048
 | BENASSI | MAXIXE | Ceramica |
 | BENASSI | MAXIXE | Coelho |
 | BENASSI | MAXIXE | Piabeta |
-| BENASSI | MORANGO | Anchieta |
-| BENASSI | MORANGO | Cachambi |
-| BENASSI | MORANGO | Ceramica |
-| BENASSI | MORANGO | Coelho |
-| BENASSI | MORANGO | Freguesia |
-| BENASSI | MORANGO | Iraja |
-| BENASSI | MORANGO | Olinda |
-| BENASSI | MORANGO | Piabeta |
-| BENASSI | MORANGO | Queimados |
-| BENASSI | MORANGO | Santa Cruz |
-| BENASSI | MORANGO | Santos |
+| Rio Minas | MORANGO | Anchieta |
+| Rio Minas | MORANGO | Cachambi |
+| Rio Minas | MORANGO | Ceramica |
+| Rio Minas | MORANGO | Coelho |
+| Rio Minas | MORANGO | Freguesia |
+| Rio Minas | MORANGO | Iraja |
+| Rio Minas | MORANGO | Olinda |
+| Rio Minas | MORANGO | Piabeta |
+| Rio Minas | MORANGO | Queimados |
+| Rio Minas | MORANGO | Santa Cruz |
+| Rio Minas | MORANGO | Santos |
 | BENASSI | PEPINO | Ceramica |
 | BENASSI | PEPINO | Coelho |
 | BENASSI | PEPINO | Piabeta |
@@ -215,6 +216,7 @@ Total de associacoes: 1048
 | BENASSI | VAGEM MANT | Ceramica |
 | BENASSI | VAGEM MANT | Coelho |
 | BENASSI | VAGEM MANT | Piabeta |
+| BENASSI | VAGEM MACARRAO | Iraja |
 | Casa dina | ABOBORA JAPONESA | Anchieta |
 | Casa dina | ABOBORA JAPONESA | Cachambi |
 | Casa dina | ABOBORA JAPONESA | Ceramica |
@@ -381,17 +383,17 @@ Total de associacoes: 1048
 | FAISÃO | AMEIXA | Queimados |
 | FAISÃO | AMEIXA | Santa Cruz |
 | FAISÃO | AMEIXA | Santos |
-| FAISÃO | BATATA BAROA | Anchieta |
-| FAISÃO | BATATA BAROA | Cachambi |
-| FAISÃO | BATATA BAROA | Ceramica |
-| FAISÃO | BATATA BAROA | Coelho |
-| FAISÃO | BATATA BAROA | Freguesia |
-| FAISÃO | BATATA BAROA | Iraja |
-| FAISÃO | BATATA BAROA | Olinda |
-| FAISÃO | BATATA BAROA | Piabeta |
-| FAISÃO | BATATA BAROA | Queimados |
-| FAISÃO | BATATA BAROA | Santa Cruz |
-| FAISÃO | BATATA BAROA | Santos |
+| Rio Minas | BATATA BAROA | Anchieta |
+| Rio Minas | BATATA BAROA | Cachambi |
+| Rio Minas | BATATA BAROA | Ceramica |
+| Rio Minas | BATATA BAROA | Coelho |
+| Rio Minas | BATATA BAROA | Freguesia |
+| Rio Minas | BATATA BAROA | Iraja |
+| Rio Minas | BATATA BAROA | Olinda |
+| Rio Minas | BATATA BAROA | Piabeta |
+| Rio Minas | BATATA BAROA | Queimados |
+| Rio Minas | BATATA BAROA | Santa Cruz |
+| Rio Minas | BATATA BAROA | Santos |
 | FAISÃO | CEREJA 250G | Anchieta |
 | FAISÃO | CEREJA 250G | Cachambi |
 | FAISÃO | CEREJA 250G | Ceramica |
@@ -447,17 +449,6 @@ Total de associacoes: 1048
 | FAISÃO | JAMBO ROSA 300G | Queimados |
 | FAISÃO | JAMBO ROSA 300G | Santa Cruz |
 | FAISÃO | JAMBO ROSA 300G | Santos |
-| FAISÃO | LARANJA BAHIA | Anchieta |
-| FAISÃO | LARANJA BAHIA | Cachambi |
-| FAISÃO | LARANJA BAHIA | Ceramica |
-| FAISÃO | LARANJA BAHIA | Coelho |
-| FAISÃO | LARANJA BAHIA | Freguesia |
-| FAISÃO | LARANJA BAHIA | Iraja |
-| FAISÃO | LARANJA BAHIA | Olinda |
-| FAISÃO | LARANJA BAHIA | Piabeta |
-| FAISÃO | LARANJA BAHIA | Queimados |
-| FAISÃO | LARANJA BAHIA | Santa Cruz |
-| FAISÃO | LARANJA BAHIA | Santos |
 | FAISÃO | LARANJA LIMA DA PERSIA | Piabeta |
 | FAISÃO | LARANJA LIMA PERSIA | Piabeta |
 | FAISÃO | LIMA DA PERSIA | Piabeta |
@@ -689,6 +680,7 @@ Total de associacoes: 1048
 | MIBA | COCO SECO | Queimados |
 | MIBA | COCO SECO | Santa Cruz |
 | MIBA | COCO SECO | Santos |
+| MIBA | BANANA PRATA | Iraja |
 | Milanes | LARANJA LIMA | Anchieta |
 | Milanes | LARANJA LIMA | Cachambi |
 | Milanes | LARANJA LIMA | Ceramica |
@@ -744,28 +736,6 @@ Total de associacoes: 1048
 | NIPPO | ABACAXI | Queimados |
 | NIPPO | ABACAXI | Santa Cruz |
 | NIPPO | ABACAXI | Santos |
-| NIPPO | MAMAO HAVAI | Anchieta |
-| NIPPO | MAMAO HAVAI | Cachambi |
-| NIPPO | MAMAO HAVAI | Ceramica |
-| NIPPO | MAMAO HAVAI | Coelho |
-| NIPPO | MAMAO HAVAI | Freguesia |
-| NIPPO | MAMAO HAVAI | Iraja |
-| NIPPO | MAMAO HAVAI | Olinda |
-| NIPPO | MAMAO HAVAI | Piabeta |
-| NIPPO | MAMAO HAVAI | Queimados |
-| NIPPO | MAMAO HAVAI | Santa Cruz |
-| NIPPO | MAMAO HAVAI | Santos |
-| NIPPO | MELAO AMARELO | Anchieta |
-| NIPPO | MELAO AMARELO | Cachambi |
-| NIPPO | MELAO AMARELO | Ceramica |
-| NIPPO | MELAO AMARELO | Coelho |
-| NIPPO | MELAO AMARELO | Freguesia |
-| NIPPO | MELAO AMARELO | Iraja |
-| NIPPO | MELAO AMARELO | Olinda |
-| NIPPO | MELAO AMARELO | Piabeta |
-| NIPPO | MELAO AMARELO | Queimados |
-| NIPPO | MELAO AMARELO | Santa Cruz |
-| NIPPO | MELAO AMARELO | Santos |
 | NIPPO | UVA VITORIA | Anchieta |
 | NIPPO | UVA VITORIA | Cachambi |
 | NIPPO | UVA VITORIA | Ceramica |
@@ -801,6 +771,17 @@ Total de associacoes: 1048
 | ROSSI | MAMAO FORMOSA | Piabeta |
 | ROSSI | MAMAO FORMOSA | Queimados |
 | ROSSI | MAMAO FORMOSA | Santos |
+| ROSSI | MAMAO HAVAI | Anchieta |
+| ROSSI | MAMAO HAVAI | Cachambi |
+| ROSSI | MAMAO HAVAI | Ceramica |
+| ROSSI | MAMAO HAVAI | Coelho |
+| ROSSI | MAMAO HAVAI | Freguesia |
+| ROSSI | MAMAO HAVAI | Iraja |
+| ROSSI | MAMAO HAVAI | Olinda |
+| ROSSI | MAMAO HAVAI | Piabeta |
+| ROSSI | MAMAO HAVAI | Queimados |
+| ROSSI | MAMAO HAVAI | Santa Cruz |
+| ROSSI | MAMAO HAVAI | Santos |
 | SEAL | PIMENTAO | Anchieta |
 | SEAL | PIMENTAO | Cachambi |
 | SEAL | PIMENTAO | Ceramica |
@@ -939,19 +920,21 @@ Total de associacoes: 1048
 | uvale | BANANA PRATA | Anchieta |
 | uvale | BANANA PRATA | Ceramica |
 | uvale | BANANA PRATA | Coelho |
-| uvale | BANANA PRATA | Iraja |
 | uvale | BANANA PRATA | Olinda |
 | uvale | BANANA PRATA | Piabeta |
 | uvale | BANANA PRATA | Queimados |
 | uvale | BANANA PRATA | Santa Cruz |
 | uvale | MANGA PALMER | Anchieta |
 | uvale | MANGA PALMER | Cachambi |
+| uvale | MANGA PALMER | Ceramica |
 | uvale | MANGA PALMER | Coelho |
 | uvale | MANGA PALMER | Freguesia |
 | uvale | MANGA PALMER | Iraja |
 | uvale | MANGA PALMER | Olinda |
+| uvale | MANGA PALMER | Piabeta |
 | uvale | MANGA PALMER | Queimados |
 | uvale | MANGA PALMER | Santa Cruz |
+| uvale | MANGA PALMER | Santos |
 | uvale | MANGA TOMMY | Anchieta |
 | uvale | MANGA TOMMY | Cachambi |
 | uvale | MANGA TOMMY | Ceramica |
@@ -963,6 +946,17 @@ Total de associacoes: 1048
 | uvale | MANGA TOMMY | Queimados |
 | uvale | MANGA TOMMY | Santa Cruz |
 | uvale | MANGA TOMMY | Santos |
+| NIPPO | MELAO AMARELO | Anchieta |
+| NIPPO | MELAO AMARELO | Cachambi |
+| NIPPO | MELAO AMARELO | Ceramica |
+| NIPPO | MELAO AMARELO | Coelho |
+| NIPPO | MELAO AMARELO | Freguesia |
+| NIPPO | MELAO AMARELO | Iraja |
+| NIPPO | MELAO AMARELO | Olinda |
+| NIPPO | MELAO AMARELO | Piabeta |
+| NIPPO | MELAO AMARELO | Queimados |
+| NIPPO | MELAO AMARELO | Santa Cruz |
+| NIPPO | MELAO AMARELO | Santos |
 | uvale | MELAO REI | Anchieta |
 | uvale | MELAO REI | Cachambi |
 | uvale | MELAO REI | Ceramica |
@@ -1024,6 +1018,17 @@ Total de associacoes: 1048
 | Vitoria | KIWI | Queimados |
 | Vitoria | KIWI | Santa Cruz |
 | Vitoria | KIWI | Santos |
+| Vitoria | LARANJA BAHIA | Anchieta |
+| Vitoria | LARANJA BAHIA | Cachambi |
+| Vitoria | LARANJA BAHIA | Ceramica |
+| Vitoria | LARANJA BAHIA | Coelho |
+| Vitoria | LARANJA BAHIA | Freguesia |
+| Vitoria | LARANJA BAHIA | Iraja |
+| Vitoria | LARANJA BAHIA | Olinda |
+| Vitoria | LARANJA BAHIA | Piabeta |
+| Vitoria | LARANJA BAHIA | Queimados |
+| Vitoria | LARANJA BAHIA | Santa Cruz |
+| Vitoria | LARANJA BAHIA | Santos |
 | Vitoria | MACA FUJI | Anchieta |
 | Vitoria | MACA FUJI | Cachambi |
 | Vitoria | MACA FUJI | Ceramica |

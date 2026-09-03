@@ -243,6 +243,7 @@ const PHRASE_REPLACEMENTS = [
   [/TANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
+  [/TOMATINHO DO BENI\s+250G\b/g, "TOMATE SWEET 180"],
   [/TOMATINHO(?:\s+BANDEJA)?\s+180G\b/g, "TOMATE SWEET 180"],
   [/\bTOMATE CEREJA(?:\s+300G)?\b/g, "TOMATE SWEET 180"],
   [/TOMATE SWEET GRAPE\b/g, "TOMATE SWEET 180"],
@@ -580,6 +581,7 @@ function resolveTemplatePath(templateName) {
 function canonicalStoreName(rawName) {
   const normalized = normalizeText(rawName).replace(/^\d+\s*[-–—]?\s*/, "");
   return normalized
+    .replace(/\bANCHEITA\b/g, "ANCHIETA")
     .replace(/\bDA ROCHA\b/g, "")
     .replace(/\bII\b/g, "")
     .replace(/\bSTA CRUZ DA SERRA\b/g, "STA CRUZ")
