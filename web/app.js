@@ -234,6 +234,8 @@
     [/TANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
+    [/TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE AMARELO 250G"],
+    [/TOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE MISTO 250G"],
     [/TOMATINHO DO BENI\s+250G\b/g, "TOMATE SWEET 180"],
     [/\bTOMATE CEREJA(?:\s+300G)?\b/g, "TOMATE SWEET 180"],
     [/TOMATE SWEET GRAPE\b/g, "TOMATE SWEET 180"],
@@ -246,7 +248,6 @@
     [/UVA THOMPSON VERDE\b/g, "UVA THOMPSON"],
     [/UVA VITORIA SEM\b/g, "UVA VITORIA"],
     [/QUIABO(?:\s+(?:BAND|BANDEJA|EMBALADO))?(?:\s+\d+G)?\b/g, "QUIABO 300G"],
-    [/VAGEM MACARRAO\b/g, "VAGEM MANT"],
     [/VAGEM MANTEIGA\b/g, "VAGEM MANT"],
   ];
 
@@ -282,6 +283,13 @@
   function canonicalizeProductName(rawName) {
     let text = normalizeText(rawName);
     text = text.replace(/\bORGANIC[AO]S?\b/g, "ORGANICO");
+
+    if (/^TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G\b/.test(text)) {
+      return "TOMATE GRAPE AMARELO 250G";
+    }
+    if (/^TOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G\b/.test(text)) {
+      return "TOMATE GRAPE MISTO 250G";
+    }
 
     if (/^OVO[S]?\s+SEAL\s+CAIPIRA\s+12\s*UN$/.test(text)) {
       return text;

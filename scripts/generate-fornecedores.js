@@ -153,6 +153,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bCOGUMELO PORTOBELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
   [/\bCOGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
   [/\bCOGUMELO SHITAKE(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
+  [/\bERVILHA(?:\s+BANDEJA)?\s+200G\b/g, "ERVILHA"],
   [/\bQUIABO 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO EMBALADOS\b/g, "QUIABO BDJ"],
@@ -161,10 +162,11 @@ const PRODUCT_REPLACEMENTS = [
   [/\bSERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/\bTAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/\bTANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
+  [/\bTOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE AMARELO 250G"],
+  [/\bTOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE MISTO 250G"],
   [/\bTOMATINHO DO BENI\s+250G\b/g, "TOMATE SWEET"],
   [/\bTOMATE SWEET 180\b/g, "TOMATE SWEET"],
   [/\bUVA ITALIA\b/g, "UVA ITALIA"],
-  [/\bVAGEM MACARRAO\b/g, "VAGEM MANT"],
   [/\bVAGEM MANTEIGA\b/g, "VAGEM MANT"],
 ];
 
@@ -271,7 +273,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set([
       "AMEIXA",
       "AMORA",
-      "BATATA BAROA",
       "CAJA",
       "CARAMBOLA",
       "CEREJA",
@@ -336,6 +337,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "BENASSI",
+    produtos: new Set(["VAGEM MACARRAO"]),
+    lojas: new Set(["IRAJA"]),
+  },
+  {
+    fornecedor: "BENASSI",
     produtos: new Set(["REPOLHO ROXO"]),
     lojas: new Set(["COELHO"]),
   },
@@ -381,8 +387,13 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["PEPINO", "PEPINO JAPONES", "TOMATE", "VAGEM MANT"]),
-    lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA", "OLINDA"]),
+    produtos: new Set(["PEPINO", "PEPINO JAPONES", "VAGEM MANT"]),
+    lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA", "IRAJA", "OLINDA"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["TOMATE"]),
+    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "QUEIMADOS", "SANTOS"]),
   },
   {
     fornecedor: "CRT",
@@ -407,7 +418,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["ABOBRINHA", "BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "PEPINO", "TOMATE"]),
+    produtos: new Set(["ABOBRINHA", "BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "PEPINO"]),
     lojas: new Set(["QUEIMADOS"]),
   },
   {
@@ -438,12 +449,25 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     produtos: new Set(["ABACATE", "COCO SECO"]),
   },
   {
+    fornecedor: "MIBA",
+    produtos: new Set(["BANANA PRATA"]),
+    lojas: new Set(["IRAJA"]),
+  },
+  {
     fornecedor: "Milanes",
-    produtos: new Set(["LARANJA LIMA", "LARANJA PERA", "LARANJA SELETA", "TANGERINA MORCOTE"]),
+    produtos: new Set(["LARANJA LIMA", "LARANJA SELETA", "TANGERINA MORCOTE"]),
+  },
+  {
+    fornecedor: "Laranja pera",
+    produtos: new Set(["LARANJA PERA"]),
   },
   {
     fornecedor: "NIPPO",
-    produtos: new Set(["ABACAXI", "UVA THOMPSON", "UVA VITORIA"]),
+    produtos: new Set(["ABACAXI", "MELAO AMARELO", "UVA THOMPSON", "UVA VITORIA"]),
+  },
+  {
+    fornecedor: "Rio Minas",
+    produtos: new Set(["BATATA BAROA"]),
   },
   {
     fornecedor: "ROSSI",
@@ -456,21 +480,21 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO"]),
-    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "QUEIMADOS", "SANTA CRUZ", "SANTOS"]),
+    produtos: new Set(["PIMENTAO", "PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE GRAPE AMARELO 250G", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE GRAPE AMARELO 250G", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set(["TOMATE"]),
+    lojas: new Set(["CERAMICA", "COELHO", "PIABETA", "SANTA CRUZ"]),
   },
   {
     fornecedor: "uvale",
     produtos: new Set(["BANANA DA TERRA", "BANANA DAGUA", "BANANA MACA", "BANANA OURO", "BANANA PRATA"]),
-    lojas: new Set(["ANCHIETA", "CERAMICA", "COELHO", "IRAJA", "OLINDA", "PIABETA", "QUEIMADOS", "SANTA CRUZ"]),
+    lojas: new Set(["ANCHIETA", "CERAMICA", "COELHO", "OLINDA", "PIABETA", "QUEIMADOS", "SANTA CRUZ"]),
   },
   {
     fornecedor: "uvale",
-    produtos: new Set(["MANGA PALMER", "MANGA TOMMY", "MELAO AMARELO"]),
+    produtos: new Set(["MANGA PALMER", "MANGA TOMMY"]),
   },
   {
     fornecedor: "Vitoria",
@@ -493,7 +517,6 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MAXIXE",
       "PEPINO",
       "PEPINO JAPONES",
-      "PIMENTAO",
       "VAGEM MANT",
     ]),
     lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
@@ -520,12 +543,16 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "Veneza",
-    produtos: new Set(["ABOBRINHA", "TOMATE"]),
+    produtos: new Set(["ABOBRINHA"]),
     lojas: new Set(["CERAMICA", "COELHO", "PIABETA", "SANTA CRUZ"]),
   },
   {
     fornecedor: "Veneza",
-    produtos: new Set(["ERVILHA", "JILO", "MARACUJA"]),
+    produtos: new Set(["JILO", "MARACUJA"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["ERVILHA"]),
   },
 ];
 
@@ -570,6 +597,13 @@ function normalizeStore(value) {
 
 function normalizeProduct(value) {
   let normalized = normalizeText(value);
+
+  if (/^TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G\b/.test(normalized)) {
+    return "TOMATE GRAPE AMARELO 250G";
+  }
+  if (/^TOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G\b/.test(normalized)) {
+    return "TOMATE GRAPE MISTO 250G";
+  }
 
   for (const [pattern, replacement] of PRODUCT_REPLACEMENTS) {
     normalized = normalized.replace(pattern, replacement);
@@ -882,11 +916,12 @@ function updateWorksheetDates(worksheet, formattedDate) {
   });
 }
 
-function updateWorksheetSupplierName(worksheet, supplierName) {
+function updateWorksheetSupplierName(worksheet, sourceName, supplierName) {
+  const sourcePattern = new RegExp(sourceName, "gi");
   worksheet.eachRow((row) => {
     row.eachCell((cell) => {
       if (typeof cell.value === "string") {
-        cell.value = cell.value.replace(/ADONAI/gi, supplierName.toUpperCase());
+        cell.value = cell.value.replace(sourcePattern, supplierName);
       }
     });
   });
@@ -1021,10 +1056,25 @@ function hasSupplierOrders(worksheet, header) {
   return false;
 }
 
+function revealEntireWorkbook(workbook) {
+  workbook.worksheets.forEach((worksheet) => {
+    worksheet.state = "visible";
+
+    for (let rowNumber = 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
+      worksheet.getRow(rowNumber).hidden = false;
+    }
+
+    for (let columnNumber = 1; columnNumber <= worksheet.columnCount; columnNumber += 1) {
+      worksheet.getColumn(columnNumber).hidden = false;
+    }
+  });
+}
+
 function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumedKeys) {
   const header = findHeaderRow(worksheet);
   ensureStoreColumnsForAlwaysSupplierProducts(worksheet, header, quantities, fileName);
-  const usesOnlyExplicitSupplierRules = normalizeText(supplierNameFromFile(fileName)) === "DELORENZE";
+  const usesOnlyExplicitSupplierRules = new Set(["DELORENZE", "LARANJA PERA"])
+    .has(normalizeText(supplierNameFromFile(fileName)));
   const mappedCells = [];
   const existingProducts = new Set();
   const existingProductRows = new Map();
@@ -1173,17 +1223,32 @@ async function generateSupplierFiles(options = {}) {
     supplierFiles.push("Delorenze.xlsx");
   }
 
+  if (!supplierFiles.some((fileName) => /^Laranja pera\.xlsx$/i.test(fileName))) {
+    const milanesTemplate = supplierFiles.find((fileName) => /^Milanes\.xlsx$/i.test(fileName));
+    if (!milanesTemplate) {
+      throw new Error("Modelo da Laranja pera nao encontrado e modelo da Milanes indisponivel para copia.");
+    }
+    supplierFiles.push("Laranja pera.xlsx");
+  }
+
   const generatedFiles = [];
 
   for (const fileName of supplierFiles) {
-    const templateFileName = /^Delorenze\.xlsx$/i.test(fileName) && !fs.existsSync(path.join(templateDir, fileName))
-      ? supplierFiles.find((candidate) => /^adonai\.xlsx$/i.test(candidate))
-      : fileName;
+    let templateFileName = fileName;
+    if (!fs.existsSync(path.join(templateDir, fileName))) {
+      if (/^Delorenze\.xlsx$/i.test(fileName)) {
+        templateFileName = supplierFiles.find((candidate) => /^adonai\.xlsx$/i.test(candidate));
+      } else if (/^Laranja pera\.xlsx$/i.test(fileName)) {
+        templateFileName = supplierFiles.find((candidate) => /^Milanes\.xlsx$/i.test(candidate));
+      }
+    }
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(path.join(templateDir, templateFileName));
 
     if (/^Delorenze\.xlsx$/i.test(fileName)) {
-      workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "Delorenze"));
+      workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "ADONAI", "DELORENZE"));
+    } else if (/^Laranja pera\.xlsx$/i.test(fileName)) {
+      workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "MILANES", "LARANJA PERA"));
     }
 
     workbook.worksheets.forEach((worksheet) => updateWorksheetDates(worksheet, formattedDate));
@@ -1195,6 +1260,10 @@ async function generateSupplierFiles(options = {}) {
 
     if (!hasOrders) {
       continue;
+    }
+
+    if (normalizeText(supplierNameFromFile(fileName)) === "CRT") {
+      revealEntireWorkbook(workbook);
     }
 
     await workbook.xlsx.writeFile(path.join(outputDir, fileName));
