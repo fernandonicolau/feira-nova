@@ -172,6 +172,10 @@ const PRODUCT_REPLACEMENTS = [
 
 const ALWAYS_SUPPLIER_PRODUCTS = [
   {
+    fornecedor: "Vitfruta",
+    produtos: new Set(["TANGERINA MEXERICA"]),
+  },
+  {
     fornecedor: "adonai",
     produtos: new Set(["CEBOLA ROXA"]),
   },
@@ -359,6 +363,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     fornecedor: "CRT",
     produtos: new Set(["MAXIXE"]),
     lojas: new Set(["CACHAMBI", "SANTOS"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["VAGEM MANT", "CARA"]),
+    lojas: new Set(["ANCHIETA"]),
   },
   {
     fornecedor: "CRT",
@@ -1073,7 +1082,7 @@ function revealEntireWorkbook(workbook) {
 function clearAndFillSupplierWorksheet(worksheet, quantities, fileName, consumedKeys) {
   const header = findHeaderRow(worksheet);
   ensureStoreColumnsForAlwaysSupplierProducts(worksheet, header, quantities, fileName);
-  const usesOnlyExplicitSupplierRules = new Set(["DELORENZE", "LARANJA PERA"])
+  const usesOnlyExplicitSupplierRules = new Set(["DELORENZE", "LARANJA PERA", "VITFRUTA"])
     .has(normalizeText(supplierNameFromFile(fileName)));
   const mappedCells = [];
   const existingProducts = new Set();
@@ -1231,10 +1240,22 @@ async function generateSupplierFiles(options = {}) {
     supplierFiles.push("Laranja pera.xlsx");
   }
 
+  if (!supplierFiles.some((fileName) => /^Vitfruta\.xlsx$/i.test(fileName))) {
+    if (!supplierFiles.some((fileName) => /^Milanes\.xlsx$/i.test(fileName))) {
+      throw new Error("Modelo da Vitfruta nao encontrado e modelo da Milanes indisponivel para copia.");
+    }
+    supplierFiles.push("Vitfruta.xlsx");
+  }
+
   const generatedFiles = [];
 
   for (const fileName of supplierFiles) {
     let templateFileName = fileName;
+    const usesVitfrutaFallback = /^Vitfruta\.xlsx$/i.test(fileName)
+      && !fs.existsSync(path.join(templateDir, fileName));
+    if (usesVitfrutaFallback) {
+      templateFileName = supplierFiles.find((candidate) => /^Milanes\.xlsx$/i.test(candidate));
+    }
     if (!fs.existsSync(path.join(templateDir, fileName))) {
       if (/^Delorenze\.xlsx$/i.test(fileName)) {
         templateFileName = supplierFiles.find((candidate) => /^adonai\.xlsx$/i.test(candidate));
@@ -1244,6 +1265,9 @@ async function generateSupplierFiles(options = {}) {
     }
     const workbook = new ExcelJS.Workbook();
     await workbook.xlsx.readFile(path.join(templateDir, templateFileName));
+    if (usesVitfrutaFallback) {
+      workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "MILANES", "VITFRUTA"));
+    }
 
     if (/^Delorenze\.xlsx$/i.test(fileName)) {
       workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "ADONAI", "DELORENZE"));
