@@ -127,6 +127,9 @@ const STOP_WORDS = new Set([
 ]);
 
 const PHRASE_REPLACEMENTS = [
+  [/\bABACATE AVOCADO\b(?:\s+FAISAO\b)?(?:\s*<<<\s*REVISAR\s*>>>)?/g, "ABACATE AVOCADO"],
+  [/\bMELANCIA AMARELA\b(?:\s+KG\b)?(?:\s*<<<\s*REVISAR\s*>>>)?/g, "MELANCIA AMARELA"],
+  [/\bJABUTICAVA\b/g, "JABUTICABA"],
   [/^ABACAXI\b.*$/g, "ABACAXI"],
   [/ABOBORA JAP\b/g, "ABOBORA JAPONESA"],
   [/ABOBORA MOR\b/g, "ABOBORA MORANGA"],
@@ -164,7 +167,7 @@ const PHRASE_REPLACEMENTS = [
   [/COGUMELO PARIS(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
   [/COGUMELO PORTO\s*BELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
   [/COGUMELO PORTOBELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
-  [/COGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
+  [/COGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b(?:\s*<<<\s*REVISAR\s*>>>)?/g, "COGUMELO SHIMEJI"],
   [/COGUMELO SHITAKE(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
   [/GOIABA VERMELHA\b/g, "GOIABA"],
   [/GOIABA GRANEL\b/g, "GOIABA"],
@@ -176,16 +179,17 @@ const PHRASE_REPLACEMENTS = [
   [/LIMAO TAHITI\b/g, "LIMAO"],
   [/MACA GALA SUPER K\b/g, "MACA 850G"],
   [/MACA GALA BENASSI\b/g, "MACA 850G"],
-  [/MACA BENNI\b/g, "MACA 850G"],
+  [/MACA BENN?I\b/g, "MACA 850G"],
   [/MACA PACOTE\b/g, "MACA 850G"],
   [/MACA PCT\b/g, "MACA 850G"],
-  [/MACA FUG\b/g, "MACA FUJI"],
+  [/MACA FUGI?\b/g, "MACA FUJI"],
   [/MACA GALA NACIONAL\b/g, "MACA GALA"],
   [/MACA RED(?: IMPORT)?\b/g, "MACA RED IMPORT"],
   [/MACA GRASMIT\b/g, "MACA VERDE GRAN"],
   [/MACA GRANSMHT\b/g, "MACA VERDE GRAN"],
   [/MACA GRANSMITH\b/g, "MACA VERDE GRAN"],
-  [/MAMAO PAPAYA\b/g, "MAMAO HAVAI"],
+  [/^MACA VERDE$/, "MACA VERDE GRAN"],
+  [/MAMAO PAPA[IY]A\b/g, "MAMAO HAVAI"],
   [/MAMAO FORMOSA\b/g, "MAMAO FORMOSA"],
   [/MANGA TOMY\b/g, "MANGA TOMMY"],
   [/GOIABA\b/g, "GOIABA"],
@@ -205,6 +209,7 @@ const PHRASE_REPLACEMENTS = [
   [/MILHO (?:BAND|BDJ)\b/g, "MILHO VERDE BDJ 3"],
   [/MIRTILLO(?:\s+BANDEJA)?(?:\s+\d+G)?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "MIRTILO"],
   [/FIGO ROXO(?:\s+BANDEJA)?\s+300G\b/g, "FIGO"],
+  [/\bMIRANGO\b/g, "MORANGO"],
   [/MORANGO BJ\b/g, "MORANGO"],
   [/MORANGO BANDEJA\b/g, "MORANGO"],
   [/PITAYA\b(?:\s+BANDEJA\b)?(?:\s+(?:\d+\s*)?(?:G|KG))?(?:\s+<<<\s+REVISAR\s+>>>)?/g, "PITAYA"],
@@ -226,9 +231,11 @@ const PHRASE_REPLACEMENTS = [
   [/PERA\s+D.?ANJOUR\b/g, "PERA DANJOUR"],
   [/PERA\s+D\s+ANJOUR\b/g, "PERA DANJOUR"],
   [/PERA DANJOUR\b/g, "PERA DANJOUR"],
+  [/\bPERU WILLIAMS\b/g, "PÊRA WILLIANS"],
   [/PERA WILHIA[MN][SN]?\b/g, "PÊRA WILLIANS"],
   [/PERA WIL?LIAM[SN]?\b/g, "PÊRA WILLIANS"],
   [/PERA WIL?LIANS\b/g, "PÊRA WILLIANS"],
+  [/\bPELA PORTUGUESA\b/g, "PERA PORTUGUESA"],
   [/PERA PORTUGUESA\b/g, "PERA PORTUGUESA"],
   [/PIMENTAO AMARELO(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO AMARELO"],
   [/PIMENTAO VERDE(?:\s+BANDEJA)?(?:\s+\d+G)?\b/g, "PIMENTAO"],
@@ -243,6 +250,7 @@ const PHRASE_REPLACEMENTS = [
   [/TANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
   [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
+  [/\bTOMATE COQUETEL\b(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE COQUETEL"],
   [/TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE AMARELO 250G"],
   [/TOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE MISTO 250G"],
   [/TOMATINHO DO BENI\s+250G\b/g, "TOMATE SWEET 180"],
@@ -255,6 +263,7 @@ const PHRASE_REPLACEMENTS = [
   [/UVA ITALIA\b/g, "UVA ITALIA"],
   [/UVA RED GLOBE\b/g, "UVA RED GLOB"],
   [/UVA REDGLOBE\b/g, "UVA RED GLOB"],
+  [/\bUVA TOMPSON\b/g, "UVA THOMPSON"],
   [/UVA THOMPSON VERDE\b/g, "UVA THOMPSON"],
   [/UVA VITORIA SEM\b/g, "UVA VITORIA"],
   [/QUIABO(?:\s+(?:BAND|BANDEJA|EMBALADO))?(?:\s+\d+G)?\b/g, "QUIABO 300G"],
@@ -274,6 +283,12 @@ function normalizeText(value) {
 
 function canonicalizeProductName(rawName) {
   let text = normalizeText(rawName);
+  if (/^COGUMELO PARIS FATIADO(?:\s+BANDEJA)?\s+200\s*G\b/.test(text)) {
+    return "COGUMELO PARIS FATIADO 200G";
+  }
+  if (/^OVOS?\s+CAIPIRA$/.test(text)) {
+    return "OVOS CAIPIRA";
+  }
   text = text.replace(/\bORGANIC[AO]S?\b/g, "ORGANICO");
 
   if (/^TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G\b/.test(text)) {
@@ -385,6 +400,9 @@ function canonicalizeProductName(rawName) {
   }
 
   if (canonical.includes("UVA")) {
+    if (canonical.includes("ALGODAO DOCE")) {
+      return "UVA ALGODAO DOCE";
+    }
     if (canonical.includes("THOMPSON")) {
       return "UVA THOMPSON";
     }

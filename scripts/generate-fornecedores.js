@@ -86,6 +86,11 @@ const STORE_ORDER = [
 ];
 
 const PRODUCT_REPLACEMENTS = [
+  [/\bPIMENTA JALAPENO(?:\s+BANDEJA)?\s+100G\b/g, "PIMENTA JALAPENO 100G"],
+  [/\bABACATE AVOCADO\b(?:\s+FAISAO\b)?(?:\s*<<<\s*REVISAR\s*>>>)?/g, "ABACATE AVOCADO"],
+  [/\bMELANCIA AMARELA\b(?:\s+KG\b)?(?:\s*<<<\s*REVISAR\s*>>>)?/g, "MELANCIA AMARELA"],
+  [/\bJABUTICAVA\b/g, "JABUTICABA"],
+  [/^OVOS?\s+CAIPIRA$/g, "OVOS CAIPIRA"],
   [/\bORGANIC[AO]S?\b/g, "ORGANICO"],
   [/^ABACAXI\b.*$/g, "ABACAXI"],
   [/\bABACAXI UNID\b/g, "ABACAXI"],
@@ -110,10 +115,11 @@ const PRODUCT_REPLACEMENTS = [
   [/\bLARANJA LIMA(?: DA)? PERSIA\b/g, "LIMA DA PERSIA"],
   [/\bLARANJA SELETA\b/g, "LARANJA SELETA"],
   [/\bLIMAO THAITI\b/g, "LIMAO"],
+  [/\bMACA FUGI?\b/g, "MACA FUJI"],
   [/\bMACA RED IMPORT\b/g, "MACA RED"],
   [/\bMACA VERDE GRAN\b/g, "MACA VERDE"],
   [/\bMACA GALA 850G\b/g, "MACA 850G"],
-  [/\bMACA BENNI\b/g, "MACA 850G"],
+  [/\bMACA BENN?I\b/g, "MACA 850G"],
   [/\bMAMAO PAPAYA\b/g, "MAMAO HAVAI"],
   [/\bMELAO CANT\b/g, "MELAO CANTALOUPE"],
   [/\bMELAO REI REDE\b/g, "MELAO REI"],
@@ -151,9 +157,9 @@ const PRODUCT_REPLACEMENTS = [
   [/\bCOGUMELO PARIS(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
   [/\bCOGUMELO PORTO\s*BELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
   [/\bCOGUMELO PORTOBELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
-  [/\bCOGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
+  [/\bCOGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b(?:\s*<<<\s*REVISAR\s*>>>)?/g, "COGUMELO SHIMEJI"],
   [/\bCOGUMELO SHITAKE(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
-  [/\bERVILHA(?:\s+BANDEJA)?\s+200G\b/g, "ERVILHA"],
+  [/\bERVILHA(?:\s+BANDEJA)?\s+200G\b/g, "ERVILHA 200G"],
   [/\bQUIABO 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO BANDEJA 300G\b/g, "QUIABO BDJ"],
   [/\bQUIABO EMBALADOS\b/g, "QUIABO BDJ"],
@@ -162,6 +168,7 @@ const PRODUCT_REPLACEMENTS = [
   [/\bSERIGUELA\s+600G\s+<<<\s+REVISAR\s+>>>/g, "SERIGUELA"],
   [/\bTAMARINDO(?:\s+BANDEJA)?\s+300G\b/g, "TAMARINDO"],
   [/\bTANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
+  [/\bTOMATE COQUETEL\b(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE COQUETEL"],
   [/\bTOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE AMARELO 250G"],
   [/\bTOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE MISTO 250G"],
   [/\bTOMATINHO DO BENI\s+250G\b/g, "TOMATE SWEET"],
@@ -171,6 +178,14 @@ const PRODUCT_REPLACEMENTS = [
 ];
 
 const ALWAYS_SUPPLIER_PRODUCTS = [
+  {
+    fornecedor: "NIPPO",
+    produtos: new Set(["ABACAXI"]),
+  },
+  {
+    fornecedor: "tangerina imp",
+    produtos: new Set(["TANGERINA IMPORTADA"]),
+  },
   {
     fornecedor: "Vitfruta",
     produtos: new Set(["TANGERINA MEXERICA"]),
@@ -248,17 +263,28 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "COCO VERDE",
       "COGUMELO",
       "COGUMELO PARIS",
+      "COGUMELO PARIS FATIADO 200G",
       "COGUMELO PORTOBELLO",
       "COGUMELO SHIMEJI",
       "COGUMELO SHITAKE",
       "MACA 850G",
-      "MACA VERDE",
+      "MELANCIA AMARELA",
       "MELANCIA PINGO AM",
       "MELANCIA PINGO VER",
       "MELAO REI",
       "UVA BRASIL",
       "UVA CRIMSON",
     ]),
+  },
+  {
+    fornecedor: "BENASSI",
+    produtos: new Set(["MACA VERDE"]),
+    lojas: new Set(STORE_ORDER.filter((store) => store !== "OLINDA")),
+  },
+  {
+    fornecedor: "FAISÃO",
+    produtos: new Set(["MACA VERDE"]),
+    lojas: new Set(["OLINDA"]),
   },
   {
     fornecedor: "Casa dina",
@@ -275,6 +301,8 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "FAISÃO",
     produtos: new Set([
+      "ABACATE AVOCADO",
+      "ACEROLA 500G",
       "AMEIXA",
       "AMORA",
       "CAJA",
@@ -283,7 +311,9 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "FIGO",
       "FRAMBOESA",
       "GOIABA",
+      "JABUTICABA",
       "JAMBO",
+      "LARANJA BAHIA",
       "LIMAO SICILIANO",
       "MACA RED",
       "MELANCIA BABY",
@@ -296,15 +326,16 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "ROMA",
       "SAPOTI",
       "SERIGUELA",
+      "TAMARA",
       "TAMARINDO",
-      "TANGERINA IMPORTADA",
+      "UVA ALGODAO DOCE",
       "UVA ITALIA",
     ]),
   },
   {
     fornecedor: "FAISÃO",
     produtos: new Set(["GRAVIOLA"]),
-    lojas: new Set(["SANTOS"]),
+    lojas: new Set(["SANTOS", "CACHAMBI"]),
   },
   {
     fornecedor: "FAISÃO",
@@ -335,14 +366,8 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
-    fornecedor: "BENASSI",
-    produtos: new Set(["VAGEM MANT"]),
-    lojas: new Set(["SANTA CRUZ"]),
-  },
-  {
-    fornecedor: "BENASSI",
-    produtos: new Set(["VAGEM MACARRAO"]),
-    lojas: new Set(["IRAJA"]),
+    fornecedor: "CRT",
+    produtos: new Set(["VAGEM MACARRAO", "VAGEM MANT"]),
   },
   {
     fornecedor: "BENASSI",
@@ -366,7 +391,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["VAGEM MANT", "CARA"]),
+    produtos: new Set(["CARA"]),
     lojas: new Set(["ANCHIETA"]),
   },
   {
@@ -396,13 +421,13 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["PEPINO", "PEPINO JAPONES", "VAGEM MANT"]),
+    produtos: new Set(["PEPINO", "PEPINO JAPONES"]),
     lojas: new Set(["CACHAMBI", "SANTOS", "FREGUESIA", "IRAJA", "OLINDA"]),
   },
   {
     fornecedor: "CRT",
     produtos: new Set(["TOMATE"]),
-    lojas: new Set(["ANCHIETA", "CACHAMBI", "FREGUESIA", "IRAJA", "OLINDA", "QUEIMADOS", "SANTOS"]),
+    lojas: new Set(["ANCHIETA", "CACHAMBI", "CERAMICA", "COELHO", "FREGUESIA", "IRAJA", "OLINDA", "PIABETA", "QUEIMADOS", "SANTA CRUZ", "SANTOS"]),
   },
   {
     fornecedor: "CRT",
@@ -412,17 +437,20 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   {
     fornecedor: "CRT",
     produtos: new Set([
-      "PIMENTA ARDIDA BANDEJA 100G",
       "PIMENTA BIQUINHO 100G",
       "PIMENTA BIQUINHO VERMELHA BANDEJA 100G",
-      "PIMENTA CAMBUCI BANDEJA 100G",
-      "PIMENTA CAMBUCI BANDEJA 250G",
+      "PIMENTA ARDIDA BANDEJA 100G",
       "PIMENTA CHEIRO BANDEJA 250G",
       "PIMENTA DE CHEIRO DOCE BANDEJA 100G",
       "PIMENTA DEDO MOCA BANDEJA 100G",
       "PIMENTA DEDO MOCA BANDEJA 200G",
+      "PIMENTA JALAPENO 100G",
       "PIMENTA MALAGUETA BANDEJA 150G",
     ]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["PIMENTA CAMBUCI BANDEJA 100G"]),
     lojas: new Set(["COELHO"]),
   },
   {
@@ -472,7 +500,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "NIPPO",
-    produtos: new Set(["ABACAXI", "MELAO AMARELO", "UVA THOMPSON", "UVA VITORIA"]),
+    produtos: new Set(["MELAO AMARELO", "UVA VITORIA"]),
   },
   {
     fornecedor: "Rio Minas",
@@ -489,12 +517,17 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["PIMENTAO", "PIMENTAO AMARELO", "PIMENTAO VERMELHO", "TOMATE COQUETEL", "TOMATE GRAPE AMARELO 250G", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
+    produtos: new Set([
+      "PIMENTA CAMBUCI BANDEJA 250G",
+    ]),
   },
   {
     fornecedor: "SEAL",
-    produtos: new Set(["TOMATE"]),
-    lojas: new Set(["CERAMICA", "COELHO", "PIABETA", "SANTA CRUZ"]),
+    produtos: new Set(["PIMENTAO AMARELO", "PIMENTAO VERMELHO", "MINI PIMENTAO COLORIDO 200G", "PIMENTA SWEET PALERMO 250G", "TOMATE COQUETEL", "TOMATE GRAPE AMARELO 250G", "TOMATE GRAPE MISTO 250G", "TOMATE ITALIANO", "TOMATE SWEET"]),
+  },
+  {
+    fornecedor: "CRT",
+    produtos: new Set(["PIMENTAO"]),
   },
   {
     fornecedor: "uvale",
@@ -503,11 +536,11 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "uvale",
-    produtos: new Set(["MANGA PALMER", "MANGA TOMMY"]),
+    produtos: new Set(["MACA GALA", "MANGA PALMER", "MANGA TOMMY", "UVA THOMPSON"]),
   },
   {
     fornecedor: "Vitoria",
-    produtos: new Set(["KIWI", "LARANJA BAHIA", "MACA FUJI", "MACA GALA", "PERA PORTUGUESA", "PERA WILLIAMS"]),
+    produtos: new Set(["KIWI", "MACA FUJI", "PERA PORTUGUESA", "PERA WILLIAMS"]),
   },
   {
     fornecedor: "Rio Minas",
@@ -526,13 +559,12 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
       "MAXIXE",
       "PEPINO",
       "PEPINO JAPONES",
-      "VAGEM MANT",
     ]),
     lojas: new Set(["CERAMICA", "COELHO", "PIABETA"]),
   },
   {
     fornecedor: "BENASSI",
-    produtos: new Set(["BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "MAXIXE", "VAGEM MANT"]),
+    produtos: new Set(["BATATA DOCE", "BERINJELA", "BETERRABA", "CENOURA", "CHUCHU", "INHAME", "MAXIXE"]),
     lojas: new Set(["SANTA CRUZ"]),
   },
   {
@@ -561,7 +593,7 @@ const ALWAYS_SUPPLIER_PRODUCTS = [
   },
   {
     fornecedor: "CRT",
-    produtos: new Set(["ERVILHA"]),
+    produtos: new Set(["ERVILHA", "ERVILHA 200G"]),
   },
 ];
 
@@ -606,6 +638,9 @@ function normalizeStore(value) {
 
 function normalizeProduct(value) {
   let normalized = normalizeText(value);
+  if (/^COGUMELO PARIS FATIADO(?:\s+BANDEJA)?\s+200\s*G\b/.test(normalized)) {
+    return "COGUMELO PARIS FATIADO 200G";
+  }
 
   if (/^TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G\b/.test(normalized)) {
     return "TOMATE GRAPE AMARELO 250G";
@@ -1249,6 +1284,13 @@ async function generateSupplierFiles(options = {}) {
 
   const generatedFiles = [];
 
+  if (!supplierFiles.some((fileName) => /^tangerina imp\.xlsx$/i.test(fileName))) {
+    if (!supplierFiles.some((fileName) => /^Milanes\.xlsx$/i.test(fileName))) {
+      throw new Error("Modelo da tangerina imp nao encontrado e modelo da Milanes indisponivel para copia.");
+    }
+    supplierFiles.push("tangerina imp.xlsx");
+  }
+
   for (const fileName of supplierFiles) {
     let templateFileName = fileName;
     const usesVitfrutaFallback = /^Vitfruta\.xlsx$/i.test(fileName)
@@ -1260,6 +1302,8 @@ async function generateSupplierFiles(options = {}) {
       if (/^Delorenze\.xlsx$/i.test(fileName)) {
         templateFileName = supplierFiles.find((candidate) => /^adonai\.xlsx$/i.test(candidate));
       } else if (/^Laranja pera\.xlsx$/i.test(fileName)) {
+        templateFileName = supplierFiles.find((candidate) => /^Milanes\.xlsx$/i.test(candidate));
+      } else if (/^tangerina imp\.xlsx$/i.test(fileName)) {
         templateFileName = supplierFiles.find((candidate) => /^Milanes\.xlsx$/i.test(candidate));
       }
     }
@@ -1273,6 +1317,8 @@ async function generateSupplierFiles(options = {}) {
       workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "ADONAI", "DELORENZE"));
     } else if (/^Laranja pera\.xlsx$/i.test(fileName)) {
       workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "MILANES", "LARANJA PERA"));
+    } else if (/^tangerina imp\.xlsx$/i.test(fileName)) {
+      workbook.worksheets.forEach((worksheet) => updateWorksheetSupplierName(worksheet, "MILAN[EÊ]S", "TANGERINA IMP"));
     }
 
     workbook.worksheets.forEach((worksheet) => updateWorksheetDates(worksheet, formattedDate));

@@ -120,6 +120,9 @@
   ]);
 
   const PHRASE_REPLACEMENTS = [
+    [/\bABACATE AVOCADO\b(?:\s+FAISAO\b)?(?:\s*<<<\s*REVISAR\s*>>>)?/g, "ABACATE AVOCADO"],
+    [/\bMELANCIA AMARELA\b(?:\s+KG\b)?(?:\s*<<<\s*REVISAR\s*>>>)?/g, "MELANCIA AMARELA"],
+    [/\bJABUTICAVA\b/g, "JABUTICABA"],
     [/^ABACAXI\b.*$/g, "ABACAXI"],
     [/ABOBORA JAP\b/g, "ABOBORA JAPONESA"],
     [/ABOBORA MOR\b/g, "ABOBORA MORANGA"],
@@ -155,7 +158,7 @@
     [/COGUMELO PARIS(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PARIS"],
     [/COGUMELO PORTO\s*BELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
     [/COGUMELO PORTOBELLO(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO PORTOBELLO"],
-    [/COGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b/g, "COGUMELO SHIMEJI"],
+    [/COGUMELO SHIME(?:J|G)I(?:\s+(?:BANDEJA|BRANCO|PRETO))*(?:\s+\d+G)?\b(?:\s*<<<\s*REVISAR\s*>>>)?/g, "COGUMELO SHIMEJI"],
     [/COGUMELO SHITAKE(?:\s+(?:BANDEJA|INTEIRO))*(?:\s+\d+G)?\b/g, "COGUMELO SHITAKE"],
     [/GOIABA VERMELHA\b/g, "GOIABA"],
     [/GOIABA GRANEL\b/g, "GOIABA"],
@@ -234,6 +237,7 @@
     [/TANGERINA IMP(?:ORT)?\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA IMPORTADA\b/g, "TANGERINA IMPORTADA"],
     [/TANGERINA MORGOTE\b/g, "TANGERINA MORCOTE"],
+    [/\bTOMATE COQUETEL\b(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE COQUETEL"],
     [/TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE AMARELO 250G"],
     [/TOMATE GRAPE MISTO(?:\s+BANDEJA)?\s+250G(?:\s*<<<\s*REVISAR\s*>>>)?/g, "TOMATE GRAPE MISTO 250G"],
     [/TOMATINHO DO BENI\s+250G\b/g, "TOMATE SWEET 180"],
@@ -282,6 +286,9 @@
 
   function canonicalizeProductName(rawName) {
     let text = normalizeText(rawName);
+    if (/^COGUMELO PARIS FATIADO(?:\s+BANDEJA)?\s+200\s*G\b/.test(text)) {
+      return "COGUMELO PARIS FATIADO 200G";
+    }
     text = text.replace(/\bORGANIC[AO]S?\b/g, "ORGANICO");
 
     if (/^TOMATE GRAPE AMARELO(?:\s+BANDEJA)?\s+250G\b/.test(text)) {
@@ -382,6 +389,9 @@
     }
 
     if (canonical.includes("UVA")) {
+      if (canonical.includes("ALGODAO DOCE")) {
+        return "UVA ALGODAO DOCE";
+      }
       if (canonical.includes("THOMPSON")) {
         return "UVA THOMPSON";
       }
