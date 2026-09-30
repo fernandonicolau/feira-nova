@@ -1,5 +1,41 @@
 # feira-nova
 
+## API NestJS
+
+A API HTTP usa a porta definida por `PORT` e expõe `GET /health`. Para desenvolvimento:
+
+```bash
+copy .env.example .env
+npm install
+npm run start:dev
+```
+
+Validações disponíveis:
+
+```bash
+npm run typecheck
+npm test
+npm run test:e2e
+npm run build
+```
+
+### Docker e Render
+
+A imagem é multi-stage, executa como usuário sem privilégios e inclui `template/`, `data/`, os scripts e o entrypoint legado necessários à migração do core.
+
+```bash
+docker build -t feira-nova-api .
+docker run --rm -p 3000:3000 --env-file .env feira-nova-api
+```
+
+No Render, crie um Web Service usando o `Dockerfile`, configure o health check como `/health` e defina:
+
+- `NODE_ENV=production`;
+- `PORT` é fornecida pelo Render e não deve ser fixada;
+- `CORS_ORIGINS` com a origem pública da Web (múltiplas origens serão tratadas na etapa de integração).
+
+O container não usa volume persistente nem banco de dados.
+
 Automacao em Node.js para ler planilhas de entrada das filiais e preencher automaticamente os mapas `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx` a partir dos templates da pasta `template/mapa`.
 
 ## Como funciona
