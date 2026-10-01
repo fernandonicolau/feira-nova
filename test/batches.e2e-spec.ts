@@ -71,4 +71,44 @@ describe("Batch file processing", () => {
       error: { code: "VALIDATION_ERROR" },
     });
   });
+
+  it("processes a mixed file and text batch and returns text warnings", async () => {
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field(
+        "batch",
+        JSON.stringify({
+          entries: [
+            { id: "ceramica", type: "file", store: "Cerâmica", fileRef: "sheet1" },
+            {
+              id: "manual-coelho",
+              type: "text",
+              store: "Coelho",
+              text: "ABACATE 2\nobservação sem quantidade",
+            },
+          ],
+        }),
+      )
+      .attach("sheet1", await spreadsheet("Cerâmica", "ABACATE", 7), "ceramica.xlsx")
+      .expect(201);
+
+    expect(response.body.data.summary).toMatchObject({ entries: 2, files: 1, texts: 1, items: 2 });
+    expect(response.body.warnings).toEqual([
+      expect.objectContaining({ code: "UNPARSED_TEXT_LINE", entryId: "manual-coelho" }),
+    ]);
+  });
+
+  it("processes a text-only batch without multipart files", async () => {
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field(
+        "batch",
+        JSON.stringify({
+          entries: [{ id: "manual", type: "text", store: "Queimados", text: "ABACATE 5" }],
+        }),
+      )
+      .expect(201);
+
+    expect(response.body.data.summary).toMatchObject({ files: 0, texts: 1, items: 1 });
+  });
 });

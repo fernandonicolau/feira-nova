@@ -6,6 +6,7 @@ const { processBatch } = require("../src/index.js") as {
     now?: Date;
   }): Promise<{
     summary: { entries: number; items: number; artifacts: number };
+    warnings: Array<{ code: string; entryId?: string }>;
     artifacts: Array<{ fileName: string; buffer: Buffer }>;
   }>;
 };
@@ -48,5 +49,23 @@ describe("spreadsheet core", () => {
     }
 
     expect(matchedQuantity).toBe(7);
+  });
+
+  it("adapts text entries and reports every unparsed line", async () => {
+    const result = await processBatch({
+      entries: [
+        {
+          id: "manual-1",
+          store: "Cerâmica",
+          text: "ABACATE 4\nlinha sem quantidade\nBANANA PRATA 2",
+        } as never,
+      ],
+      now: new Date("2026-10-01T12:00:00Z"),
+    });
+
+    expect(result.summary).toEqual({ entries: 1, items: 2, artifacts: 3 });
+    expect(result.warnings).toEqual([
+      expect.objectContaining({ code: "UNPARSED_TEXT_LINE", entryId: "manual-1" }),
+    ]);
   });
 });

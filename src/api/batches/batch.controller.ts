@@ -30,6 +30,6 @@ export class BatchController {
     @UploadedFiles() files: Express.Multer.File[] = [],
     @Req() request: RequestWithId,
   ): Promise<ProcessBatchResponse> {
-    return this.batchService.processFiles(batch, files, request.requestId);
+    return this.batchService.process(batch, files, request.requestId);
   }
 }

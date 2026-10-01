@@ -23,21 +23,20 @@ interface CoreResult {
 }
 
 type CoreProcessBatch = (options: {
-  entries: Array<{ fileName: string; buffer: Buffer; store: string }>;
+  entries: Array<
+    | { fileName: string; buffer: Buffer; store: string }
+    | { id: string; text: string; store: string }
+  >;
 }) => Promise<CoreResult>;
 
 @Injectable()
 export class BatchService {
-  async processFiles(
+  async process(
     rawBatch: string | undefined,
     files: Express.Multer.File[],
     requestId: string,
   ): Promise<ProcessBatchResponse> {
     const batch = await this.parseContract(rawBatch);
-
-    if (batch.entries.some((entry) => entry.type !== BatchEntryType.FILE)) {
-      throw new BadRequestException("This endpoint currently accepts file entries only");
-    }
 
     this.validateFiles(batch, files);
     const filesByRef = new Map(files.map((file) => [file.fieldname, file]));
@@ -47,12 +46,12 @@ export class BatchService {
     try {
       result = await processBatch({
         entries: batch.entries.map((entry) => {
+          if (entry.type === BatchEntryType.TEXT) {
+            return { id: entry.id, text: entry.text!, store: entry.store };
+          }
+
           const file = filesByRef.get(entry.fileRef!);
-          return {
-            fileName: file!.originalname,
-            buffer: file!.buffer,
-            store: entry.store,
-          };
+          return { fileName: file!.originalname, buffer: file!.buffer, store: entry.store };
         }),
       });
     } catch (error) {
@@ -68,8 +67,8 @@ export class BatchService {
         batchId,
         summary: {
           entries: batch.entries.length,
-          files: batch.entries.length,
-          texts: 0,
+          files: batch.entries.filter((entry) => entry.type === BatchEntryType.FILE).length,
+          texts: batch.entries.filter((entry) => entry.type === BatchEntryType.TEXT).length,
           items: result.summary.items,
           artifacts: result.artifacts.length,
         },
@@ -111,11 +110,12 @@ export class BatchService {
   }
 
   private validateFiles(batch: ProcessBatchDto, files: Express.Multer.File[]): void {
-    if (files.length === 0) {
+    const fileEntries = batch.entries.filter((entry) => entry.type === BatchEntryType.FILE);
+    if (fileEntries.length > 0 && files.length === 0) {
       throw new BadRequestException("At least one spreadsheet file is required");
     }
 
-    const expectedRefs = new Set(batch.entries.map((entry) => entry.fileRef));
+    const expectedRefs = new Set(fileEntries.map((entry) => entry.fileRef));
     const receivedRefs = new Set(files.map((file) => file.fieldname));
     const totalBytes = files.reduce((total, file) => total + file.size, 0);
 

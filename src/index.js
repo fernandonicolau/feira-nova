@@ -1109,6 +1109,36 @@ async function workbookEntryFromBuffer({ fileName, buffer, store }) {
   };
 }
 
+function textEntryFromContent({ id, text, store }) {
+  const items = [];
+  const warnings = [];
+
+  String(text)
+    .split(/\r?\n/)
+    .forEach((line, index) => {
+      const trimmed = line.trim();
+      if (!trimmed) return;
+
+      const item = parseLooseItem(trimmed);
+      if (item) {
+        items.push(item);
+      } else {
+        warnings.push({
+          code: "UNPARSED_TEXT_LINE",
+          message: `Linha ${index + 1} da entrada textual não foi interpretada.`,
+          entryId: id,
+        });
+      }
+    });
+
+  return {
+    fileName: `${id}.txt`,
+    storeKey: canonicalStoreName(store),
+    items,
+    warnings,
+  };
+}
+
 async function loadInputs(inputDir = INPUT_DIR) {
   const inputEntries = [];
 
@@ -1198,8 +1228,13 @@ async function processBatch({ entries, templateDir = TEMPLATE_DIR, now = new Dat
   }
 
   const inputs = [];
+  const warnings = [];
   for (const entry of entries) {
-    inputs.push(await workbookEntryFromBuffer(entry));
+    const input = entry.buffer
+      ? await workbookEntryFromBuffer(entry)
+      : textEntryFromContent(entry);
+    inputs.push(input);
+    warnings.push(...(input.warnings ?? []));
   }
 
   const artifacts = [];
@@ -1217,7 +1252,7 @@ async function processBatch({ entries, templateDir = TEMPLATE_DIR, now = new Dat
       items: inputs.reduce((total, input) => total + input.items.length, 0),
       artifacts: artifacts.length,
     },
-    warnings: [],
+    warnings,
     artifacts,
   };
 }
@@ -1272,5 +1307,6 @@ module.exports = {
   canonicalStoreName,
   parseWorkbookItems,
   processBatch,
+  textEntryFromContent,
   workbookEntryFromBuffer,
 };
