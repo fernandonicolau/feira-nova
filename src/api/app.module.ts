@@ -3,6 +3,7 @@ import { ConfigModule } from "@nestjs/config";
 import { RequestIdMiddleware } from "./common/middleware/request-id.middleware";
 import { validateEnvironment } from "./config/env.validation";
 import { HealthModule } from "./health/health.module";
+import { BatchModule } from "./batches/batch.module";
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { HealthModule } from "./health/health.module";
       cache: true,
       validate: validateEnvironment,
     }),
+    BatchModule,
     HealthModule,
   ],
 })
