@@ -32,9 +32,11 @@ No Render, crie um Web Service usando o `Dockerfile`, configure o health check c
 
 - `NODE_ENV=production`;
 - `PORT` é fornecida pelo Render e não deve ser fixada;
-- `CORS_ORIGINS` com a origem pública da Web (múltiplas origens serão tratadas na etapa de integração).
+- `CORS_ORIGINS` com uma ou mais origens explícitas da Web, separadas por vírgula e sem caminhos (por exemplo, `https://feira-nova-web.onrender.com`); curingas não são aceitos.
 
 O container não usa volume persistente nem banco de dados.
+
+Cada requisição gera um log com `requestId`, método, rota, status e duração. O conteúdo das entradas e planilhas não é registrado. Para redeploy, publique o commit desejado na branch `master` e use **Manual Deploy > Deploy latest commit** no serviço do Render quando o deploy automático estiver desabilitado.
 
 Automacao em Node.js para ler planilhas de entrada das filiais e preencher automaticamente os mapas `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx` a partir dos templates da pasta `template/mapa`.
 
