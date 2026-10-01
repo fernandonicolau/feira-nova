@@ -595,8 +595,8 @@ function formatOutputFolderName(value) {
   return `output-${year}-${month}-${day}-${hour}-${minute}`;
 }
 
-function resolveTemplatePath(templateName) {
-  const templatePath = path.join(TEMPLATE_DIR, templateName);
+function resolveTemplatePath(templateName, templateDir = TEMPLATE_DIR) {
+  const templatePath = path.join(templateDir, templateName);
   if (!fs.existsSync(templatePath)) {
     throw new Error(`Template obrigatorio nao encontrado em template/mapa: ${templateName}`);
   }
@@ -1098,11 +1098,22 @@ function updateHeaderDates(worksheet, formattedDate) {
   }
 }
 
-async function loadInputs() {
+async function workbookEntryFromBuffer({ fileName, buffer, store }) {
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(buffer);
+
+  return {
+    fileName,
+    storeKey: store ? canonicalStoreName(store) : getStoreKey(workbook, fileName),
+    items: parseWorkbookItems(workbook),
+  };
+}
+
+async function loadInputs(inputDir = INPUT_DIR) {
   const inputEntries = [];
 
-  for (const fileName of fs.readdirSync(INPUT_DIR)) {
-    const fullPath = path.join(INPUT_DIR, fileName);
+  for (const fileName of fs.readdirSync(inputDir)) {
+    const fullPath = path.join(inputDir, fileName);
     if (!fs.statSync(fullPath).isFile()) {
       continue;
     }
@@ -1111,24 +1122,17 @@ async function loadInputs() {
       continue;
     }
 
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.readFile(fullPath);
-
-    const storeKey = getStoreKey(workbook, fileName);
-    const items = parseWorkbookItems(workbook);
-
-    inputEntries.push({
+    inputEntries.push(await workbookEntryFromBuffer({
       fileName,
-      storeKey,
-      items,
-    });
+      buffer: await fs.promises.readFile(fullPath),
+    }));
   }
 
   return inputEntries;
 }
 
-async function generateMap(config, inputs, outputDir, now) {
-  const templatePath = resolveTemplatePath(config.templateName);
+async function generateMapBuffer(config, inputs, now, templateDir = TEMPLATE_DIR) {
+  const templatePath = resolveTemplatePath(config.templateName, templateDir);
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.readFile(templatePath);
 
@@ -1177,9 +1181,45 @@ async function generateMap(config, inputs, outputDir, now) {
 
   compactWorksheetSections(worksheet, config.sections, sectionCategoryMap);
 
+  return Buffer.from(await workbook.xlsx.writeBuffer());
+}
+
+async function generateMap(config, inputs, outputDir, now, templateDir = TEMPLATE_DIR) {
+  const buffer = await generateMapBuffer(config, inputs, now, templateDir);
+
   const outputPath = path.join(outputDir, config.outputName);
-  await workbook.xlsx.writeFile(outputPath);
+  await fs.promises.writeFile(outputPath, buffer);
   return outputPath;
+}
+
+async function processBatch({ entries, templateDir = TEMPLATE_DIR, now = new Date() }) {
+  if (!Array.isArray(entries) || entries.length === 0) {
+    throw new Error("O lote deve conter ao menos uma entrada.");
+  }
+
+  const inputs = [];
+  for (const entry of entries) {
+    inputs.push(await workbookEntryFromBuffer(entry));
+  }
+
+  const artifacts = [];
+  for (const config of MAP_CONFIGS) {
+    artifacts.push({
+      fileName: config.outputName,
+      mediaType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      buffer: await generateMapBuffer(config, inputs, now, templateDir),
+    });
+  }
+
+  return {
+    summary: {
+      entries: inputs.length,
+      items: inputs.reduce((total, input) => total + input.items.length, 0),
+      artifacts: artifacts.length,
+    },
+    warnings: [],
+    artifacts,
+  };
 }
 
 async function main() {
@@ -1219,7 +1259,18 @@ async function main() {
   }
 }
 
-main().catch((error) => {
-  console.error(error.message);
-  process.exitCode = 1;
-});
+if (require.main === module) {
+  main().catch((error) => {
+    console.error(error.message);
+    process.exitCode = 1;
+  });
+}
+
+module.exports = {
+  MAP_CONFIGS,
+  canonicalizeProductName,
+  canonicalStoreName,
+  parseWorkbookItems,
+  processBatch,
+  workbookEntryFromBuffer,
+};
