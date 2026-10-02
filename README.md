@@ -1,16 +1,100 @@
-# feira-nova
+# Feira Nova API
 
-## API NestJS
+API NestJS stateless para transformar pedidos em mapas e arquivos de fornecedores. O runtime não usa banco, `input/` ou `output/` globais.
 
-A API HTTP usa a porta definida por `PORT` e expõe `GET /health`. Para desenvolvimento:
+## Requisitos e desenvolvimento
+
+- Node.js 24
+- npm 11
 
 ```bash
 copy .env.example .env
-npm install
+npm ci
 npm run start:dev
 ```
 
-Validações disponíveis:
+Por padrão a API abre em `http://localhost:3000`. Endpoints auxiliares:
+
+- health check: `GET /health`;
+- Swagger UI: `GET /docs`;
+- documento OpenAPI JSON: `GET /docs-json`.
+
+## Configuração
+
+```dotenv
+NODE_ENV=development
+PORT=3000
+CORS_ORIGINS=http://localhost:5173
+```
+
+`CORS_ORIGINS` aceita origens explícitas separadas por vírgula, sem caminhos ou curingas. Nenhuma variável contém segredo.
+
+## Processar um lote
+
+Os dois endpoints recebem `multipart/form-data`. O campo `batch` contém o contrato JSON; cada entrada de arquivo referencia pelo `fileRef` o nome da respectiva parte multipart.
+
+### Arquivo único ou múltiplos arquivos
+
+```bash
+curl -X POST http://localhost:3000/api/v1/batches/process \
+  -F 'batch={"name":"Pedido manhã","entries":[{"id":"ceramica","type":"file","store":"Cerâmica","fileRef":"sheet1"},{"id":"coelho","type":"file","store":"Coelho","fileRef":"sheet2"}]}' \
+  -F 'sheet1=@ceramica.xlsx' \
+  -F 'sheet2=@coelho.xlsx'
+```
+
+### Entrada textual
+
+```bash
+curl -X POST http://localhost:3000/api/v1/batches/process \
+  -F 'batch={"name":"Pedido manual","entries":[{"id":"manual-1","type":"text","store":"Queimados","text":"ABACATE 5\nBANANA PRATA 2"}]}'
+```
+
+### Lote misto
+
+```bash
+curl -X POST http://localhost:3000/api/v1/batches/process \
+  -F 'batch={"entries":[{"id":"arquivo-1","type":"file","store":"Cerâmica","fileRef":"sheet1"},{"id":"manual-1","type":"text","store":"Coelho","text":"ABACATE 3"}]}' \
+  -F 'sheet1=@ceramica.xlsx'
+```
+
+`POST /api/v1/batches/process` retorna JSON com `requestId`, resumo, avisos e manifesto de mapas, fornecedores e pendências.
+
+## Download ZIP
+
+Envie o mesmo multipart para `POST /api/v1/batches/process/download`. A resposta `application/zip` contém:
+
+```text
+mapas/
+  MAPA.xlsx
+  MAPA2.xlsx
+  MAPA3.xlsx
+fornecedores/
+  ...arquivos com pedidos...
+  associacoes-pendentes.xlsx (quando necessário)
+manifest.json
+```
+
+Exemplo:
+
+```bash
+curl -X POST http://localhost:3000/api/v1/batches/process/download \
+  -F 'batch={"entries":[{"id":"manual-1","type":"text","store":"Cerâmica","text":"CEBOLA ROXA 6"}]}' \
+  --output feira-nova.zip
+```
+
+Cada requisição usa buffers e, somente para adaptar o gerador legado de fornecedores, um diretório temporário exclusivo removido em `finally`.
+
+## Erros e limites
+
+Erros usam envelope JSON com `requestId`, código estável, mensagem segura e detalhes quando aplicável. Limites atuais:
+
+- 20 entradas por lote;
+- 10 arquivos;
+- 10 MiB por arquivo e 50 MiB no total;
+- 50 mil caracteres por entrada textual;
+- formatos `.xlsx` e `.xlsm`.
+
+## Validação
 
 ```bash
 npm run typecheck
@@ -19,135 +103,27 @@ npm run test:e2e
 npm run build
 ```
 
-### Docker e Render
+A suíte cobre normalização, extração, mapas, fornecedores, arquivo/texto/misto, erros, ZIP, cleanup e isolamento concorrente.
 
-A imagem é multi-stage, executa como usuário sem privilégios e inclui `template/`, `data/`, os scripts e o entrypoint legado necessários à migração do core.
+## Docker e Render
 
 ```bash
 docker build -t feira-nova-api .
 docker run --rm -p 3000:3000 --env-file .env feira-nova-api
 ```
 
-No Render, crie um Web Service usando o `Dockerfile`, configure o health check como `/health` e defina:
+No Render, use o `Dockerfile`, branch `master`, health check `/health`, `NODE_ENV=production` e `CORS_ORIGINS=https://feira-nova-web.onrender.com`. `PORT` é fornecida pelo Render. A imagem executa sem privilégios e não precisa de volume persistente.
 
-- `NODE_ENV=production`;
-- `PORT` é fornecida pelo Render e não deve ser fixada;
-- `CORS_ORIGINS` com uma ou mais origens explícitas da Web, separadas por vírgula e sem caminhos (por exemplo, `https://feira-nova-web.onrender.com`); curingas não são aceitos.
+O deploy é nativo do Render a partir do Git. O workflow `API CI` apenas valida typecheck, testes, build e imagem Docker; não requer `RENDER_API_KEY` nem publica o serviço.
 
-O container não usa volume persistente nem banco de dados.
+## Estrutura principal
 
-Cada requisição gera um log com `requestId`, método, rota, status e duração. O conteúdo das entradas e planilhas não é registrado. Para redeploy, publique o commit desejado na branch `master` e use **Manual Deploy > Deploy latest commit** no serviço do Render quando o deploy automático estiver desabilitado.
+- `src/api/`: controllers, configuração e aplicação NestJS;
+- `src/index.js`: core de planilhas preservado e chamável por buffers;
+- `template/mapa/`: modelos dos mapas;
+- `template/fornecedores/`: modelos de fornecedores;
+- `data/`: catálogos de produtos;
+- `test/`: regressão e E2E;
+- `docs/batch-contract.md`: contrato detalhado do lote.
 
-### CI e deploy
-
-O serviço da API no Render acompanha a branch `master`. Um push nessa branch dispara o build e o deploy nativos do Render a partir do `Dockerfile`. Quando o auto-deploy estiver desabilitado, o redeploy deve ser iniciado pelo painel do próprio Render.
-
-O workflow `API CI` do GitHub Actions executa instalação, typecheck, testes, build e `docker build` somente como validação. Ele não publica no Render e não requer `RENDER_API_KEY`, deploy hook ou qualquer secret do Render no GitHub.
-
-Automacao em Node.js para ler planilhas de entrada das filiais e preencher automaticamente os mapas `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx` a partir dos templates da pasta `template/mapa`.
-
-## Como funciona
-
-O script principal:
-
-- le todos os arquivos `.xlsx` e `.xlsm` da pasta `input/`
-- identifica a filial pelo cabecalho da planilha ou, como fallback, pelo nome do arquivo
-- extrai os itens e quantidades mesmo quando a planilha vem em formatos um pouco diferentes
-- normaliza nomes de produtos para encaixar no padrao dos mapas
-- aplica duas listas compartilhadas de produtos em `data/produtos-legumes.json` e `data/produtos-frutas.json`
-- preenche os templates em `template/mapa`
-- cria uma pasta de saida no formato `output-AAAA-MM-DD-HH-mm`
-- gera os arquivos por fornecedor em `output-AAAA-MM-DD-HH-mm/fornecedores/`
-- destaca em amarelo os produtos que nao encontrou no template para revisao manual
-
-## Estrutura esperada
-
-```text
-.
-|-- input/
-|-- data/
-|   |-- produtos-legumes.json
-|   `-- produtos-frutas.json
-|-- template/
-|   `-- mapa/
-|       |-- MAPA.xlsx
-|       |-- MAPA2.xlsx
-|       `-- MAPA3.xlsx
-|-- src/
-|   `-- index.js
-`-- exemplo/
-```
-
-## Requisitos
-
-- Node.js instalado
-- dependencias instaladas com `npm install`
-
-## Como usar
-
-1. Coloque os arquivos de entrada das filiais dentro da pasta `input/`.
-2. Rode o comando:
-
-```bash
-npm run generate
-```
-
-3. Abra a pasta `output-...` gerada na raiz do projeto.
-4. Revise os arquivos `MAPA.xlsx`, `MAPA2.xlsx`, `MAPA3.xlsx` e a pasta `fornecedores/`.
-5. Se houver linhas destacadas em amarelo, ajuste manualmente ou atualize as regras de normalizacao no codigo.
-
-## Gerar arquivos por fornecedor
-
-O comando `npm run generate` ja cria a pasta `fornecedores/` dentro do `output-...` gerado.
-
-Se quiser gerar fornecedores manualmente a partir dos mapas que estiverem na pasta fixa `output/`, rode:
-
-```bash
-npm run fornecedores
-```
-
-O script usa os arquivos em `exemplo/` como modelos de associacao entre fornecedor, produto e loja. Os arquivos finais sao gerados em `output/fornecedores/`.
-
-Quando alguma associacao do modelo nao for encontrada nos mapas, o script tambem gera `associacoes-pendentes.xlsx` na pasta dos fornecedores. Preencha a coluna `Como tratar` para indicar qual nome/regra deve ser usada.
-
-## Uso no navegador
-
-O projeto agora tambem tem uma interface web estatica em `index.html`, pensada para GitHub Pages.
-
-Fluxo da interface:
-
-- aceita upload de arquivos `.xlsx` e `.xlsm`
-- aceita upload de `.zip` com varias planilhas dentro
-- gera os mapas diretamente no navegador
-- libera um botao para baixar um `.zip` com `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx`
-- possui um botao `Limpar` para remover os arquivos carregados e resetar a tela
-
-### Publicar no GitHub Pages
-
-1. Suba o projeto para o GitHub.
-2. Em `Settings > Pages`, selecione `GitHub Actions` como source.
-3. A cada push na branch `master`, a workflow `.github/workflows/deploy-pages.yml` roda `npm ci` e `npm run build:web`.
-4. O script `scripts/build-pages.js` gera a pasta `dist/` com a versao publicada do frontend.
-5. O deploy envia apenas `dist/` para o GitHub Pages.
-
-Importante:
-
-- no GitHub Pages nao existe backend, entao o processamento acontece 100% no navegador
-- a interface depende dos arquivos de template versionados no repositorio
-- para abrir localmente com todos os recursos funcionando, prefira servir a pasta com um servidor estatico ou usar o proprio GitHub Pages
-
-## Validacao com exemplo
-
-O projeto tem um conjunto de exemplo para comparacao.
-
-```bash
-npm run check:example
-```
-
-Esse comando compara a ultima pasta `output-*` gerada com os arquivos de referencia em `exemplo/output/output mapa`.
-
-## Regras importantes
-
-- Qualquer pasta na raiz que comece com `input` fica no `.gitignore`, como `input/`, `input-old/` e variacoes semelhantes.
-- Qualquer pasta na raiz que comece com `output` tambem fica no `.gitignore`, incluindo as pastas geradas pelo processo.
-- Se voce precisar manter exemplos versionados, vale usar nomes de pasta que nao comecem com `input` ou `output`.
+Os comandos legados `npm run generate` e `npm run fornecedores` permanecem temporariamente para compatibilidade e serão removidos na etapa de limpeza do legado.
