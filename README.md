@@ -38,6 +38,12 @@ O container não usa volume persistente nem banco de dados.
 
 Cada requisição gera um log com `requestId`, método, rota, status e duração. O conteúdo das entradas e planilhas não é registrado. Para redeploy, publique o commit desejado na branch `master` e use **Manual Deploy > Deploy latest commit** no serviço do Render quando o deploy automático estiver desabilitado.
 
+### CI e deploy
+
+O serviço da API no Render acompanha a branch `master`. Um push nessa branch dispara o build e o deploy nativos do Render a partir do `Dockerfile`. Quando o auto-deploy estiver desabilitado, o redeploy deve ser iniciado pelo painel do próprio Render.
+
+O workflow `API CI` do GitHub Actions executa instalação, typecheck, testes, build e `docker build` somente como validação. Ele não publica no Render e não requer `RENDER_API_KEY`, deploy hook ou qualquer secret do Render no GitHub.
+
 Automacao em Node.js para ler planilhas de entrada das filiais e preencher automaticamente os mapas `MAPA.xlsx`, `MAPA2.xlsx` e `MAPA3.xlsx` a partir dos templates da pasta `template/mapa`.
 
 ## Como funciona
