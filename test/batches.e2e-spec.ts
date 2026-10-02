@@ -1,14 +1,37 @@
 import "reflect-metadata";
 import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
+import ExcelJS from "exceljs";
 import JSZip from "jszip";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import request from "supertest";
+import type { Response as SuperAgentResponse } from "superagent";
 import { AppModule } from "../src/api/app.module";
 import { HttpExceptionFilter } from "../src/api/common/filters/http-exception.filter";
 import { structuredSpreadsheet } from "./fixtures/spreadsheet.fixture";
+
+function binaryParser(
+  response: SuperAgentResponse,
+  callback: (error: Error | null, body: Buffer) => void,
+): void {
+  const chunks: Buffer[] = [];
+  response.on("data", (chunk: Buffer) => chunks.push(chunk));
+  response.on("end", () => callback(null, Buffer.concat(chunks)));
+}
+
+async function mapQuantity(zipBuffer: Buffer, product: string): Promise<unknown> {
+  const zip = await JSZip.loadAsync(zipBuffer);
+  const map = await zip.file("mapas/MAPA.xlsx")!.async("nodebuffer");
+  const workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.load(map as never);
+  const sheet = workbook.worksheets[0];
+  for (let row = 1; row <= sheet.rowCount; row += 1) {
+    if (sheet.getCell(`A${row}`).value === product) return sheet.getCell(`B${row}`).value;
+  }
+  return undefined;
+}
 
 async function spreadsheet(store: string, product: string, quantity: number): Promise<Buffer> {
   return structuredSpreadsheet(store, [[product, quantity]]);
@@ -161,11 +184,7 @@ describe("Batch file processing", () => {
       .field("batch", JSON.stringify(batch))
       .attach("sheet1", await spreadsheet("Cerâmica", "CEBOLA ROXA", 6), "ceramica.xlsx")
       .buffer(true)
-      .parse((res, callback) => {
-        const chunks: Buffer[] = [];
-        res.on("data", (chunk: Buffer) => chunks.push(chunk));
-        res.on("end", () => callback(null, Buffer.concat(chunks)));
-      })
+      .parse(binaryParser)
       .expect("content-type", /application\/zip/)
       .expect("content-disposition", /attachment; filename="feira-nova-[^"]+\.zip"/)
       .expect(201);
@@ -193,5 +212,29 @@ describe("Batch file processing", () => {
       .filter((name) => name.startsWith("feira-nova-"))
       .filter((name) => !temporaryDirectoriesBefore.has(name));
     expect(temporaryDirectoriesAfter.map((name) => path.join(os.tmpdir(), name))).toEqual([]);
+  });
+
+  it("isolates concurrent requests and cleans both temporary workspaces", async () => {
+    const temporaryDirectoriesBefore = new Set(
+      fs.readdirSync(os.tmpdir()).filter((name) => name.startsWith("feira-nova-")),
+    );
+    const requestDownload = async (quantity: number) => {
+      const batch = { entries: [{ id: `entry-${quantity}`, type: "file", store: "Cerâmica", fileRef: "sheet1" }] };
+      return request(app.getHttpServer())
+        .post("/api/v1/batches/process/download")
+        .field("batch", JSON.stringify(batch))
+        .attach("sheet1", await spreadsheet("Cerâmica", "CEBOLA ROXA", quantity), `pedido-${quantity}.xlsx`)
+        .buffer(true)
+        .parse(binaryParser)
+        .expect(201);
+    };
+
+    const [first, second] = await Promise.all([requestDownload(4), requestDownload(9)]);
+    expect(await mapQuantity(first.body as Buffer, "CEBOLA ROXA")).toBe(4);
+    expect(await mapQuantity(second.body as Buffer, "CEBOLA ROXA")).toBe(9);
+    const leakedDirectories = fs
+      .readdirSync(os.tmpdir())
+      .filter((name) => name.startsWith("feira-nova-") && !temporaryDirectoriesBefore.has(name));
+    expect(leakedDirectories).toEqual([]);
   });
 });
