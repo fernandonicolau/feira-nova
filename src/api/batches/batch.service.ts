@@ -2,7 +2,10 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { plainToInstance } from "class-transformer";
 import { validate } from "class-validator";
 import { randomUUID } from "node:crypto";
+import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
+import JSZip from "jszip";
 import {
   BATCH_LIMITS,
   BatchEntryType,
@@ -14,6 +17,16 @@ interface CoreArtifact {
   fileName: string;
   mediaType: string;
   buffer: Buffer;
+}
+
+interface PreparedArtifact extends CoreArtifact {
+  folder: "mapas" | "fornecedores";
+}
+
+interface SupplierResult {
+  files: string[];
+  unmatched: unknown[];
+  unmatchedFile: { fileName: string } | null;
 }
 
 interface CoreResult {
@@ -36,6 +49,44 @@ export class BatchService {
     files: Express.Multer.File[],
     requestId: string,
   ): Promise<ProcessBatchResponse> {
+    const prepared = await this.prepare(rawBatch, files, requestId);
+    return prepared.response;
+  }
+
+  async download(
+    rawBatch: string | undefined,
+    files: Express.Multer.File[],
+    requestId: string,
+  ): Promise<{ buffer: Buffer; fileName: string }> {
+    const prepared = await this.prepare(rawBatch, files, requestId);
+    const zip = new JSZip();
+    for (const artifact of prepared.artifacts) {
+      zip.file(`${artifact.folder}/${artifact.fileName}`, artifact.buffer);
+    }
+    zip.file(
+      "manifest.json",
+      JSON.stringify(
+        {
+          requestId,
+          data: prepared.response.data,
+          warnings: prepared.response.warnings,
+        },
+        null,
+        2,
+      ),
+    );
+
+    return {
+      buffer: await zip.generateAsync({ type: "nodebuffer", compression: "DEFLATE" }),
+      fileName: `feira-nova-${prepared.response.data.batchId}.zip`,
+    };
+  }
+
+  private async prepare(
+    rawBatch: string | undefined,
+    files: Express.Multer.File[],
+    requestId: string,
+  ): Promise<{ response: ProcessBatchResponse; artifacts: PreparedArtifact[] }> {
     const batch = await this.parseContract(rawBatch);
 
     this.validateFiles(batch, files);
@@ -60,8 +111,21 @@ export class BatchService {
       );
     }
 
+    const supplierArtifacts = await this.generateSupplierArtifacts(result.artifacts);
+    const artifacts: PreparedArtifact[] = [
+      ...result.artifacts.map((artifact) => ({ ...artifact, folder: "mapas" as const })),
+      ...supplierArtifacts.artifacts,
+    ];
+    const warnings = [...result.warnings];
+    if (supplierArtifacts.unmatched > 0) {
+      warnings.push({
+        code: "UNMATCHED_SUPPLIER_ASSOCIATIONS",
+        message: `${supplierArtifacts.unmatched} associações não foram atribuídas a fornecedores.`,
+      });
+    }
+
     const batchId = randomUUID();
-    return {
+    const response: ProcessBatchResponse = {
       requestId,
       data: {
         batchId,
@@ -70,18 +134,67 @@ export class BatchService {
           files: batch.entries.filter((entry) => entry.type === BatchEntryType.FILE).length,
           texts: batch.entries.filter((entry) => entry.type === BatchEntryType.TEXT).length,
           items: result.summary.items,
-          artifacts: result.artifacts.length,
+          artifacts: artifacts.length,
         },
-        artifacts: result.artifacts.map((artifact, index) => ({
+        artifacts: artifacts.map((artifact, index) => ({
           id: `artifact-${index + 1}`,
           fileName: artifact.fileName,
           mediaType: artifact.mediaType,
           size: artifact.buffer.length,
-          downloadUrl: "/api/v1/batches/download",
+          downloadUrl: "/api/v1/batches/process/download",
         })),
       },
-      warnings: result.warnings,
+      warnings,
     };
+    return { response, artifacts };
+  }
+
+  private async generateSupplierArtifacts(
+    mapArtifacts: CoreArtifact[],
+  ): Promise<{ artifacts: PreparedArtifact[]; unmatched: number }> {
+    const requestDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "feira-nova-"));
+    const mapDir = path.join(requestDir, "maps");
+    const outputDir = path.join(requestDir, "fornecedores");
+    const templateDir = path.join(process.cwd(), "template", "fornecedores");
+
+    try {
+      await fs.promises.mkdir(mapDir);
+      await Promise.all(
+        mapArtifacts.map((artifact) =>
+          fs.promises.writeFile(path.join(mapDir, artifact.fileName), artifact.buffer),
+        ),
+      );
+      const generatorPath = path.join(process.cwd(), "scripts", "generate-fornecedores.js");
+      const { generateSupplierFiles } = require(generatorPath) as {
+        generateSupplierFiles(options: {
+          mapDir: string;
+          templateDir: string;
+          outputDir: string;
+          now: Date;
+        }): Promise<SupplierResult>;
+      };
+      const generated = await generateSupplierFiles({
+        mapDir,
+        templateDir,
+        outputDir,
+        now: new Date(),
+      });
+      const fileNames = await fs.promises.readdir(outputDir);
+      const artifacts = await Promise.all(
+        fileNames
+          .filter((fileName) => fileName.toLowerCase().endsWith(".xlsx"))
+          .sort((a, b) => a.localeCompare(b, "pt-BR"))
+          .map(async (fileName): Promise<PreparedArtifact> => ({
+            fileName,
+            mediaType: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            buffer: await fs.promises.readFile(path.join(outputDir, fileName)),
+            folder: "fornecedores",
+          })),
+      );
+      return { artifacts, unmatched: generated.unmatched.length };
+    } finally {
+      await fs.promises.rm(requestDir, { recursive: true, force: true });
+    }
   }
 
   private async parseContract(rawBatch: string | undefined): Promise<ProcessBatchDto> {

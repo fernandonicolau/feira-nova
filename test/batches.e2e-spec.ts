@@ -1,6 +1,10 @@
 import "reflect-metadata";
 import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
+import JSZip from "jszip";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import request from "supertest";
 import { AppModule } from "../src/api/app.module";
 import { HttpExceptionFilter } from "../src/api/common/filters/http-exception.filter";
@@ -39,14 +43,20 @@ describe("Batch file processing", () => {
       .expect(201);
 
     expect(response.body.requestId).toEqual(expect.any(String));
-    expect(response.body.data.summary).toEqual({
+    expect(response.body.data.summary).toMatchObject({
       entries: 2,
       files: 2,
       texts: 0,
       items: 2,
-      artifacts: 3,
     });
-    expect(response.body.data.artifacts).toHaveLength(3);
+    expect(response.body.data.summary.artifacts).toBeGreaterThanOrEqual(4);
+    expect(response.body.data.artifacts).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ fileName: "MAPA.xlsx", downloadUrl: "/api/v1/batches/process/download" }),
+        expect.objectContaining({ fileName: "MAPA2.xlsx" }),
+        expect.objectContaining({ fileName: "MAPA3.xlsx" }),
+      ]),
+    );
   });
 
   it("rejects mismatched file references with a structured error", async () => {
@@ -136,5 +146,52 @@ describe("Batch file processing", () => {
       .expect(400);
     expect(response.body.error).toMatchObject({ code: "VALIDATION_ERROR" });
     expect(response.body.error.message).not.toContain("node_modules");
+  });
+
+  it("downloads maps, supplier outputs and a structured manifest in one ZIP", async () => {
+    const temporaryDirectoriesBefore = new Set(
+      fs.readdirSync(os.tmpdir()).filter((name) => name.startsWith("feira-nova-")),
+    );
+    const batch = {
+      name: "Download E2E",
+      entries: [{ id: "ceramica", type: "file", store: "Cerâmica", fileRef: "sheet1" }],
+    };
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process/download")
+      .field("batch", JSON.stringify(batch))
+      .attach("sheet1", await spreadsheet("Cerâmica", "CEBOLA ROXA", 6), "ceramica.xlsx")
+      .buffer(true)
+      .parse((res, callback) => {
+        const chunks: Buffer[] = [];
+        res.on("data", (chunk: Buffer) => chunks.push(chunk));
+        res.on("end", () => callback(null, Buffer.concat(chunks)));
+      })
+      .expect("content-type", /application\/zip/)
+      .expect("content-disposition", /attachment; filename="feira-nova-[^"]+\.zip"/)
+      .expect(201);
+
+    const zip = await JSZip.loadAsync(response.body as Buffer);
+    expect(Object.keys(zip.files)).toEqual(
+      expect.arrayContaining([
+        "mapas/MAPA.xlsx",
+        "mapas/MAPA2.xlsx",
+        "mapas/MAPA3.xlsx",
+        "fornecedores/adonai.xlsx",
+        "manifest.json",
+      ]),
+    );
+    const manifest = JSON.parse(await zip.file("manifest.json")!.async("string")) as {
+      requestId: string;
+      data: { summary: { artifacts: number } };
+      warnings: unknown[];
+    };
+    expect(manifest.requestId).toBe(response.headers["x-request-id"]);
+    expect(manifest.data.summary.artifacts).toBeGreaterThanOrEqual(4);
+    expect(Array.isArray(manifest.warnings)).toBe(true);
+    const temporaryDirectoriesAfter = fs
+      .readdirSync(os.tmpdir())
+      .filter((name) => name.startsWith("feira-nova-"))
+      .filter((name) => !temporaryDirectoriesBefore.has(name));
+    expect(temporaryDirectoriesAfter.map((name) => path.join(os.tmpdir(), name))).toEqual([]);
   });
 });
