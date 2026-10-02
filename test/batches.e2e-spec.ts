@@ -1,18 +1,13 @@
 import "reflect-metadata";
 import { INestApplication } from "@nestjs/common";
 import { Test } from "@nestjs/testing";
-import ExcelJS from "exceljs";
 import request from "supertest";
 import { AppModule } from "../src/api/app.module";
 import { HttpExceptionFilter } from "../src/api/common/filters/http-exception.filter";
+import { structuredSpreadsheet } from "./fixtures/spreadsheet.fixture";
 
 async function spreadsheet(store: string, product: string, quantity: number): Promise<Buffer> {
-  const workbook = new ExcelJS.Workbook();
-  const sheet = workbook.addWorksheet("Pedido");
-  sheet.addRow(["FILIAL", store]);
-  sheet.addRow(["PRODUTO", "QUANTIDADE"]);
-  sheet.addRow([product, quantity]);
-  return Buffer.from(await workbook.xlsx.writeBuffer());
+  return structuredSpreadsheet(store, [[product, quantity]]);
 }
 
 describe("Batch file processing", () => {
@@ -110,5 +105,36 @@ describe("Batch file processing", () => {
       .expect(201);
 
     expect(response.body.data.summary).toMatchObject({ files: 0, texts: 1, items: 1 });
+  });
+
+  it.each([
+    ["missing batch", undefined, "Multipart field 'batch' is required"],
+    ["invalid JSON", "{not-json", "Multipart field 'batch' must be valid JSON"],
+  ])("returns a structured error for %s", async (_case, batch, message) => {
+    let call = request(app.getHttpServer()).post("/api/v1/batches/process");
+    if (batch !== undefined) call = call.field("batch", batch);
+    const response = await call.expect(400);
+    expect(response.body).toMatchObject({ requestId: expect.any(String), error: { code: "VALIDATION_ERROR", message } });
+  });
+
+  it("rejects unsupported file formats", async () => {
+    const batch = { entries: [{ id: "manual", type: "file", store: "Cerâmica", fileRef: "sheet1" }] };
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field("batch", JSON.stringify(batch))
+      .attach("sheet1", Buffer.from("not a workbook"), "pedido.csv")
+      .expect(400);
+    expect(response.body).toMatchObject({ requestId: expect.any(String), error: { code: "VALIDATION_ERROR" } });
+  });
+
+  it("rejects an invalid spreadsheet with a safe structured response", async () => {
+    const batch = { entries: [{ id: "manual", type: "file", store: "Cerâmica", fileRef: "sheet1" }] };
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field("batch", JSON.stringify(batch))
+      .attach("sheet1", Buffer.from("invalid xlsx"), "pedido.xlsx")
+      .expect(400);
+    expect(response.body.error).toMatchObject({ code: "VALIDATION_ERROR" });
+    expect(response.body.error.message).not.toContain("node_modules");
   });
 });
