@@ -36,6 +36,15 @@ describe("Health endpoint", () => {
       .expect({ status: "ok" });
   });
 
+  it("GET /health/ready", async () => {
+    await request(app.getHttpServer())
+      .get("/health/ready")
+      .expect(200)
+      .expect(({ body }) => {
+        expect(body).toEqual({ status: "ready", uptimeSeconds: expect.any(Number) });
+      });
+  });
+
   it("allows the configured web origin", async () => {
     await request(app.getHttpServer())
       .options("/health")

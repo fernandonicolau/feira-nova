@@ -22,11 +22,22 @@ describe("environment validation", () => {
         NODE_ENV: "production",
         PORT: "10000",
         CORS_ORIGINS: "https://web.example.com/",
+        REQUEST_TIMEOUT_MS: "90000",
       }),
     ).toMatchObject({
       NODE_ENV: "production",
       PORT: 10000,
       CORS_ORIGINS: "https://web.example.com",
+      REQUEST_TIMEOUT_MS: 90000,
     });
+  });
+
+  it("rejects invalid request timeouts", () => {
+    expect(() =>
+      validateEnvironment({
+        CORS_ORIGINS: "https://web.example.com",
+        REQUEST_TIMEOUT_MS: 0,
+      }),
+    ).toThrow("REQUEST_TIMEOUT_MS must be a positive integer");
   });
 });

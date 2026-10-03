@@ -3,6 +3,7 @@ export const BATCH_LIMITS = {
   maxFiles: 10,
   maxFileBytes: 10 * 1024 * 1024,
   maxTotalFileBytes: 50 * 1024 * 1024,
+  maxBatchFieldBytes: 2 * 1024 * 1024,
   maxTextCharacters: 50_000,
 } as const;
 

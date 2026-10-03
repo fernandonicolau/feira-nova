@@ -33,6 +33,14 @@ const multipartBatchSchema: Parameters<typeof ApiBody>[0] = {
   },
 };
 
+const uploadLimits = {
+  files: BATCH_LIMITS.maxFiles,
+  fileSize: BATCH_LIMITS.maxFileBytes,
+  fieldSize: BATCH_LIMITS.maxBatchFieldBytes,
+  fields: 1,
+  parts: BATCH_LIMITS.maxFiles + 1,
+};
+
 @ApiTags("batches")
 @Controller("api/v1/batches")
 export class BatchController {
@@ -42,15 +50,7 @@ export class BatchController {
   @ApiConsumes("multipart/form-data")
   @ApiBody(multipartBatchSchema)
   @ApiCreatedResponse({ description: "Resumo, avisos e manifesto de todos os artefatos." })
-  @UseInterceptors(
-    AnyFilesInterceptor({
-      limits: {
-        files: BATCH_LIMITS.maxFiles,
-        fileSize: BATCH_LIMITS.maxFileBytes,
-        fields: 1,
-      },
-    }),
-  )
+  @UseInterceptors(AnyFilesInterceptor({ limits: uploadLimits }))
   process(
     @Body("batch") batch: string | undefined,
     @UploadedFiles() files: Express.Multer.File[] = [],
@@ -64,15 +64,7 @@ export class BatchController {
   @ApiProduces("application/zip")
   @ApiBody(multipartBatchSchema)
   @ApiCreatedResponse({ description: "ZIP com mapas, fornecedores, pendências e manifest.json." })
-  @UseInterceptors(
-    AnyFilesInterceptor({
-      limits: {
-        files: BATCH_LIMITS.maxFiles,
-        fileSize: BATCH_LIMITS.maxFileBytes,
-        fields: 1,
-      },
-    }),
-  )
+  @UseInterceptors(AnyFilesInterceptor({ limits: uploadLimits }))
   async download(
     @Body("batch") batch: string | undefined,
     @UploadedFiles() files: Express.Multer.File[] = [],

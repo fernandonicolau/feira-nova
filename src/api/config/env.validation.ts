@@ -2,6 +2,15 @@ export interface AppEnvironment {
   NODE_ENV: string;
   PORT: number;
   CORS_ORIGINS: string;
+  REQUEST_TIMEOUT_MS: number;
+}
+
+function parsePositiveInteger(value: unknown, fallback: number, name: string): number {
+  const parsed = Number(value ?? fallback);
+  if (!Number.isInteger(parsed) || parsed < 1) {
+    throw new Error(`${name} must be a positive integer`);
+  }
+  return parsed;
 }
 
 export function parseCorsOrigins(value: string): string[] {
@@ -46,11 +55,17 @@ export function validateEnvironment(
   const corsOrigins = parseCorsOrigins(
     String(raw.CORS_ORIGINS ?? "http://localhost:5173"),
   );
+  const requestTimeoutMs = parsePositiveInteger(
+    raw.REQUEST_TIMEOUT_MS,
+    120_000,
+    "REQUEST_TIMEOUT_MS",
+  );
 
   return {
     ...raw,
     NODE_ENV: String(raw.NODE_ENV ?? "development"),
     PORT: port,
     CORS_ORIGINS: corsOrigins.join(","),
+    REQUEST_TIMEOUT_MS: requestTimeoutMs,
   };
 }

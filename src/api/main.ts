@@ -3,6 +3,7 @@ import { Logger, ValidationPipe } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import type { Server } from "node:http";
 import { AppModule } from "./app.module";
 import { HttpExceptionFilter } from "./common/filters/http-exception.filter";
 import { parseCorsOrigins } from "./config/env.validation";
@@ -40,6 +41,11 @@ export async function bootstrap(): Promise<void> {
 
   const port = config.get<number>("PORT", 3000);
   await app.listen(port, "0.0.0.0");
+  const server = app.getHttpServer() as Server;
+  const requestTimeout = config.get<number>("REQUEST_TIMEOUT_MS", 120_000);
+  server.requestTimeout = requestTimeout;
+  server.headersTimeout = Math.min(requestTimeout, 60_000);
+  server.keepAliveTimeout = 5_000;
   Logger.log(`API listening on port ${port}`, "Bootstrap");
 }
 

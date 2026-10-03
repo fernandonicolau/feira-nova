@@ -91,8 +91,11 @@ Erros usam envelope JSON com `requestId`, código estável, mensagem segura e de
 - 20 entradas por lote;
 - 10 arquivos;
 - 10 MiB por arquivo e 50 MiB no total;
+- 2 MiB para o contrato JSON multipart;
 - 50 mil caracteres por entrada textual;
 - formatos `.xlsx` e `.xlsm`.
+
+O servidor encerra requisições acima de `REQUEST_TIMEOUT_MS` (120 segundos por padrão), habilita graceful shutdown e expõe `/health` para liveness e `/health/ready` para readiness. Uploads ficam em memória somente durante a requisição e os workspaces temporários são sempre removidos.
 
 ## Validação
 
