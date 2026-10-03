@@ -2,6 +2,8 @@ export interface BatchWarning {
   code: string;
   message: string;
   entryId?: string;
+  line?: number;
+  originalText?: string;
 }
 
 export interface BatchArtifact {

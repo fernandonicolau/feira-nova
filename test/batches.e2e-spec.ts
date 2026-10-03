@@ -140,6 +140,38 @@ describe("Batch file processing", () => {
     expect(response.body.data.summary).toMatchObject({ files: 0, texts: 1, items: 1 });
   });
 
+  it("extracts valid spreadsheets from a ZIP into the canonical batch", async () => {
+    const zip = new JSZip();
+    zip.file("ceramica.xlsx", await spreadsheet("Cerâmica", "ABACATE", 4));
+    zip.file("coelho.xlsm", await spreadsheet("Coelho", "CEBOLA ROXA", 2));
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field("batch", JSON.stringify({ entries: [{ id: "zip-1", type: "file", store: "Cerâmica", fileRef: "archive" }] }))
+      .attach("archive", await zip.generateAsync({ type: "nodebuffer" }), "pedidos.zip")
+      .expect(201);
+    expect(response.body.data.summary).toMatchObject({ entries: 2, files: 2, items: 2 });
+  });
+
+  it("rejects unexpected files inside a ZIP", async () => {
+    const zip = new JSZip().file("pedido.csv", "produto,quantidade");
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field("batch", JSON.stringify({ entries: [{ id: "zip-1", type: "file", store: "Cerâmica", fileRef: "archive" }] }))
+      .attach("archive", await zip.generateAsync({ type: "nodebuffer" }), "pedidos.zip")
+      .expect(400);
+    expect(response.body.error.message).toContain("Unsupported file inside ZIP");
+  });
+
+  it("rejects ZIP path traversal", async () => {
+    const zip = new JSZip().file("../pedido.xlsx", await spreadsheet("Cerâmica", "ABACATE", 1));
+    const response = await request(app.getHttpServer())
+      .post("/api/v1/batches/process")
+      .field("batch", JSON.stringify({ entries: [{ id: "zip-1", type: "file", store: "Cerâmica", fileRef: "archive" }] }))
+      .attach("archive", await zip.generateAsync({ type: "nodebuffer" }), "pedidos.zip")
+      .expect(400);
+    expect(response.body.error.message).toContain("Unsafe ZIP path");
+  });
+
   it.each([
     ["missing batch", undefined, "Multipart field 'batch' is required"],
     ["invalid JSON", "{not-json", "Multipart field 'batch' must be valid JSON"],

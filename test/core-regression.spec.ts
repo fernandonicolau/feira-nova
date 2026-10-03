@@ -4,6 +4,10 @@ import { looseSpreadsheet, structuredSpreadsheet } from "./fixtures/spreadsheet.
 const core = require("../src/index.js") as {
   canonicalizeProductName(value: unknown): string;
   canonicalStoreName(value: unknown): string;
+  textEntryFromContent(entry: { id: string; store: string; text: string }): {
+    items: Array<{ productName: string; quantity: number }>;
+    warnings: Array<{ entryId: string; line: number; originalText: string }>;
+  };
   workbookEntryFromBuffer(entry: { fileName: string; buffer: Buffer; store?: string }): Promise<{
     storeKey: string;
     items: Array<{ productName: string; quantity: number }>;
@@ -26,6 +30,16 @@ async function quantityFor(buffer: Buffer, product: string, column: string): Pro
 }
 
 describe("core regression", () => {
+  it("parses manual quantities before or after the product and preserves invalid line details", () => {
+    const entry = core.textEntryFromContent({ id: "manual", store: "Cerâmica", text: "2 BANANA PRATA\nABACATE 5\nrevisar esta linha" });
+    expect(entry.items).toEqual([
+      { productName: "BANANA PRATA", quantity: 2 },
+      { productName: "ABACATE", quantity: 5 },
+    ]);
+    expect(entry.warnings).toEqual([
+      expect.objectContaining({ entryId: "manual", line: 3, originalText: "revisar esta linha" }),
+    ]);
+  });
   it.each([
     ["beringela kg", "BERINJELA"],
     ["limão tahiti", "LIMAO"],

@@ -533,6 +533,11 @@ function parseLooseItem(text) {
     return null;
   }
 
+  const prefixMatch = cleaned.match(/^(\d+(?:[.,]\d+)?)\s*(?:KG|KILO|UNID|UNIDADE|UN|UND|UNID\.|CX|PCT|PACOTE|BDJ)?\s+(.+)$/i);
+  if (prefixMatch && /[A-Za-zÀ-ÿ]/.test(prefixMatch[2])) {
+    return { productName: prefixMatch[2].trim(), quantity: normalizeQuantity(prefixMatch[1]) };
+  }
+
   const match = cleaned.match(/^(.*?)(?:\s*[-]?\s*)(\d+(?:[.,]\d+)?)\s*(?:KG|KILO|UNID|UNIDADE|UN|UND|UNID\.|CX|PCT|PACOTE|BDJ)?\s*$/i);
 
   if (!match) {
@@ -1115,6 +1120,8 @@ function textEntryFromContent({ id, text, store }) {
           code: "UNPARSED_TEXT_LINE",
           message: `Linha ${index + 1} da entrada textual não foi interpretada.`,
           entryId: id,
+          line: index + 1,
+          originalText: trimmed,
         });
       }
     });

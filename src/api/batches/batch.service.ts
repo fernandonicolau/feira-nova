@@ -31,7 +31,7 @@ interface SupplierResult {
 
 interface CoreResult {
   summary: { entries: number; items: number; artifacts: number };
-  warnings: Array<{ code: string; message: string; entryId?: string }>;
+  warnings: Array<{ code: string; message: string; entryId?: string; line?: number; originalText?: string }>;
   artifacts: CoreArtifact[];
 }
 
@@ -41,6 +41,8 @@ type CoreProcessBatch = (options: {
     | { id: string; text: string; store: string }
   >;
 }) => Promise<CoreResult>;
+
+type CoreEntry = Parameters<CoreProcessBatch>[0]["entries"][number];
 
 @Injectable()
 export class BatchService {
@@ -92,18 +94,12 @@ export class BatchService {
     this.validateFiles(batch, files);
     const filesByRef = new Map(files.map((file) => [file.fieldname, file]));
     const processBatch = this.loadCore();
+    const coreEntries = await this.expandEntries(batch, filesByRef);
 
     let result: CoreResult;
     try {
       result = await processBatch({
-        entries: batch.entries.map((entry) => {
-          if (entry.type === BatchEntryType.TEXT) {
-            return { id: entry.id, text: entry.text!, store: entry.store };
-          }
-
-          const file = filesByRef.get(entry.fileRef!);
-          return { fileName: file!.originalname, buffer: file!.buffer, store: entry.store };
-        }),
+        entries: coreEntries,
       });
     } catch (error) {
       throw new BadRequestException(
@@ -130,8 +126,8 @@ export class BatchService {
       data: {
         batchId,
         summary: {
-          entries: batch.entries.length,
-          files: batch.entries.filter((entry) => entry.type === BatchEntryType.FILE).length,
+          entries: coreEntries.length,
+          files: coreEntries.filter((entry) => "buffer" in entry).length,
           texts: batch.entries.filter((entry) => entry.type === BatchEntryType.TEXT).length,
           items: result.summary.items,
           artifacts: artifacts.length,
@@ -244,13 +240,70 @@ export class BatchService {
     }
 
     for (const file of files) {
-      if (!/\.(xlsx|xlsm)$/i.test(file.originalname)) {
-        throw new BadRequestException(`Unsupported spreadsheet format: ${file.originalname}`);
+      if (!/\.(xlsx|xlsm|zip)$/i.test(file.originalname)) {
+        throw new BadRequestException(`Unsupported upload format: ${file.originalname}`);
       }
       if (!file.buffer?.length) {
         throw new BadRequestException(`Spreadsheet is empty: ${file.originalname}`);
       }
     }
+  }
+
+  private async expandEntries(
+    batch: ProcessBatchDto,
+    filesByRef: Map<string, Express.Multer.File>,
+  ): Promise<CoreEntry[]> {
+    const entries: CoreEntry[] = [];
+    let expandedBytes = 0;
+
+    for (const entry of batch.entries) {
+      if (entry.type === BatchEntryType.TEXT) {
+        entries.push({ id: entry.id, text: entry.text!, store: entry.store });
+        continue;
+      }
+
+      const upload = filesByRef.get(entry.fileRef!)!;
+      if (!/\.zip$/i.test(upload.originalname)) {
+        entries.push({ fileName: upload.originalname, buffer: upload.buffer, store: entry.store });
+        expandedBytes += upload.buffer.length;
+        continue;
+      }
+
+      let zip: JSZip;
+      try {
+        zip = await JSZip.loadAsync(upload.buffer);
+      } catch {
+        throw new BadRequestException(`Invalid ZIP file: ${upload.originalname}`);
+      }
+
+      const members = Object.values(zip.files).filter((member) => !member.dir);
+      if (members.length === 0) throw new BadRequestException(`ZIP is empty: ${upload.originalname}`);
+      for (const member of members) {
+        const originalName = member.unsafeOriginalName ?? member.name;
+        if (
+          originalName.startsWith("/") ||
+          originalName.startsWith("\\") ||
+          originalName.split(/[\\/]/).includes("..")
+        ) {
+          throw new BadRequestException(`Unsafe ZIP path: ${originalName}`);
+        }
+        if (!/\.(xlsx|xlsm)$/i.test(member.name)) {
+          throw new BadRequestException(`Unsupported file inside ZIP: ${member.name}`);
+        }
+        const buffer = await member.async("nodebuffer");
+        if (!buffer.length || buffer.length > BATCH_LIMITS.maxFileBytes) {
+          throw new BadRequestException(`Invalid file size inside ZIP: ${member.name}`);
+        }
+        expandedBytes += buffer.length;
+        entries.push({ fileName: path.basename(member.name), buffer, store: entry.store });
+      }
+    }
+
+    const fileCount = entries.filter((entry) => "buffer" in entry).length;
+    if (fileCount > BATCH_LIMITS.maxFiles || expandedBytes > BATCH_LIMITS.maxTotalFileBytes) {
+      throw new BadRequestException("Expanded ZIP contents exceed the configured limits");
+    }
+    return entries;
   }
 
   private loadCore(): CoreProcessBatch {
