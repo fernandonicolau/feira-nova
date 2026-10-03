@@ -1,15 +1,12 @@
 const fs = require("fs");
 const path = require("path");
 const ExcelJS = require("exceljs");
-const { generateSupplierFiles } = require("../scripts/generate-fornecedores");
 const PRODUCT_LISTS = {
   legumes: require("../data/produtos-legumes.json"),
   frutas: require("../data/produtos-frutas.json"),
 };
 
-const ROOT_DIR = process.cwd();
-const INPUT_DIR = path.join(ROOT_DIR, "input");
-const TEMPLATE_DIR = path.join(ROOT_DIR, "template", "mapa");
+const TEMPLATE_DIR = path.join(process.cwd(), "template", "mapa");
 const PRODUCT_START_ROW = 9;
 
 const MAP_CONFIGS = [
@@ -586,15 +583,6 @@ function formatDate(value) {
   return `${day}/${month}/${year}`;
 }
 
-function formatOutputFolderName(value) {
-  const year = value.getFullYear();
-  const month = String(value.getMonth() + 1).padStart(2, "0");
-  const day = String(value.getDate()).padStart(2, "0");
-  const hour = String(value.getHours()).padStart(2, "0");
-  const minute = String(value.getMinutes()).padStart(2, "0");
-  return `output-${year}-${month}-${day}-${hour}-${minute}`;
-}
-
 function resolveTemplatePath(templateName, templateDir = TEMPLATE_DIR) {
   const templatePath = path.join(templateDir, templateName);
   if (!fs.existsSync(templatePath)) {
@@ -1139,28 +1127,6 @@ function textEntryFromContent({ id, text, store }) {
   };
 }
 
-async function loadInputs(inputDir = INPUT_DIR) {
-  const inputEntries = [];
-
-  for (const fileName of fs.readdirSync(inputDir)) {
-    const fullPath = path.join(inputDir, fileName);
-    if (!fs.statSync(fullPath).isFile()) {
-      continue;
-    }
-
-    if (/^~\$/.test(fileName) || !/\.(xlsx|xlsm)$/i.test(fileName)) {
-      continue;
-    }
-
-    inputEntries.push(await workbookEntryFromBuffer({
-      fileName,
-      buffer: await fs.promises.readFile(fullPath),
-    }));
-  }
-
-  return inputEntries;
-}
-
 async function generateMapBuffer(config, inputs, now, templateDir = TEMPLATE_DIR) {
   const templatePath = resolveTemplatePath(config.templateName, templateDir);
   const workbook = new ExcelJS.Workbook();
@@ -1214,14 +1180,6 @@ async function generateMapBuffer(config, inputs, now, templateDir = TEMPLATE_DIR
   return Buffer.from(await workbook.xlsx.writeBuffer());
 }
 
-async function generateMap(config, inputs, outputDir, now, templateDir = TEMPLATE_DIR) {
-  const buffer = await generateMapBuffer(config, inputs, now, templateDir);
-
-  const outputPath = path.join(outputDir, config.outputName);
-  await fs.promises.writeFile(outputPath, buffer);
-  return outputPath;
-}
-
 async function processBatch({ entries, templateDir = TEMPLATE_DIR, now = new Date() }) {
   if (!Array.isArray(entries) || entries.length === 0) {
     throw new Error("O lote deve conter ao menos uma entrada.");
@@ -1255,50 +1213,6 @@ async function processBatch({ entries, templateDir = TEMPLATE_DIR, now = new Dat
     warnings,
     artifacts,
   };
-}
-
-async function main() {
-  if (!fs.existsSync(INPUT_DIR)) {
-    throw new Error("Pasta input nao encontrada.");
-  }
-
-  const now = new Date();
-  const outputDir = path.join(ROOT_DIR, formatOutputFolderName(now));
-  fs.mkdirSync(outputDir, { recursive: true });
-
-  const inputs = await loadInputs();
-  const outputs = [];
-
-  for (const config of MAP_CONFIGS) {
-    if (!fs.existsSync(path.join(TEMPLATE_DIR, config.templateName))) {
-      console.warn(`Template nao encontrado, pulando: ${config.templateName}`);
-      continue;
-    }
-
-    const outputPath = await generateMap(config, inputs, outputDir, now);
-    outputs.push(outputPath);
-  }
-
-  console.log(`Arquivos gerados em: ${outputDir}`);
-  for (const outputPath of outputs) {
-    console.log(`- ${path.basename(outputPath)}`);
-  }
-
-  const supplierOutput = await generateSupplierFiles({ mapDir: outputDir, now });
-  console.log(`Arquivos de fornecedores gerados em: ${supplierOutput.outputDir}`);
-  for (const fileName of supplierOutput.files) {
-    console.log(`- fornecedores/${fileName}`);
-  }
-  if (supplierOutput.unmatchedFile) {
-    console.log(`Associacoes pendentes: fornecedores/${supplierOutput.unmatchedFile.fileName}`);
-  }
-}
-
-if (require.main === module) {
-  main().catch((error) => {
-    console.error(error.message);
-    process.exitCode = 1;
-  });
 }
 
 module.exports = {

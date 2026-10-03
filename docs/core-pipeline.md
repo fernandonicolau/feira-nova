@@ -1,18 +1,18 @@
 # Pipeline do core
 
-## Fluxo legado
+## Fluxo atual
 
-1. `src/index.js` procura planilhas em `input/` a partir de `process.cwd()`.
-2. Cada workbook identifica a loja pelo cabeçalho `FILIAL` ou pelo nome do arquivo.
-3. Itens estruturados ou linhas livres são convertidos em produto e quantidade.
-4. Nomes de produtos são normalizados e associados aos três templates em `template/mapa/`.
-5. Os mapas são gravados em uma pasta global `output-*`.
-6. `scripts/generate-fornecedores.js` relê os mapas e usa modelos de `exemplo/` para gerar arquivos por fornecedor.
+1. A API recebe um lote HTTP com arquivos e/ou entradas textuais.
+2. O controller valida o contrato e converte uploads em buffers.
+3. `processBatch` normaliza todas as entradas no mesmo modelo interno.
+4. O core gera mapas em memória usando `template/mapa/` e `data/`.
+5. O serviço adapta os mapas a um workspace temporário exclusivo para gerar os arquivos de fornecedores com os modelos versionados em `template/fornecedores/`.
+6. Os artefatos são devolvidos por HTTP e o workspace é removido em `finally`.
 
-As dependências de runtime do fluxo antigo são `input/`, `template/mapa/`, `data/`, `exemplo/` e `output-*`. A pasta `exemplo/` não está versionada no estado atual e, portanto, a geração legada de fornecedores não é reproduzível em um checkout limpo.
+Nenhum fluxo produtivo procura pastas globais `input/`, `output/` ou `exemplo/`. Os casos de regressão usam buffers e fixtures sintéticas de `test/fixtures/`.
 
 ## Entrada programática
 
-`processBatch({ entries, templateDir?, now? })` recebe planilhas como buffers, interpreta todas as entradas e devolve mapas também como buffers. A função não procura `input/`, não cria `output-*` e não conhece HTTP.
+`processBatch({ entries, templateDir?, now? })` recebe planilhas ou textos normalizados, interpreta as entradas e devolve mapas como buffers. A função não conhece HTTP nem grava artefatos em diretórios globais.
 
-Os templates e catálogos permanecem assets versionados somente para leitura. A CLI continua disponível como adaptador temporário e chama as mesmas funções antes de gravar seus arquivos.
+Os templates e catálogos permanecem assets versionados somente para leitura. A escrita em disco fica restrita ao workspace temporário isolado de cada requisição.

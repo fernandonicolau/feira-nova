@@ -2,19 +2,15 @@
   "name": "feira-nova",
   "version": "1.0.0",
   "description": "API e motor de processamento do Feira Nova",
-  "main": "src/index.js",
+  "main": "dist/main.js",
   "scripts": {
     "build": "npm run build:api",
     "build:api": "nest build",
-    "build:web": "node scripts/build-pages.js",
     "start": "node dist/main.js",
     "start:dev": "nest start --watch",
     "typecheck": "tsc --noEmit",
     "test": "jest --runInBand",
-    "test:e2e": "jest --config test/jest-e2e.json --runInBand",
-    "generate": "node src/index.js",
-    "fornecedores": "node scripts/generate-fornecedores.js",
-    "check:example": "node scripts/check-example.js"
+    "test:e2e": "jest --config test/jest-e2e.json --runInBand"
   },
   "keywords": [],
   "author": "",

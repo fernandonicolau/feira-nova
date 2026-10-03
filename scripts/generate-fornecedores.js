@@ -2,9 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const ExcelJS = require("exceljs");
 
-const ROOT_DIR = process.cwd();
-const DEFAULT_MAP_DIR = path.join(ROOT_DIR, "output");
-const DEFAULT_TEMPLATE_DIR = path.join(ROOT_DIR, "exemplo");
 const PRODUCT_START_ROW = 9;
 
 const MAP_FILES = [
@@ -1239,14 +1236,18 @@ async function writeUnmatchedWorkbook(outputDir, pendingEntries) {
   };
 }
 
-async function generateSupplierFiles(options = {}) {
-  const mapDir = options.mapDir ?? DEFAULT_MAP_DIR;
-  const templateDir = options.templateDir ?? DEFAULT_TEMPLATE_DIR;
+async function generateSupplierFiles(options) {
+  if (!options?.mapDir || !options?.templateDir) {
+    throw new Error("mapDir e templateDir sao obrigatorios.");
+  }
+
+  const mapDir = options.mapDir;
+  const templateDir = options.templateDir;
   const outputDir = options.outputDir ?? path.join(mapDir, "fornecedores");
   const formattedDate = formatDate(addDays(options.now ?? new Date(), 1));
 
   if (!fs.existsSync(templateDir)) {
-    throw new Error("Pasta exemplo nao encontrada.");
+    throw new Error("Diretorio de modelos de fornecedores nao encontrado.");
   }
 
   const { quantities, entries } = await loadMapQuantities(mapDir);
@@ -1354,20 +1355,3 @@ async function generateSupplierFiles(options = {}) {
 module.exports = {
   generateSupplierFiles,
 };
-
-if (require.main === module) {
-  generateSupplierFiles()
-    .then(({ outputDir, files, unmatchedFile }) => {
-      console.log(`Arquivos de fornecedores gerados em: ${outputDir}`);
-      for (const fileName of files) {
-        console.log(`- ${fileName}`);
-      }
-      if (unmatchedFile) {
-        console.log(`Associacoes pendentes: ${unmatchedFile.fileName}`);
-      }
-    })
-    .catch((error) => {
-      console.error(error.message);
-      process.exitCode = 1;
-    });
-}

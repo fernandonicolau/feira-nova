@@ -1,6 +1,6 @@
 # Associacoes conhecidas entre produto, loja e fornecedor
 
-Este arquivo foi gerado a partir das planilhas modelo em `exemplo/`. Cada linha representa uma associacao ja conhecida quando existe uma quantidade preenchida no modelo do fornecedor.
+Este arquivo foi gerado a partir das planilhas legadas e preserva as associações conhecidas. Os modelos necessários ao runtime foram migrados para `template/fornecedores/`; nenhuma pasta `exemplo/` é necessária.
 
 Total de associacoes: 1036
 

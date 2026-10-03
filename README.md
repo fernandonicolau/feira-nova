@@ -126,4 +126,4 @@ O deploy é nativo do Render a partir do Git. O workflow `API CI` apenas valida 
 - `test/`: regressão e E2E;
 - `docs/batch-contract.md`: contrato detalhado do lote.
 
-Os comandos legados `npm run generate` e `npm run fornecedores` permanecem temporariamente para compatibilidade e serão removidos na etapa de limpeza do legado.
+O runtime produtivo é exclusivamente a API. O antigo frontend estático, o deploy no GitHub Pages e os comandos baseados em pastas globais `input/`, `output/` e `exemplo/` foram removidos. Fixtures sintéticas vivem em `test/fixtures/`; modelos necessários ao processamento permanecem versionados em `template/`.
