@@ -6,6 +6,7 @@ import {
   Res,
   StreamableFile,
   UploadedFiles,
+  UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { AnyFilesInterceptor } from "@nestjs/platform-express";
@@ -14,6 +15,7 @@ import { ApiBody, ApiConsumes, ApiCreatedResponse, ApiProduces, ApiTags } from "
 import type { RequestWithId } from "../common/middleware/request-id.middleware";
 import { BatchService } from "./batch.service";
 import { BATCH_LIMITS, type ProcessBatchResponse } from "./contracts";
+import { LegacyAccessGuard } from "../access/access.guard";
 
 const multipartBatchSchema: Parameters<typeof ApiBody>[0] = {
   schema: {
@@ -43,6 +45,7 @@ const uploadLimits = {
 
 @ApiTags("batches")
 @Controller("api/v1/batches")
+@UseGuards(LegacyAccessGuard)
 export class BatchController {
   constructor(private readonly batchService: BatchService) {}
 

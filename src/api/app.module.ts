@@ -4,6 +4,7 @@ import { RequestIdMiddleware } from "./common/middleware/request-id.middleware";
 import { validateEnvironment } from "./config/env.validation";
 import { HealthModule } from "./health/health.module";
 import { BatchModule } from "./batches/batch.module";
+import { AccessModule } from "./access/access.module";
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { BatchModule } from "./batches/batch.module";
       validate: validateEnvironment,
     }),
     BatchModule,
+    AccessModule,
     HealthModule,
   ],
 })
