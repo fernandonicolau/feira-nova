@@ -34,6 +34,7 @@ export class SupabaseStore {
   }
 
   async remove(path: string): Promise<void> {
-    await this.db.storage.from(DAILY_BUCKET).remove([path]);
+    const { error } = await this.db.storage.from(DAILY_BUCKET).remove([path]);
+    if (error) throw new ServiceUnavailableException("Falha ao limpar arquivo após erro de envio");
   }
 }

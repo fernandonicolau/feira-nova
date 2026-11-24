@@ -5,6 +5,7 @@ import { validateEnvironment } from "./config/env.validation";
 import { HealthModule } from "./health/health.module";
 import { BatchModule } from "./batches/batch.module";
 import { AccessModule } from "./access/access.module";
+import { DayModule } from "./days/day.module";
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AccessModule } from "./access/access.module";
     }),
     BatchModule,
     AccessModule,
+    DayModule,
     HealthModule,
   ],
 })
