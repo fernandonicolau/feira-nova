@@ -14,10 +14,10 @@ export async function bootstrap(): Promise<void> {
 
   app.enableCors({
     origin: parseCorsOrigins(config.getOrThrow<string>("CORS_ORIGINS")),
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Accept", "Content-Type", "X-Request-Id"],
     exposedHeaders: ["X-Request-Id"],
-    credentials: false,
+    credentials: true,
     maxAge: 600,
   });
 

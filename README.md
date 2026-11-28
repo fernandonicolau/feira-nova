@@ -130,3 +130,17 @@ O deploy é nativo do Render a partir do Git. O workflow `API CI` apenas valida 
 - `docs/batch-contract.md`: contrato detalhado do lote.
 
 O runtime produtivo é exclusivamente a API. O antigo frontend estático, o deploy no GitHub Pages e os comandos baseados em pastas globais `input/`, `output/` e `exemplo/` foram removidos. Fixtures sintéticas vivem em `test/fixtures/`; modelos necessários ao processamento permanecem versionados em `template/`.
+# Acesso ao produto diário
+
+Copie `.env.example` para `.env` no desenvolvimento. Para ativar a entrada por código, defina na API:
+
+| Variável | Valor |
+|---|---|
+| `ACCESS_CODE` | Seis dígitos escolhidos para a equipe. Guarde como secret no Render. |
+| `SESSION_SECRET` | String aleatória com pelo menos 32 caracteres. Guarde como secret no Render. |
+| `COOKIE_SECURE` | `true` em produção HTTPS; `false` no desenvolvimento HTTP. |
+| `CORS_ORIGINS` | Origem pública da Web, sem caminho ou barra final. |
+| `SUPABASE_URL` | URL do projeto Supabase, usada nas próximas rotas diárias. |
+| `SUPABASE_SERVICE_ROLE_KEY` | Chave de serviço do Supabase, exclusiva do backend. Nunca usar `VITE_` ou incluir na Web. |
+
+O navegador recebe um cookie HttpOnly de oito horas; não há token para copiar. Trocar `ACCESS_CODE` ou `SESSION_SECRET` no Render invalida sessões anteriores. O código é compartilhado e não identifica pessoas. Cinco tentativas incorretas pelo mesmo endereço bloqueiam novas tentativas por 15 minutos em cada instância da API. O endpoint `/health` continua público. Quando `ACCESS_CODE` está configurado, as rotas legadas de lote também exigem sessão.
