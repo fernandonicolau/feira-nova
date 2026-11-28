@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Res, StreamableFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post, Put, Res, StreamableFile, UploadedFiles, UseGuards, UseInterceptors } from "@nestjs/common";
 import { AnyFilesInterceptor } from "@nestjs/platform-express";
 import { ApiConsumes, ApiTags } from "@nestjs/swagger";
 import type { Response } from "express";
 import { AccessGuard } from "../access/access.guard";
 import { BATCH_LIMITS } from "../batches/contracts";
 import { DayService } from "./day.service";
+import { KNOWN_STORES, type ColumnLayout } from "./file-recognition";
 
 @ApiTags("days")
 @Controller("api/v1/days")
@@ -14,6 +15,9 @@ export class DayController {
 
   @Get()
   list() { return this.days.list(); }
+
+  @Get("stores")
+  stores() { return KNOWN_STORES; }
 
   @Put(":day")
   create(@Param("day") day: string) { return this.days.create(day); }
@@ -44,6 +48,11 @@ export class DayController {
   async remove(@Param("day") day: string, @Param("id") id: string) {
     await this.days.removeEntry(day, id);
     return { removed: true };
+  }
+
+  @Patch(":day/entries/:id/review")
+  review(@Param("day") day: string, @Param("id") id: string, @Body() body: { store?: string; layout?: ColumnLayout }) {
+    return this.days.reviewEntry(day, id, body);
   }
 
   @Get(":day/uploads/:id/original")

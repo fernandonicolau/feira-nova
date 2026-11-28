@@ -662,61 +662,56 @@ function getStoreKey(workbook, fileName) {
 }
 
 function findStructuredColumns(worksheet) {
+  let best = null;
   for (let rowNumber = 1; rowNumber <= Math.min(worksheet.rowCount, 20); rowNumber += 1) {
-    let productColumn = null;
-    let quantityColumn = null;
-
+    const productColumns = [];
+    const quantityColumns = [];
     const row = worksheet.getRow(rowNumber);
-    const maxColumns = Math.max(row.cellCount || 0, 30);
+    const maxColumns = Math.min(Math.max(row.cellCount || 0, 2), 30);
 
     for (let columnNumber = 1; columnNumber <= maxColumns; columnNumber += 1) {
       const cellText = normalizeText(worksheetValueToString(row.getCell(columnNumber).value));
 
-      if (cellText === "PRODUTO") {
-        productColumn = columnNumber;
-      }
-
-      if (cellText === "QTDE" || cellText === "QUANTIDADE" || cellText === "QTD") {
-        quantityColumn = columnNumber;
-      }
+      if (["PRODUTO", "NOME", "ITEM", "DESCRICAO", "NOME DO PRODUTO"].includes(cellText)) productColumns.push(columnNumber);
+      if (["QTDE", "QUANTIDADE", "QTD", "QUANT"].includes(cellText)) quantityColumns.push(columnNumber);
     }
-
-    if (productColumn && quantityColumn) {
-      return {
-        headerRow: rowNumber,
-        productColumn,
-        quantityColumn,
-      };
-    }
+    const used = new Set();
+    const pairs = productColumns.map((productColumn) => {
+      const quantityColumn = quantityColumns.find((candidate) => candidate > productColumn && candidate - productColumn <= 3 && !used.has(candidate));
+      if (!quantityColumn) return null;
+      used.add(quantityColumn);
+      return { productColumn, quantityColumn };
+    }).filter(Boolean);
+    if (pairs.length > (best?.pairs.length || 0)) best = { headerRow: rowNumber, pairs };
   }
 
-  return null;
+  return best;
 }
 
 function parseStructuredItems(worksheet, columns) {
   const items = [];
+  const warnings = [];
 
   for (let rowNumber = columns.headerRow + 1; rowNumber <= worksheet.rowCount; rowNumber += 1) {
-    const productName = worksheetValueToString(worksheet.getRow(rowNumber).getCell(columns.productColumn).value).trim();
-    const quantity = normalizeQuantity(worksheet.getRow(rowNumber).getCell(columns.quantityColumn).value);
-
-    if (!productName && quantity == null) {
-      continue;
+    for (const pair of columns.pairs) {
+      const productName = worksheetValueToString(worksheet.getRow(rowNumber).getCell(pair.productColumn).value).trim();
+      const quantity = normalizeQuantity(worksheet.getRow(rowNumber).getCell(pair.quantityColumn).value);
+      if (!productName && quantity == null) continue;
+      if (!productName || quantity == null) {
+        warnings.push({ code: "UNPARSED_SPREADSHEET_ROW", message: `Linha ${rowNumber} da planilha tem produto ou quantidade incompletos.`, line: rowNumber });
+        continue;
+      }
+      items.push({ productName, quantity });
     }
-
-    if (!productName || quantity == null) {
-      continue;
-    }
-
-    items.push({ productName, quantity });
   }
-
-  return items;
+  return { items, warnings };
 }
 
-function parseWorkbookItems(workbook) {
+function parseWorkbookItemsDetailed(workbook, layout) {
   const worksheet = workbook.worksheets[0];
-  const structuredColumns = findStructuredColumns(worksheet);
+  const structuredColumns = layout?.pairs?.length
+    ? { headerRow: layout.headerRow, pairs: layout.pairs.map((pair) => ({ productColumn: pair.nameColumn, quantityColumn: pair.quantityColumn })) }
+    : findStructuredColumns(worksheet);
 
   if (structuredColumns) {
     return parseStructuredItems(worksheet, structuredColumns);
@@ -743,7 +738,11 @@ function parseWorkbookItems(workbook) {
     }
   }
 
-  return items;
+  return { items, warnings: [] };
+}
+
+function parseWorkbookItems(workbook, layout) {
+  return parseWorkbookItemsDetailed(workbook, layout).items;
 }
 
 function buildTemplateMap(worksheet, sections) {
@@ -1091,14 +1090,16 @@ function updateHeaderDates(worksheet, formattedDate) {
   }
 }
 
-async function workbookEntryFromBuffer({ fileName, buffer, store }) {
+async function workbookEntryFromBuffer({ fileName, buffer, store, layout }) {
   const workbook = new ExcelJS.Workbook();
   await workbook.xlsx.load(buffer);
+  const parsed = parseWorkbookItemsDetailed(workbook, layout);
 
   return {
     fileName,
     storeKey: store ? canonicalStoreName(store) : getStoreKey(workbook, fileName),
-    items: parseWorkbookItems(workbook),
+    items: parsed.items,
+    warnings: parsed.warnings.map((warning) => ({ ...warning, entryId: fileName })),
   };
 }
 
